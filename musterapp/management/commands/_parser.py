@@ -1,4 +1,3 @@
-import six
 import re
 import urllib
 import os
@@ -18,16 +17,16 @@ class MusterParser:
                      'HA.II.09', 'HA.II.10', 'HA.II.12', 'HA.II.13', 'HA.II.14', 'HA.II.15', 
                      'HA.II.16', 'HA.II.20', 'HA.II.22', 'HA.II.27', 'HA.II.28', 'HA.II.49']
 
-    def __init__(self, cachedir=None, download=False):
+    def __init__(self, cachedir=None):
         self._valid_volumes_ids = sorted([ int(s[6:]) for s in self._valid_volumes ])
         self._cachedir = cachedir
-        self._download = download and cachedir is not None
+        self._download = cachedir is not None
         
     
     def parse(self, tree):
         ns = self._ns
         
-        if isinstance(tree, six.string_types):
+        if not isinstance(tree, ET.ElementTree):
             tree = ET.parse(tree)
         
         volumes = {}
@@ -83,16 +82,15 @@ class MusterParser:
                 match = re.match("^.*\((.+)\)[ .]*$", page["general_desc"])
                 if match is not None:
                     tags = match.group(1).strip().split(";")
-                    page["colors"] = tags[0].strip().split(" ")
+                    page["colors"] = list(filter(None, re.split("[, ]", tags[0])))
                     if len(tags) > 1:
-                        page["types"] = tags[1].strip().split(" ")
-
+                        page["types"] = list(filter(None, re.split("[, ]", tags[1])))
 
                 img_name = self._img_url_tpl.format(volid, pageid)
                 page["img_name"] = img_name
                 
                 if self._download:
-                     self._download_img(volume["recID"], recid, img_name)
+                     self._download_img(volume["record_id"], recid, img_name)
                 
 
                 volume["pages"][pageid] = page
@@ -137,9 +135,9 @@ class MusterParser:
                 "object_category": object_category,
                 "general_desc": general_desc,
                 "physical_desc": physical_desc,
-                "width": width, 
-                "height": height,
-                "pagecount": pagecount}
+                "page_width": width, 
+                "page_height": height,
+                "page_count": pagecount}
     
     
     
@@ -170,11 +168,11 @@ class MusterParser:
         result = self._common_info(lido)
 
         result.update({
-                "recID": recid,
+                "record_id": recid,
                 "title": title, 
                 "producer_name": producer_name,
                 "producer_role": producer_role,
-                "location": location,
+                "producer_location": location,
                 "pages": {}
             })
 
@@ -184,10 +182,10 @@ class MusterParser:
     def _page_info(self, lido, recid):
 
         result = self._common_info(lido)
-        del result["pagecount"]
+        del result["page_count"]
 
         result.update({
-                "recID": recid
+                "record_id": recid
             })
         return result
 
