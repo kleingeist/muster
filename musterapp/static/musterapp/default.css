@@ -1,0 +1,12 @@
+body {
+    color: #fff;
+}
+
+#logo {
+    background-color: #fff;
+}
+
+#logo img {
+    width: 80px;
+    margin: 10px 0;
+}

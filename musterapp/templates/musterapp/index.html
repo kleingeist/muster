@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Volumes{% endblock %}
+
+
+{% block content %}
+
+<ul>
+{% for volume in volumes %}
+    <li>
+        <a href="{% url "volume_list" volume.record_id %}">{{ volume.record_id }}</a>
+    </li>
+{% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>PATTREATOR :: {% block title %}Home{% endblock %}</title>
+
+    <!-- Bootstrap -->
+    <link href="{% static 'musterapp/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
+
+    <link href="{% static 'musterapp/default.css' %}" rel="stylesheet">
+
+    <style type="text/css">
+        .page-left, .page-right {
+            float: left;
+            margin: 10pt;
+            /*width: 320px;*/
+
+        }
+    </style>
+</head>
+<body>
+    <div id="logo">
+        <div class="container">
+            <img class="collapse navbar-collapse logo" src="{% static "musterapp/img/logo.png" %}" >
+        </div>
+    </div>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed"
+                        data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">PATTREATOR</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{% url "index" %}">Home</a></li>
+                    <li><a href="#search">Search</a></li>
+                    <li><a href="#about">About</a></li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#login">Login</a></li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </nav>
+
+
+    <div id="content" class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="{% static 'jquery-2.1.4.js' %}"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'musterapp/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'musterapp/default.js' %}"></script>
+</body>
+</html>
