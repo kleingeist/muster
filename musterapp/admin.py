@@ -11,9 +11,12 @@ admin.site.register(Volume, VolumeAdmin)
 # class PageColorInline(admin.TabularInline): 
 #     model = Page.colors.through
 
-class PageAdmin(admin.ModelAdmin):
+from sorl.thumbnail.admin import AdminImageMixin
+class PageAdmin(AdminImageMixin, admin.ModelAdmin):
     list_display = ("record_id", "volume", "number")
     list_filter = ("volume", )
+    readonly_fields = ("image", "image_meta",
+                       "image_name", "image_width", "image_height")
 
     # inlines = (PageColorInline,)
 

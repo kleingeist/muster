@@ -1,10 +1,12 @@
 import argparse
 
 from django.core.management.base import BaseCommand, CommandError
+from django.conf import settings
 from musterapp.models import Volume, Page, PageColor, PageType
 from django.db import connection
 
 from ._parser import MusterParser
+
 
 def _set_attr(o, k, v, ignore=[]):
     if k not in ignore and k in o._meta.get_all_field_names():
@@ -15,15 +17,16 @@ class Command(BaseCommand):
 
     def add_arguments(self, parser):
         parser.add_argument('xmlfile', type=argparse.FileType('r'))
-        parser.add_argument('--cachedir', default=None)
+        parser.add_argument('--download', action='store_true', default=False)
 
     def handle(self, *args, **options):
-        cachedir = options["cachedir"]
+        cachedir = None
+
+        if options["download"]:
+            cachedir = settings.MEDIA_ROOT
 
         mp = MusterParser(cachedir)
         data = mp.parse(options["xmlfile"])
-
-        data = {2: data[2]}
 
         Page.objects.all().delete()
         Volume.objects.all().delete()
@@ -43,7 +46,14 @@ class Command(BaseCommand):
             for n, p in v["pages"].items():
                 p_ = Page()
                 for k in p:
-                    _set_attr(p_, k, p[k], ["id", "number", "types", "colors"])
+                    _set_attr(p_, k, p[k], ["id", "number", "types", "colors",
+                                            "image", "commons_meta"])
+
+                if p["img_path"]:
+                    p_.image = p["img_path"]
+
+                if p["img_meta_path"]:
+                    p_.image_meta = p["img_meta_path"]
 
                 p_.number = n
                 p_.volume = v_

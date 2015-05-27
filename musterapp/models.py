@@ -24,7 +24,7 @@ class Volume(models.Model):
 
 def _page_upload_to(page, filename):
     if page.record_id and len(page.record_id) > 8:
-        return "pages/" + page.record_id[:8]
+        return "pages/" + page.record_id[:8] + "/" + page.record_id[8:]
     else:
         return "pages/unsorted"
 
@@ -34,8 +34,13 @@ class Page(models.Model):
     record_id = models.CharField(max_length=32, unique=True)
     number = models.SmallIntegerField(default=-1)
 
-    img_name = models.CharField(max_length=255)
-    image = ImageField(upload_to=_page_upload_to, default='')
+    image_name = models.CharField(max_length=255)
+    image = ImageField(upload_to=_page_upload_to, default='', max_length=255,
+                       height_field="image_height", width_field="image_width")
+    image_height = models.IntegerField(default=0)
+    image_width = models.IntegerField(default=0)
+    image_meta = models.FileField(upload_to=_page_upload_to, default='',
+                                  max_length=255)
 
     object_name = models.CharField(max_length=255)
     object_category = models.CharField(max_length=255)

@@ -49,6 +49,7 @@ class MusterParser:
 
             volid = int(match.group(1))
             if volid not in self._valid_volumes_ids:
+                print("Invalid volume id " + recid)
                 continue
 
             pageid = match.group(2) 
@@ -88,10 +89,12 @@ class MusterParser:
 
                 img_name = self._img_url_tpl.format(volid, pageid)
                 page["img_name"] = img_name
-                
+
+                page["img_path"] = page["img_meta_path"] = ""
                 if self._download:
-                     self._download_img(volume["record_id"], recid, img_name)
-                
+                    page["img_path"], page["img_meta_path"] = \
+                        self._download_img(volume["record_id"], recid, img_name)
+
 
                 volume["pages"][pageid] = page
                 
@@ -191,20 +194,25 @@ class MusterParser:
 
     
     def _download_img(self, volrecid, imgrecid, img_name):
-        path = os.path.join(self._cachedir, volrecid, imgrecid)
+        img_path_rel = "pages/" + volrecid + "/" + imgrecid + "/" + img_name
+        img_meta_path_rel = "pages/" + volrecid + "/" + imgrecid + "/" + img_name + ".xml"
+
+        path = os.path.join(self._cachedir, "pages", volrecid, imgrecid)
         if not os.path.exists(path):
             os.makedirs(path)
 
-        commonsmeta_path = os.path.join(path, "commonsmeta.xml")
+        commonsmeta_path = os.path.join(self._cachedir, img_meta_path_rel)
         if not os.path.exists(commonsmeta_path):
             img_url_api = self._commonsapi_url_tpl.format(img_name)
             urllib.request.urlretrieve(img_url_api, commonsmeta_path)
         
-        img_path = os.path.join(path, img_name)
+        img_path = os.path.join(self._cachedir, img_path_rel)
         if not os.path.exists(img_path):
             tree = ET.parse(commonsmeta_path)
             commonsurl = tree.find("./file/urls/file")
-            if commonsurl is not None:
-                urllib.request.urlretrieve(commonsurl.text, img_path)
+            if commonsurl is None:
+                return "", ""
 
+            urllib.request.urlretrieve(commonsurl.text, img_path)
 
+        return img_path_rel, img_meta_path_rel

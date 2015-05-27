@@ -1,5 +1,7 @@
 # Project specific
 local_settings.py
+media/
+
 
 # Ignore PyCharm project config
 .idea/
