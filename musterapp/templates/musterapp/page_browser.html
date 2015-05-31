@@ -9,6 +9,7 @@
 <div id="page-browser">
     <h2>{{ page.record_id }}</h2>
 
+    <div class="text-center">
     {% with prev=page.prev_page %}
     {% if prev %}
         <span class="prev-page">
@@ -38,6 +39,11 @@
             {% endthumbnail %}
         </span>
     {% endwith %}
+    </div>
+
+    <div class="text-center">
+        Volume: <a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a>
+    </div>
 
 </div>
 {% endblock %}

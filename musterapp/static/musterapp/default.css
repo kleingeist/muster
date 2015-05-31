@@ -11,6 +11,14 @@ body {
     margin: 10px 0;
 }
 
+#volume-detail .page-list .page {
+    margin: 5px;
+    float: left;
+}
+
+
+
+
 #page-browser .page,
 #page-browser .prev-page,
 #page-browser .next-page {
@@ -21,6 +29,11 @@ body {
 #page-browser .prev-page img,
 #page-browser .next-page img {
     vertical-align: bottom;
+}
+
+#page-browser .prev-page,
+#page-browser .next-page {
+    min-width: 180px;
 }
 
 #page-browser-full {

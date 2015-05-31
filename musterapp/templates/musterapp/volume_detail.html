@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}{{ volume.record_id }}{% endblock %}
+
+
+{% block content %}
+<div id="volume-detail">
+    <h2>{{ volume.record_id }}</h2>
+
+    <div class="page-list clearfix">
+    {% for page in pages %}
+        <div class="page">
+            <a href="{% url "page_browser" page.record_id %}">
+                <img src="{% thumbnail page.image "x100" %}">
+            </a>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
