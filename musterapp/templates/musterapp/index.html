@@ -8,7 +8,7 @@
 <ul>
 {% for volume in volumes %}
     <li>
-        <a href="{% url "volume_list" volume.record_id %}">{{ volume.record_id }}</a>
+        <a href="{% url "page_browser" volume.first_page %}">{{ volume.record_id }}</a>
     </li>
 {% endfor %}
 </ul>

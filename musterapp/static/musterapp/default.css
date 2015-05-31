@@ -10,3 +10,48 @@ body {
     width: 80px;
     margin: 10px 0;
 }
+
+#page-browser .page,
+#page-browser .prev-page,
+#page-browser .next-page {
+    display: inline;
+}
+
+#page-browser .page img,
+#page-browser .prev-page img,
+#page-browser .next-page img {
+    vertical-align: bottom;
+}
+
+#page-browser-full {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: none;
+    padding-bottom: 50px;
+    background-color: #4a4a4c;
+}
+
+#page-browser-full .image {
+    overflow: hidden;
+    height: 100%;
+    width: 100%;
+}
+
+#page-browser-full .image .zoom {
+    display: inline-block;
+}
+
+#page-browser-full .title {
+    margin-bottom: -50px;
+    height: 40px;
+    padding: 5px 10px
+}
+
+
+#page-browser-full .title h3 {
+    text-align: center;
+    margin:0;
+}

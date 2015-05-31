@@ -13,10 +13,9 @@ admin.site.register(Volume, VolumeAdmin)
 
 from sorl.thumbnail.admin import AdminImageMixin
 class PageAdmin(AdminImageMixin, admin.ModelAdmin):
-    list_display = ("record_id", "volume", "number")
+    list_display = ("record_id", "volume", "page_number")
     list_filter = ("volume", )
-    readonly_fields = ("image", "image_meta",
-                       "image_name", "image_width", "image_height")
+    readonly_fields = ("image", "image_name", "image_width", "image_height")
 
     # inlines = (PageColorInline,)
 

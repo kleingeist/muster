@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}{{ page.record_id }}{% endblock %}
+
+
+{% block content %}
+<div id="page-browser">
+    <h2>{{ page.record_id }}</h2>
+
+    {% with prev=page.prev_page %}
+    {% if prev %}
+        <span class="prev-page">
+            <a href="{% url 'page_browser' prev.record_id %}">
+            {% thumbnail prev.image "x100" as im %}
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+            {% endthumbnail %}
+            </a>
+        </span>
+    {% endif %}
+    {% endwith %}
+
+    <span class="page">
+    {% thumbnail page.image "x450" as im %}
+        <a href="{{ page.image.url }}">
+        <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+        </a>
+    {% endthumbnail %}
+    </span>
+
+    {% with next=page.next_page %}
+        <span class="next-page">
+            {% thumbnail next.image "x100" as im %}
+                <a href="{% url 'page_browser' next.record_id %}">
+                <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
+                </a>
+            {% endthumbnail %}
+        </span>
+    {% endwith %}
+
+</div>
+{% endblock %}
+
+{% block root %}
+<div id="page-browser-full">
+    <div class="image">
+        <div class="zoom">
+            <img data-src="{{ page.image.url }}" width="{{ page.image.width }}" height="{{ page.image.height }}">
+        </div>
+    </div>
+    <div class="title"><h3>{{ page.record_id }}</h3></div>
+</div>
+{% endblock %}

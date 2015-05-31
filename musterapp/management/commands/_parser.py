@@ -17,10 +17,11 @@ class MusterParser:
                      'HA.II.09', 'HA.II.10', 'HA.II.12', 'HA.II.13', 'HA.II.14', 'HA.II.15', 
                      'HA.II.16', 'HA.II.20', 'HA.II.22', 'HA.II.27', 'HA.II.28', 'HA.II.49']
 
-    def __init__(self, cachedir=None):
+    def __init__(self, cachedir=None, verbose=False):
         self._valid_volumes_ids = sorted([ int(s[6:]) for s in self._valid_volumes ])
         self._cachedir = cachedir
         self._download = cachedir is not None
+        self._verbose = verbose
         
     
     def parse(self, tree):
@@ -49,7 +50,8 @@ class MusterParser:
 
             volid = int(match.group(1))
             if volid not in self._valid_volumes_ids:
-                print("Invalid volume id " + recid)
+                if self._verbose:
+                    print("volume id not in valid list " + recid)
                 continue
 
             pageid = match.group(2) 
@@ -79,7 +81,7 @@ class MusterParser:
 
                 page = self._page_info(lido, recid)
 
-                page["colors"] =  page["types"] = ""
+                page["colors"] =  page["types"] = []
                 match = re.match("^.*\((.+)\)[ .]*$", page["general_desc"])
                 if match is not None:
                     tags = match.group(1).strip().split(";")
