@@ -1,3 +1,27 @@
+@font-face {
+  font-family: 'kirvy-regular-webfont';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/kirvy-regular-webfont.woff') format('woff'),
+       url('fonts/kirvy-regular-webfont.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'kirvy-bold-webfont';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/kirvy-bold-webfont.woff') format('woff'),
+       url('fonts/kirvy-bold-webfont.woff2') format('woff2');
+}
+
+.nav a {
+    font-family: kirvy-bold-webfont;
+  }
+
+.navbar-default .navbar-brand {
+    font-family: kirvy-regular-webfont;
+}
+
 body {
     color: #fff;
 }
@@ -15,9 +39,6 @@ body {
     margin: 5px;
     float: left;
 }
-
-
-
 
 #page-browser .page,
 #page-browser .prev-page,
