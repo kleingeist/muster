@@ -109,8 +109,8 @@ class Command(BaseCommand):
         Page.objects.all().delete()
         Volume.objects.all().delete()
 
-        cursor = connection.cursor()
-        cursor.execute('TRUNCATE TABLE "{0}", "{1}" CASCADE'.format(Page._meta.db_table, Volume._meta.db_table))
+        #cursor = connection.cursor()
+        #cursor.execute('TRUNCATE TABLE "{0}", "{1}" CASCADE'.format(Page._meta.db_table, Volume._meta.db_table))
 
         for v in volumes.values():
             v_ = Volume()
@@ -133,12 +133,16 @@ class Command(BaseCommand):
 
                 # Copy the image to the media dir
                 image_src = os.path.join(imgdir, p["image_name"])
-                image_dst = os.path.join(mediadir, "pages", v["record_id"], p["image_name"])
+                image_dst_dir = os.path.join(mediadir, "pages", v["record_id"])
+                image_dst = os.path.join(image_dst_dir, p["image_name"])
+                image_media_path = os.path.join("pages", v["record_id"], p["image_name"])
+
+                if not os.path.isdir(image_dst_dir):
+                    os.makedirs(image_dst_dir)
 
                 if not os.path.exists(image_dst):
                     shutil.copy(image_src, image_dst)
 
-                image_media_path = os.path.join("pages", v["record_id"], p["image_name"])
                 if image_media_path is None:
                     print("None:" + v + " - " + p)
                 print(image_media_path)
