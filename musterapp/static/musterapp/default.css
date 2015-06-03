@@ -24,11 +24,16 @@
 
 body {
     color: #fff;
+    background-color: #4d4d4a;
 }
 
 #volume-detail .page-list .page {
     margin: 5px;
     float: left;
+}
+
+#page-browser {
+    text-align: center;
 }
 
 #page-browser .page,
@@ -45,8 +50,44 @@ body {
 
 #page-browser .prev-page,
 #page-browser .next-page {
-    min-width: 180px;
+    width: 100px;
+    height: 450px;
+    display: inline-block;
+
+    padding: 195px 35px;
+
 }
+
+#page-browser .prev-page a,
+#page-browser .next-page a {
+
+    width: 30px;
+    height: 30px;
+    display: block;
+    background-size: 30px 30px;
+    background-position: center center;
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+
+
+    /* .text-hide(); */
+    font: 0/0 a;
+    color: transparent;
+    text-shadow: none;
+    background-color: transparent;
+    border: 0;
+}
+
+#page-browser .prev-page a {
+    background-image: url(img/svg/prev.svg) ;
+}
+
+#page-browser .next-page a {
+    background-image: url(img/svg/next.svg) ;
+}
+
+
 
 #page-browser-full {
     position: absolute;
@@ -81,6 +122,7 @@ body {
     margin:0;
 }
 
+
 /*
 
 logo-bg: #ff6f00
@@ -95,6 +137,8 @@ schrift: #b3b3b3
 icons: #a09f9f
 dot: #393737
 */
+
+
 
 .container {
     padding-left: 100px;
