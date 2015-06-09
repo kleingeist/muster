@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, HttpResponse
 
-from .models import Page, Volume
+from .models import Page, Volume, VolumeCategory
 
 
 def index(request):
-    volumes = Volume.objects.all().order_by("record_id")
 
-    context = {"volumes": volumes}
+    categories = VolumeCategory.objects.all().order_by("name")
+
+    context = {"categories": categories}
     return render(request, "musterapp/index.html", context=context)
 
 

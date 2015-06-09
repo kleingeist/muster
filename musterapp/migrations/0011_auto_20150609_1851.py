@@ -14,7 +14,8 @@ class Migration(migrations.Migration):
         migrations.CreateModel(
             name='VolumeCategory',
             fields=[
-                ('name', models.CharField(max_length=255, serialize=False, primary_key=True)),
+                ('id', models.AutoField(primary_key=True, verbose_name='ID', auto_created=True, serialize=False)),
+                ('name', models.CharField(max_length=255, unique=True)),
                 ('category', models.CharField(max_length=255)),
                 ('color', models.CharField(max_length=8)),
             ],

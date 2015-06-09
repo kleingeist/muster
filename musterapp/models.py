@@ -2,13 +2,16 @@ from django.db import models
 from sorl.thumbnail import ImageField
 
 class VolumeCategory(models.Model):
-    name = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255, unique=True)
     category = models.CharField(max_length=255)
 
     color = models.CharField(max_length=8)
 
     def __str__(self):
         return self.name
+
+    def volumes_ordered(self):
+        return self.volumes.all().order_by("record_id")
 
 
 class Volume(models.Model):

@@ -5,12 +5,37 @@
 
 {% block content %}
 
-<ul>
-{% for volume in volumes %}
-    <li>
-        <a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a>
+<div role="tabpanel">
+<ul class="nav nav-tabs" role="tablist">
+{% for category in categories %}
+    <li role="presentation" class="{% if forloop.first %}active{% endif %}">
+        <a href="#category-{{ category.id }}"
+           aria-controls="category-{{ category.id }}"
+           role="tab" data-toggle="tab">
+          {{ category.name }}
+        </a>
     </li>
 {% endfor %}
 </ul>
+
+
+<!-- Tab panes -->
+<div class="tab-content">
+{% for category in categories %}
+    <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="category-{{ category.id }}">
+        <h2>{{ category.name }}</h2>
+
+        <ul>
+        {% for volume in category.volumes_ordered %}
+            <li>
+                <a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endfor %}
+</div>
+
+</div>
 
 {% endblock %}
