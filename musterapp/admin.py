@@ -1,9 +1,11 @@
 from django.contrib import admin
 
-from .models import Page, Volume, PageColor
+from .models import Page, Volume, PageColor, Pattern, VolumeCategory
+
+admin.site.register(VolumeCategory)
 
 class VolumeAdmin(admin.ModelAdmin):
-    list_display = ("record_id", "title", "object_name") 
+    list_display = ("record_id", "title", "category")
 
 admin.site.register(Volume, VolumeAdmin)
 
@@ -21,3 +23,5 @@ class PageAdmin(AdminImageMixin, admin.ModelAdmin):
 
 admin.site.register(Page, PageAdmin)
 
+
+admin.site.register(Pattern)

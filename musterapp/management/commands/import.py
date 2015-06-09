@@ -1,12 +1,12 @@
 import argparse
+import os
+import shutil
 
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
-from musterapp.models import Volume, Page, PageColor, PageType
-from musterapp import helper
-from django.db import connection
-import os, shutil
 
+from musterapp.models import Volume, Page, PageColor, PageType, VolumeCategory
+from musterapp import helper
 from ._parser import MusterParser
 
 
@@ -47,7 +47,7 @@ class Command(BaseCommand):
 
             vid, p1id, p2id = helper.split_recid(p)
 
-            if not vid in metadata:
+            if vid not in metadata:
                 print("Volume not found: " + vol)
                 continue
             vm = metadata[vid]
@@ -95,13 +95,14 @@ class Command(BaseCommand):
 
             if p2id in vm["pages"]:
                 p2m = vm["pages"][p2id]
-
-                double[p1] = double[p2] = True
                 pm["colors"] = list(set(pm["colors"] + p2m["colors"]))
                 pm["types"] = list(set(pm["types"] + p2m["types"]))
                 pm["general_desc"] = pm["general_desc"] + "\n" + p2m["general_desc"]
                 pm["physical_desc"] = pm["physical_desc"] + "\n" + p2m["physical_desc"]
                 pm["page_width"] = pm["page_height"] = None
+
+            if p2id:
+                double[p1] = double[p2] = True
 
             volumes[vol]["pages"][p] = pm
 
@@ -109,11 +110,15 @@ class Command(BaseCommand):
         Page.objects.all().delete()
         Volume.objects.all().delete()
 
-        #cursor = connection.cursor()
-        #cursor.execute('TRUNCATE TABLE "{0}", "{1}" CASCADE'.format(Page._meta.db_table, Volume._meta.db_table))
-
         for v in volumes.values():
+            category, created = VolumeCategory.objects.get_or_create(
+                name=v["object_name"],
+                defaults={"category": v["object_category"]})
+            if created:
+                category.save()
+
             v_ = Volume()
+            v_.category = category
 
             for k in v:
                 _set_attr(v_, k, v[k], ["pages", "id"])
