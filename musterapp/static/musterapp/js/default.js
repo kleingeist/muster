@@ -1,37 +1,30 @@
 $(document).ready(function(){
 
-    var $full = $("#page-browser-full");
-    var $image = $full.find(".image");
-    var $zoom = $image.find(".zoom");
-    var $img = $zoom.find("img");
+    $("#page-browser rect").mouseenter(function(e){
+        var bbox = e.target.getBoundingClientRect();
+        var $content = $("#" + e.target.id + "-content");
+        var left = bbox.left - $content.outerWidth();
+        var top = bbox.top;
 
-    $panzoom = $zoom.panzoom({
-       // contain: "invert",
+        $content.css({
+            top: top + "px",
+            left: left + "px"});
+        $content.show()
     });
 
-    $zoom.on('mousewheel.focal', function (e) {
-        e.preventDefault();
-        var delta = e.delta || e.originalEvent.wheelDelta;
-        var zoomOut = delta ? delta < 0 : e.originalEvent.deltaY > 0;
-        $panzoom.panzoom('zoom', zoomOut, {
-            increment: 0.1,
-            animate: false,
-            focal: e
-        });
-    });
-
-    $panzoom.on('panzoomend', function (e, panzoom, matrix, changed) {
-        if (!changed) {
-            $full.hide();
+    $("#page-browser rect").mouseleave(function(e){
+        var $content = $("#" + e.target.id + "-content");
+        if (!$content.is($(e.relatedTarget))) {
+            $content.hide()
         }
-        return false;
     });
 
-    $("#page-browser .page a").click(function (event) {
-        $img[0].src = $img.data("src");
-        $full.show();
-        return false;
+    $(".page-pattern").mouseleave(function(e) {
+        var $content = $(e.target);
+        var $related_svg = $("#" + $content.data("related-svg"));
+        if (!$related_svg.is($(e.relatedTarget))) {
+            $content.hide();
+        }
     });
-
 
 });

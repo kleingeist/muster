@@ -23,11 +23,36 @@
         {% endwith %}
 
         <span class="page">
-        {% thumbnail page.image "x450" as im %}
-            <a href="{{ page.image.url }}">
-            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}">
-            </a>
-        {% endthumbnail %}
+
+        {% thumbnail page.image "x450" as scaled %}
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+             xmlns:xlink="http://www.w3.org/1999/xlink"
+             width="{{ scaled.width }}" height="{{ scaled.height }}"
+             viewBox="0 0 {{ page.image_width }} {{ page.image_height }}">
+
+            <image x="0" y="0" width="{{ page.image_width }}" height="{{ page.image_height }}"
+             xlink:href="{{ scaled.url }}" />
+
+        {% for pattern in patterns %}
+            <g>
+
+                <rect x="{{ pattern.bbox.x }}" y="{{ pattern.bbox.y }}"
+                      width="{{ pattern.bbox.width }}" height="{{ pattern.bbox.height}}"
+                      stroke="black" stroke-width="10" fill="none" pointer-events="all"
+                      id="pattern-{{ pattern.id }}" class="page-svg-patttern"
+                        />
+
+
+<!--
+                <polygon points="{{ pattern.shape }}"
+                      stroke="black" stroke-width="10" fill="blue"
+                      id="pattern-{{  pattern.id }}"                        />
+-->
+            </g>
+        {% endfor %}
+
+        </svg>
+        {%  endthumbnail %}
         </span>
 
         {% with next=page.next_page %}
@@ -45,12 +70,12 @@
 {% endblock %}
 
 {% block root %}
-<div id="page-browser-full">
-    <div class="image">
-        <div class="zoom">
-            <img data-src="{{ page.image.url }}" width="{{ page.image.width }}" height="{{ page.image.height }}">
-        </div>
+{% for pattern in patterns %}
+    <div class="page-pattern"
+         id="pattern-{{ pattern.id }}-content"
+         data-related-svg="pattern-{{ pattern.id }}"
+         style="-width: {{ pattern.bbox.width }}px; -height: {{ pattern.bbox.height }}px">
+    Pattern {{ pattern.id }}
     </div>
-    <div class="title"><h3>{{ page.record_id }}</h3></div>
-</div>
+{% endfor %}
 {% endblock %}

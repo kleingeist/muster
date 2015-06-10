@@ -25,6 +25,7 @@
 body {
     color: #fff;
     background-color: #4d4d4a;
+    font-family: kirvy-regular-webfont;
 }
 
 #volume-detail .page-list .page {
@@ -43,10 +44,12 @@ body {
 }
 
 #page-browser .page img,
+#page-browser .page svg,
 #page-browser .prev-page img,
 #page-browser .next-page img {
     vertical-align: bottom;
 }
+
 
 #page-browser .prev-page,
 #page-browser .next-page {
@@ -89,39 +92,6 @@ body {
 
 
 
-#page-browser-full {
-    position: absolute;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    display: none;
-    padding-bottom: 50px;
-    background-color: #4a4a4c;
-}
-
-#page-browser-full .image {
-    overflow: hidden;
-    height: 100%;
-    width: 100%;
-}
-
-#page-browser-full .image .zoom {
-    display: inline-block;
-}
-
-#page-browser-full .title {
-    margin-bottom: -50px;
-    height: 40px;
-    padding: 5px 10px
-}
-
-
-#page-browser-full .title h3 {
-    text-align: center;
-    margin:0;
-}
-
 
 /*
 
@@ -151,7 +121,6 @@ dot: #393737
     top: 0;
     left: 0;
     bottom: 0;
-    -z-index: 1;
     background-color: #000;
 }
 
@@ -189,7 +158,7 @@ dot: #393737
 }
 
 #nav-left .logo h1 {
-    background-image: url(img/svg/logo.svg) ;
+    background-image: url(img/svg/logo.svg);
 }
 
 #nav-left ul.top {
@@ -199,19 +168,19 @@ dot: #393737
 }
 
 #nav-left ul.top .home a {
-    background-image: url(img/svg/home.svg) ;
+    background-image: url(img/svg/home.svg);
 }
 
 #nav-left ul.top .search a {
-    background-image: url(img/svg/search.svg) ;
+    background-image: url(img/svg/search.svg);
 }
 
 #nav-left ul.top .network a {
-    background-image: url(img/svg/network.svg) ;
+    background-image: url(img/svg/network.svg);
 }
 
 #nav-left ul.top .about a {
-    background-image: url(img/svg/info.svg) ;
+    background-image: url(img/svg/info.svg);
 }
 
 
@@ -222,6 +191,15 @@ dot: #393737
 }
 
 #nav-left .bottom a {
-    background-image: url(img/svg/login.svg) ;
+    background-image: url(img/svg/login.svg);
 }
 
+
+/** page_browser Hover Handling **/
+.page-pattern {
+    position: absolute;
+    display: none;
+    width: 150px;
+    height: 50px;
+    border: 3px solid black;
+}

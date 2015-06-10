@@ -94,6 +94,7 @@ class Pattern(models.Model):
     shape = models.TextField(blank=True)
 
     image = ImageField(upload_to="patterns/%Y/%m", default='', max_length=255,
-                       height_field="image_height", width_field="image_width")
-    image_height = models.IntegerField(null=True)
-    image_width = models.IntegerField(null=True)
+                       height_field="image_height", width_field="image_width",
+                       blank=True, null=True)
+    image_height = models.IntegerField(null=True, editable=False)
+    image_width = models.IntegerField(null=True, editable=False)
