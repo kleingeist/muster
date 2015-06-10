@@ -4,27 +4,15 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>PATTREATOR :: {% block title %}Home{% endblock %}</title>
-
-    <!-- Bootstrap -->
-    <link href="{% static 'musterapp/bootstrap/css/bootstrap.css' %}" rel="stylesheet">
-
-    <link href="{% static 'musterapp/default.css' %}" rel="stylesheet">
-
-    <style type="text/css">
-        .page-left, .page-right {
-            float: left;
-            margin: 10pt;
-            /*width: 320px;*/
-
-        }
-    </style>
+    <link href="{% static 'musterapp/css/bootstrap.custom.css' %}" rel="stylesheet">
+    <link href="{% static 'musterapp/css/default.css' %}" rel="stylesheet">
 </head>
 <body>
 
     <nav id="nav-left">
         <div class="logo"><a href="{% url "index" %}"><h1 class="icon">PATTREATOR</h1></a></div>
 
-        <ul class="top">
+        <ul class="nav">
             <li class="home"><a href="{% url "index" %}">Home</a></li>
             <li class="search"><a href="#">Search</a></li>
             <li class="network"><a href="#">Network</a></li>
@@ -32,7 +20,7 @@
         </ul>
 
         <div class="bottom">
-            <a class="login icon" href="#">Login</a>
+            <a class="login" href="#">Login</a>
         </div>
     </nav>
 
@@ -46,10 +34,10 @@
     {% block root %}{% endblock %}
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="{% static 'jquery-2.1.4.js' %}"></script>
+    <script src="{% static 'musterapp/js/jquery-2.1.4.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="{% static 'musterapp/bootstrap/js/bootstrap.js' %}"></script>
-    <script src="{% static 'musterapp/js/jquery.panzoom.js' %}"></script>
+    <!--<script src="{% static 'musterapp/bootstrap/js/bootstrap.js' %}"></script>-->
+
     <script src="{% static 'musterapp/js/default.js' %}"></script>
 </body>
 </html>

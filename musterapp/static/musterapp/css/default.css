@@ -1,0 +1,244 @@
+/*
+logo-bg: #ff6f00
+content-bg: #4d4d4a
+login-bg: #1f1e1e
+content-modal-bg: a4a3a3
+modal-bg: #575656
+modal-font: #bdbcbc
+modal-link: #00c2ff
+modal-form-border: #bdbcbc
+schrift: #b3b3b3
+icons: #a09f9f
+dot: #393737
+*/
+
+
+/* Force fixed (non responsive) bootstrap layout */
+.container {
+  width: 1170px;
+  max-width: none !important;
+}
+
+
+
+/* Custom Font */
+@font-face {
+  font-family: 'kirvy-regular-webfont';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/kirvy-regular-webfont.woff') format('woff'),
+       url('../fonts/kirvy-regular-webfont.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'kirvy-bold-webfont';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../fonts/kirvy-bold-webfont.woff') format('woff'),
+       url('../fonts/kirvy-bold-webfont.woff2') format('woff2');
+}
+
+
+
+/* Base layout (fonts, colors, etc.) */
+body {
+  font-family: kirvy-regular-webfont;
+  font-size: 14px;
+  line-height: 1.42857143;
+  /* color: #333333; */
+  color: #fff;
+  background-color: #4a4a4c;
+}
+
+
+
+/* Left Navigation */
+.container {
+  padding-left: 100px;
+  margin-left: 0px;
+}
+
+#nav-left {
+  width: 80px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  background-color: #000;
+}
+
+#nav-left ul.nav {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+#nav-left .bottom {
+  position: fixed;
+  bottom: 0;
+}
+
+#nav-left .logo,
+#nav-left .bottom,
+#nav-left .nav li {
+  height: 80px;
+  width: 80px;
+  padding: 25px;
+}
+
+#nav-left a.login,
+#nav-left .logo h1,
+#nav-left .nav a {
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: 30px 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+#nav-left .logo {
+  background-color: #ff6f00;
+}
+
+#nav-left .logo h1 {
+  background-image: url(../img/svg/logo.svg);
+}
+
+#nav-left .nav .home a {
+  background-image: url(../img/svg/home.svg);
+}
+
+#nav-left .nav .search a {
+  background-image: url(../img/svg/search.svg);
+}
+
+#nav-left .nav .network a {
+  background-image: url(../img/svg/network.svg);
+}
+
+#nav-left .nav .about a {
+  background-image: url(../img/svg/info.svg);
+}
+
+#nav-left .bottom {
+  background-color: #1f1e1e;
+}
+
+#nav-left a.login {
+  background-image: url(../img/svg/login.svg);
+}
+
+
+
+/* index specific styles */
+.volume-cat .volume-list {
+  overflow-x: auto;
+  overflow-y: hidden;
+  height: 130px;
+  min-height: 130px;
+  white-space: nowrap;
+}
+
+.volume-cat .volume {
+  display: inline;
+  float: left;
+  height: 110px;
+  border: 1px solid #000;
+  margin: 5px 5px;
+  padding: 5px;
+}
+
+
+
+/* volume_detail specific styles */
+#volume-detail .page-list .page {
+  margin: 5px;
+  float: left;
+}
+
+
+
+/* page_browser specific styles */
+#page-browser {
+  text-align: center;
+}
+
+#page-browser .page,
+#page-browser .prev-page,
+#page-browser .next-page {
+  display: inline;
+}
+
+#page-browser .page img,
+#page-browser .page svg,
+#page-browser .prev-page img,
+#page-browser .next-page img {
+  vertical-align: bottom;
+}
+
+#page-browser .prev-page,
+#page-browser .next-page {
+  width: 100px;
+  height: 450px;
+  display: inline-block;
+  padding: 195px 35px;
+}
+
+#page-browser .prev-page a,
+#page-browser .next-page a {
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: 30px 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+#page-browser .prev-page a {
+  background-image: url(../img/svg/prev.svg);
+}
+
+#page-browser .next-page a {
+  background-image: url(../img/svg/next.svg);
+}
+
+.page-pattern {
+  position: absolute;
+  display: none;
+  width: 150px;
+  height: 50px;
+  border: 3px solid black;
+}
+
+
+
+/* Testing */
+.page svg rect:hover {
+  stroke-width: 5px;
+  stroke: #000;
+  cursor: pointer;
+}
+
+.page svg rect {
+  stroke-width: none;
+  stroke: none;
+}

@@ -1,5 +1,5 @@
 $(document).ready(function(){
-
+/*
     $("#page-browser rect").mouseenter(function(e){
         var bbox = e.target.getBoundingClientRect();
         var $content = $("#" + e.target.id + "-content");
@@ -26,5 +26,5 @@ $(document).ready(function(){
             $content.hide();
         }
     });
-
+*/
 });
