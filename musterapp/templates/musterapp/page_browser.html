@@ -9,73 +9,86 @@
 <div id="page-browser">
     <h2>{{ page.record_id }}</h2>
 
-
-
-
-    <div class="text-center">
+    <div class="page-with-nav">
         {% with prev=page.prev_page %}
-        {% if prev %}
-            <span class="prev-page">
-                <a href="{% url 'page_browser' prev.record_id %}">Prev</a>
-                </a>
-            </span>
-        {% endif %}
+            {% if prev %}
+                <div class="prev-page">
+                    <a href="{% url 'page_browser' prev.record_id %}">Prev</a>
+                </div>
+            {% endif %}
         {% endwith %}
 
-        <span class="page">
+        <div class="page">
+            {% thumbnail page.image "x500" as scaled %}
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
+                     xmlns:xlink="http://www.w3.org/1999/xlink"
+                     width="{{ scaled.width }}" height="{{ scaled.height }}"
+                     viewBox="0 0 {{ page.image_width }} {{ page.image_height }}">
 
-        {% thumbnail page.image "x450" as scaled %}
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-             xmlns:xlink="http://www.w3.org/1999/xlink"
-             width="{{ scaled.width }}" height="{{ scaled.height }}"
-             viewBox="0 0 {{ page.image_width }} {{ page.image_height }}">
+                    <image x="0" y="0" width="{{ page.image_width }}" height="{{ page.image_height }}"
+                     xlink:href="{{ scaled.url }}" />
 
-            <image x="0" y="0" width="{{ page.image_width }}" height="{{ page.image_height }}"
-             xlink:href="{{ scaled.url }}" />
+                    {% for pattern in patterns %}
+                        <g>
+                            <rect x="{{ pattern.bbox.x }}" y="{{ pattern.bbox.y }}"
+                                  width="{{ pattern.bbox.width }}" height="{{ pattern.bbox.height}}"
+                                  stroke="black" stroke-width="10" fill="none" pointer-events="all"
+                                  id="pattern-{{ pattern.id }}" class="page-svg-patttern"
+                                    />
 
-        {% for pattern in patterns %}
-            <g>
+                            <!--
+                            <polygon points="{{ pattern.shape }}"
+                                  stroke="black" stroke-width="10" fill="blue"
+                                  id="pattern-{{  pattern.id }}" />
+                            -->
+                        </g>
+                    {% endfor %}
+                </svg>
+            {%  endthumbnail %}
 
-                <rect x="{{ pattern.bbox.x }}" y="{{ pattern.bbox.y }}"
-                      width="{{ pattern.bbox.width }}" height="{{ pattern.bbox.height}}"
-                      stroke="black" stroke-width="10" fill="none" pointer-events="all"
-                      id="pattern-{{ pattern.id }}" class="page-svg-patttern"
-                        />
-
-
-<!--
-                <polygon points="{{ pattern.shape }}"
-                      stroke="black" stroke-width="10" fill="blue"
-                      id="pattern-{{  pattern.id }}"                        />
--->
-            </g>
-        {% endfor %}
-
-        </svg>
-        {%  endthumbnail %}
-        </span>
+        </div>
 
         {% with next=page.next_page %}
-            <span class="next-page">
+            {% if next %}
+                <div class="next-page">
                     <a href="{% url 'page_browser' next.record_id %}">Next</a>
-            </span>
+                </div>
+            {% endif %}
         {% endwith %}
     </div>
-
-    <div class="text-center">
-        Volume: <a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a>
-    </div>
-
 </div>
 {% endblock %}
 
 {% block root %}
 {% for pattern in patterns %}
-    <div class="page-pattern"
+<div class="modal fade page-pattern modal-centered"
          id="pattern-{{ pattern.id }}-content"
-         data-related-svg="pattern-{{ pattern.id }}"
-         style="-width: {{ pattern.bbox.width }}px; -height: {{ pattern.bbox.height }}px">
-    Pattern {{ pattern.id }}
-    </div>
+         data-related-svg="pattern-{{ pattern.id }}">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <!--
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-
+          <h5 class="modal-title">Modal title</h5>
+        </div>
+        -->
+        <div class="modal-body">
+
+          <img src="{% thumbnail pattern.image "450" %}">
+
+          <!--
+          <dl>
+              <dt>Tags:</dt>
+                  <dd>foo foo foo</dd>
+              <dt>Status:</dt>
+                  <dd>Vectorfoo</dd>
+                  <dd>Like</dd>
+          </dl>
+          -->
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 {% endfor %}
 {% endblock %}

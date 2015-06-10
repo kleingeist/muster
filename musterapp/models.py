@@ -1,5 +1,6 @@
 from django.db import models
 from sorl.thumbnail import ImageField
+from .fields import BBoxField
 
 class VolumeCategory(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -34,6 +35,9 @@ class Volume(models.Model):
         return self.record_id
 
     def first_page(self):
+        return self.pages.order_by('page_number').first()
+
+    def preview_page(self):
         return self.pages.order_by('page_number').first()
 
 
@@ -87,10 +91,11 @@ class PageType(models.Model):
     def __str__(self): 
         return self.name
 
+
 class Pattern(models.Model):
     page = models.ForeignKey(Page, related_name="patterns")
 
-    bbox = models.CharField(max_length=79)
+    bbox = BBoxField()
     shape = models.TextField(blank=True)
 
     image = ImageField(upload_to="patterns/%Y/%m", default='', max_length=255,

@@ -27,4 +27,15 @@ $(document).ready(function(){
         }
     });
 */
+
+    $("#page-browser rect").click(function(e){
+        var $content = $("#" + e.target.id + "-content");
+        $content.modal("show");
+    });
+
+
+    $(".modal-centered").on("show.bs.modal", function() {
+        $(this).css('display', 'flex');
+    });
+
 });

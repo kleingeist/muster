@@ -23,5 +23,28 @@ def page_browser(request, page_rid):
     page = get_object_or_404(Page, record_id=page_rid)
     volume = page.volume
 
-    context = {"page": page, "volume": volume}
+    patterns = page.patterns.all()
+    """
+    for pattern in page.patterns.all():
+        bbox = dict(zip(("x", "y", "width", "height"),
+                        pattern.bbox.split(" ")))
+        assert len(bbox) == 4, "Invalid BBox"
+
+        x, y, width, height = map(int, pattern.bbox.split(" "))
+        shape = "{},{} {},{} {},{} {},{}".format(
+            x, y,
+            x + width, y,
+            x + width, y + height,
+            x, y + height
+        )
+
+        patterns.append({
+            "id": pattern.id,
+            "bbox": bbox,
+            "shape": shape,
+        })
+    """
+
+    context = {"page": page, "volume": volume, "patterns": patterns}
     return render(request, "musterapp/page_browser.html", context=context)
+
