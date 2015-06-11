@@ -5,10 +5,10 @@ _recid_single = "HA.II.{:02d}.{:03d}"
 _recid_double = "HA.II.{:02d}.{:03d}-{:03d}"
 _recpattern = re.compile(
     "^HA\.II\. (\d{2})  (?:\.(\d{3}))?  (?:-(\d{3}))? $", re.X)
-_imgname = "Htw-berlin-stoffmuster-ha02-{:02d}-{:03d}.jpg"
-_imgname_double = "Htw-berlin-stoffmuster-ha02-{:02d}-{:03d}-{:03d}.jpg"
+_imgname = "Htw-berlin-stoffmuster-ha02-{:02d}-{:03d}.{}"
+_imgname_double = "Htw-berlin-stoffmuster-ha02-{:02d}-{:03d}-{:03d}.{}"
 _imgpattern = re.compile(
-    "^Htw-berlin-stoffmuster-ha02- (\d{2}) -(\d{3}) (?:-(\d{3}))? .jpg$", re.X)
+    "^Htw-berlin-stoffmuster-ha02- (\d{2}) -(\d{3}) (?:-(\d{3}))?", re.X)
 
 
 def split_recid(recid):
@@ -22,13 +22,15 @@ def split_recid(recid):
 
     return volid, page1, page2
 
-def recid2img(recid):
+def recid2img(recid, ext="jpg"):
     volid, page1, page2 = split_recid(recid)
     if page1 is None:
         raise ValueError("Invalid record id, page missing: {}".format(recid))
 
-    _recid = _imgname if page2 is None else _imgname_double
-    return _recid.format(volid, page1, page2)
+    if page2 is not None:
+        return _imgname_double.format(volid, page1, page2, ext)
+
+    return _imgname.format(volid, page1, ext)
 
 def img2recids(imgname):
     match = _imgpattern.match(imgname)
