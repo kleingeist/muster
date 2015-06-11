@@ -3,39 +3,26 @@
 {% block title %}Volumes{% endblock %}
 
 
+
+{% load thumbnail %}
 {% block content %}
 
-<div role="tabpanel">
-<ul class="nav nav-tabs" role="tablist">
 {% for category in categories %}
-    <li role="presentation" class="{% if forloop.first %}active{% endif %}">
-        <a href="#category-{{ category.id }}"
-           aria-controls="category-{{ category.id }}"
-           role="tab" data-toggle="tab">
-          {{ category.name }}
-        </a>
-    </li>
-{% endfor %}
-</ul>
-
-
-<!-- Tab panes -->
-<div class="tab-content">
-{% for category in categories %}
-    <div role="tabpanel" class="tab-pane {% if forloop.first %}active{% endif %}" id="category-{{ category.id }}">
+    <div class="volume-cat">
         <h2>{{ category.name }}</h2>
 
-        <ul>
+        <div class="volume-list clearfix">
+
         {% for volume in category.volumes_ordered %}
-            <li>
-                <a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a>
-            </li>
+            <div class="volume">
+                {% with preview_page=volume.preview_page %}
+                <img src="{% thumbnail preview_page.image "x80" %}" />
+                {% endwith %}
+                <div><a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a></div>
+            </div>
         {% endfor %}
-        </ul>
+        </div>
     </div>
 {% endfor %}
-</div>
-
-</div>
 
 {% endblock %}
