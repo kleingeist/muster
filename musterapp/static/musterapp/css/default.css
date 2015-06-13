@@ -175,7 +175,23 @@ body {
   background-image: url(../img/svg/login.svg);
 }
 
+/* left categorybrowser sidebar */
 
+#left-sidebar {
+  width: 160px;
+  position: fixed;
+  top: 0px;
+  left: 80px;
+  bottom: 0px;
+  margin: 0;
+  padding: 5px;
+  overflow-y: hidden;
+  background-color: #2a2829;
+}
+
+.sidebar h2{
+    font-size: 14px
+}
 
 /* index specific styles */
 .volume-cat .volume-list {
@@ -198,6 +214,11 @@ body {
 
 
 /* volume_detail specific styles */
+#volume-detail .page-list{
+  position: fixed;
+  left: 240px;
+}
+
 #volume-detail .page-list .page {
   margin: 5px;
   float: left;

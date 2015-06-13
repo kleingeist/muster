@@ -14,8 +14,9 @@ def index(request):
 def volume_detail(request, volume_rid):
     volume = get_object_or_404(Volume, record_id=volume_rid)
     pages = volume.pages.order_by("page_number").all()
+    categories = VolumeCategory.objects.all().order_by("name")
 
-    context = {"volume": volume, "pages": pages}
+    context = {"volume": volume, "pages": pages, "categories": categories}
     return render(request, "musterapp/volume_detail.html", context=context)
 
 
