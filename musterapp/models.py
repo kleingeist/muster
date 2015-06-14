@@ -1,6 +1,7 @@
 from django.db import models
 from sorl.thumbnail import ImageField
 from .fields import BBoxField
+from taggit.managers import TaggableManager
 
 class VolumeCategory(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -43,9 +44,8 @@ class Volume(models.Model):
 
 def _page_upload_to(page, filename):
     if page.record_id and len(page.record_id) >= 8:
-        return "pages/" + page.record_id[:8] + "/" + filename
-    else:
-        return "pages/unsorted/" + filename
+        return "pages/{}/{}".format(page.record_id[:8], filename)
+    return "pages/unsorted/{}".format(filename)
 
 class Page(models.Model):
     volume = models.ForeignKey(Volume, related_name="pages")
@@ -92,14 +92,21 @@ class PageType(models.Model):
         return self.name
 
 
+def _pattern_upload_to(pattern, filename):
+    if pattern.page and pattern.page.record_id:
+        return "pattern/{}/{}".format(pattern.page.record_id, filename)
+    return "pattern/unsorted/{}".format(filename)
+
 class Pattern(models.Model):
     page = models.ForeignKey(Page, related_name="patterns")
 
     bbox = BBoxField()
     shape = models.TextField(blank=True)
 
-    image = ImageField(upload_to="patterns/%Y/%m", default='', max_length=255,
+    image = ImageField(upload_to=_pattern_upload_to, default='', max_length=255,
                        height_field="image_height", width_field="image_width",
                        blank=True, null=True)
     image_height = models.IntegerField(null=True, editable=False)
     image_width = models.IntegerField(null=True, editable=False)
+
+    tags = TaggableManager()

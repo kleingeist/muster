@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
+    "taggit",
     'musterapp'
 )
 
@@ -67,7 +68,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'musterapp.context_processors.volume_menu',
+                # 'musterapp.context_processors.volume_menu',
             ],
         },
     },

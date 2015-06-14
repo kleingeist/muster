@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
+{% load tag_colors %}
 
 {% block title %}{{ page.record_id }}{% endblock %}
 
@@ -76,15 +77,20 @@
 
           <img src="{% thumbnail pattern.image "450" %}">
 
-          <!--
-          <dl>
-              <dt>Tags:</dt>
-                  <dd>foo foo foo</dd>
-              <dt>Status:</dt>
-                  <dd>Vectorfoo</dd>
-                  <dd>Like</dd>
-          </dl>
-          -->
+          <table class="pattern-meta>
+            <tr class="tags">
+              <td>Tags</td>
+              <td>
+                {% for tag in pattern.tags.names %}
+                  <span class="tag" style="background-color: {{ tag|color }}">{{ tag }}</span>
+                {% endfor %}
+              </td>
+            </tr>
+            <tr class="status">
+              <td>Status</td>
+              <td>...</td>
+            </tr>
+          </table>
         </div>
       </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
