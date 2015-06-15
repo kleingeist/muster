@@ -186,6 +186,7 @@ body {
   overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 20px;
+  padding-top: 70px;
   background-color: #2a2827;
 }
 
@@ -197,28 +198,38 @@ body {
 .volume-cat {
   font-family: kirvy-bold-webfont;
   position: relative;
-  top: 35px;
 }
 
 .volume-cat p {
   line-height: 130%;
   font-stretch: ultra-expanded;
+  margin: 0px;
+}
+
+.volume-cat li {
+  font-family: "kirvy-regular-webfont";
+  font-size: 12px;
+  float: left;
+  clear: both;
+}
+
+.volume-cat a {
+  color: #a19f9f;
+  text-decoration: none;
 }
 
 .volume-cat .name {
   background-color: #4d494a;
-  padding: 5px;
-  margin-bottom: 0px;
   margin-top: 10px;
-  border-style:  solid;
-  border-color: #a19f9f;
-  border-width: 0px;
+  padding: 5px 0px 5px 5px;
+  border: 0px solid #a19f9f;
   border-left-width: 12px;
 }
 
 
 .volume-cat .active {
   border-color: #ff6f00;
+  color: #f6f6f6;
 }
 
 
@@ -226,9 +237,11 @@ body {
   position: relative;
   overflow-x: auto;
   overflow-y: hidden;
-  padding: 5px 5px 5px 40px;
-  margin: 36px 0px 0px 0px;
   background-color: #181719;
+}
+
+.volume-cat .volume-list .hover {
+  color: #f6f6f6;
 }
 
 .volume-cat .volume-list .hidden {
@@ -237,6 +250,8 @@ body {
 
 .volume-cat .volume {
   display: inline;
+  padding-top: 10px;
+  padding-bottom: 10px;
   float: left;
 }
 

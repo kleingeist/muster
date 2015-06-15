@@ -39,7 +39,16 @@ $(document).ready(function(){
     });
 
     $("#left-sidebar .volume-cat .name").click(function() {
-        $(this).toggleClass('active');
         $(this).next().toggleClass('hidden');
     });
+
+    $("#left-sidebar .volume-list .volume a").hover(
+        function () {
+            $(this).addClass("hover");
+        },
+        function () {
+            $(this).removeClass("hover");
+        });
+
+
 });

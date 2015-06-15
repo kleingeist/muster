@@ -5,16 +5,14 @@
         <div class="volume-cat">
             <p class="volume-cat name {% if volume.category == category %}active{% endif %}">Collection<br>{{ category.name }}</p>
 
-            <div class="volume-list {% if volume.category != category %}hidden{% endif %}">
+            <ul class="volume-list {% if volume.category != category %}hidden{% endif %}">
                 {% for vol in category.volumes_ordered %}
-                    <div class="volume">
-                        <div>
-                            <a href="{% url "volume_detail" vol.record_id %}">&#x25CF; {{ vol.record_id }}</a>
-                        </div>
-                    </div>
+                    <li class="volume">
+                        <a {% if vol == volume  %}class="active" {% endif %}href="{% url "volume_detail" vol.record_id %}">&#x25CF; {{ vol.record_id }}</a>
+                    </li>
                     <br/>
                 {% endfor %}
-            </div>
+            </ul>
         </div>
     {% endfor %}
 </div>

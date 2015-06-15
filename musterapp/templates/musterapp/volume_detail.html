@@ -7,19 +7,16 @@
 
 {% block content %}
 
-{% include "left-sidebar.html" %}
-
+    {% include "left-sidebar.html" %}
 <div id="volume-detail">
-    <h2>{{ volume.record_id }}</h2>
-
     <div class="page-list clearfix">
-    {% for page in pages %}
-        <div class="page">
-            <a href="{% url "page_browser" page.record_id %}">
-                <img src="{% thumbnail page.image "x100" format="PNG"  %}">
-            </a>
-        </div>
-    {% endfor %}
+        {% for page in pages %}
+            <div class="page">
+                <a href="{% url "page_browser" page.record_id %}">
+                    <img src="{% thumbnail page.image "x100" format="PNG" %}">
+                </a>
+            </div>
+        {% endfor %}
     </div>
 </div>
 {% endblock %}
