@@ -8,7 +8,7 @@ _colormap = {
     'aqua': '#00ffff', 'wasser': '#00ffff',
     'aquamarine': '#7fffd4', 'aquamarinblau': '#7fffd4',
     'azure': '#f0ffff', 'himmelblau': '#f0ffff',
-    'beige': '#f5f5dc', 'beige': '#f5f5dc',
+    'beige': '#f5f5dc',
     'bisque': '#ffe4c4', 'biskuit': '#ffe4c4',
     'black': '#000000', 'schwarz': '#000000',
     'blanchedalmond': '#ffebcd', 'mandelweiß': '#ffebcd',
@@ -49,18 +49,17 @@ _colormap = {
     'floralwhite': '#fffaf0', 'blütenweiß': '#fffaf0',
     'forestgreen': '#228b22', 'waldgrün': '#228b22',
     'fuchsia': '#ff00ff', 'fuchsie (fuchsia = magenta)': '#ff00ff',
-    'gainsboro': '#dcdcdc', 'gainsboro': '#dcdcdc',
+    'gainsboro': '#dcdcdc',
     'ghostwhite': '#f8f8ff', 'geisterweiß': '#f8f8ff',
-    'gold': '#ffd700', 'gold': '#ffd700',
+    'gold': '#ffd700',
     'goldenrod': '#daa520', 'goldrute': '#daa520',
-    'gray ': '#808080', 'grau': '#808080',
+    'gray': '#808080', 'grey': '#808080', 'grau': '#808080',
     'green': '#008000', 'grün': '#008000',
     'greenyellow': '#adff2f', 'grüngelb': '#adff2f',
-    'grey': '#808080', 'grau': '#808080',
     'honeydew': '#f0fff0', 'honigmelone': '#f0fff0',
     'hotpink': '#ff69b4', 'leuchtendes rosa': '#ff69b4',
     'indianred': '#cd5c5c', 'indischrot': '#cd5c5c',
-    'indigo': '#4b0082', 'indigo': '#4b0082',
+    'indigo': '#4b0082',
     'ivory': '#fffff0', 'elfenbein': '#fffff0',
     'khaki': '#f0e68c', 'staubfarben': '#f0e68c',
     'lavender': '#e6e6fa', 'lavendel': '#e6e6fa',
@@ -103,7 +102,7 @@ _colormap = {
     'oldlace': '#fdf5e6', 'alte spitze': '#fdf5e6',
     'olive': '#808000', 'olivgrün': '#808000',
     'olivedrab ': '#6b8e23', 'olivgraubraun': '#6b8e23',
-    'orange': '#ffa500', 'orange': '#ffa500',
+    'orange': '#ffa500',
     'orangered': '#ff4500', 'orangerot': '#ff4500',
     'orchid': '#da70d6', 'orchidee': '#da70d6',
     'palegoldenrod': '#eee8aa', 'blasse goldrutenfarbe': '#eee8aa',
@@ -112,7 +111,7 @@ _colormap = {
     'palevioletred': '#db7093', 'blasses violettrot': '#db7093',
     'papayawhip': '#ffefd5', 'papayacreme': '#ffefd5',
     'peachpuff': '#ffdab9', 'pfirsich': '#ffdab9',
-    'peru': '#cd853f', 'peru': '#cd853f',
+    'peru': '#cd853f',
     'pink': '#ffc0cb', 'rosa': '#ffc0cb',
     'plum': '#dda0dd', 'pflaume': '#dda0dd',
     'powderblue': '#b0e0e6', 'taubenblau': '#b0e0e6',
@@ -149,6 +148,7 @@ _colormap = {
 
 @register.filter
 def color(value):
+    value = value.lower()
     if value in _colormap:
         return _colormap[value]
 

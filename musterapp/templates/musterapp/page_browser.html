@@ -2,6 +2,7 @@
 
 {% load thumbnail %}
 {% load tag_colors %}
+{% load staticfiles %}
 
 {% block title %}{{ page.record_id }}{% endblock %}
 
@@ -20,7 +21,7 @@
         {% endwith %}
 
         <div class="page">
-            {% thumbnail page.image "x500" as scaled %}
+            {% thumbnail page.image "x500" format="PNG"  as scaled %}
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1"
                      xmlns:xlink="http://www.w3.org/1999/xlink"
                      width="{{ scaled.width }}" height="{{ scaled.height }}"
@@ -64,7 +65,8 @@
 {% for pattern in patterns %}
 <div class="modal fade page-pattern modal-centered"
          id="pattern-{{ pattern.id }}-content"
-         data-related-svg="pattern-{{ pattern.id }}">
+         data-related-svg="pattern-{{ pattern.id }}"
+         data-keyboard="true"  tabindex="-1">
     <div class="modal-dialog">
       <div class="modal-content">
         <!--
@@ -75,9 +77,14 @@
         -->
         <div class="modal-body">
 
-          <img src="{% thumbnail pattern.image "450" %}">
+          <div class="pattern-image">
+            <a href="#" class="pattern-link">
+              <img src="{% static 'musterapp/img/more.png' %}" class="pattern-image-more">
+              <img src="{% thumbnail pattern.image "450" %}" class="pattern-image-image">
+            </a>
+          </div>
 
-          <table class="pattern-meta>
+          <table class="pattern-meta">
             <tr class="tags">
               <td>Tags</td>
               <td>

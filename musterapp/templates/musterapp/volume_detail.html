@@ -16,7 +16,7 @@
     {% for page in pages %}
         <div class="page">
             <a href="{% url "page_browser" page.record_id %}">
-                <img src="{% thumbnail page.image "x100" %}">
+                <img src="{% thumbnail page.image "x100" format="PNG"  %}">
             </a>
         </div>
     {% endfor %}

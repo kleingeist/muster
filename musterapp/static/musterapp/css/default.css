@@ -303,9 +303,39 @@ body {
 }
 
 .page-pattern .modal-dialog {
-  width: 500px;
+  width: 480px;
 }
 
+.page-pattern .pattern-image {
+  position: relative;
+}
+
+.page-pattern .pattern-link img.pattern-image-image {
+  display: block;
+}
+
+.page-pattern .pattern-link img.pattern-image-more {
+  display: none;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  top: 50%;
+  left: 50%;
+  margin-left: -25px;
+  margin-top: -15px;
+}
+
+.page-pattern .pattern-link:hover img.pattern-image-more {
+  display: block;
+}
+
+.page-pattern .pattern-meta td {
+  padding: 2px 4px 2px 0;
+}
+
+.tag {
+  padding: 1px;
+}
 
 /* Testing */
 .page svg rect:hover {
