@@ -38,4 +38,8 @@ $(document).ready(function(){
         $(this).css('display', 'flex');
     });
 
+    $("#left-sidebar .volume-cat .name").click(function() {
+        $(this).toggleClass('active');
+        $(this).next().toggleClass('hidden');
+    });
 });

@@ -47,7 +47,7 @@ body {
   line-height: 1.42857143;
   /* color: #333333; */
   color: #fff;
-  background-color: #4a4a4c;
+  background-color: #4d494a;
 }
 
 /* Modals */
@@ -178,15 +178,15 @@ body {
 /* left categorybrowser sidebar */
 
 #left-sidebar {
-  width: 160px;
+  width: 180px;
   position: fixed;
   top: 0px;
   left: 80px;
   bottom: 0px;
-  margin: 0;
-  padding: 5px;
   overflow-y: hidden;
-  background-color: #2a2829;
+  overflow-x: hidden;
+  padding-left: 20px;
+  background-color: #2a2827;
 }
 
 .sidebar h2{
@@ -194,37 +194,63 @@ body {
 }
 
 /* index specific styles */
+.volume-cat {
+  font-family: kirvy-bold-webfont;
+  position: relative;
+  top: 35px;
+}
+
+.volume-cat p {
+  line-height: 130%;
+  font-stretch: ultra-expanded;
+}
+
+.volume-cat .name {
+  background-color: #4d494a;
+  padding: 5px;
+  margin-bottom: 0px;
+  margin-top: 10px;
+  border-style:  solid;
+  border-color: #a19f9f;
+  border-width: 0px;
+  border-left-width: 12px;
+}
+
+
+.volume-cat .active {
+  border-color: #ff6f00;
+}
+
+
 .volume-cat .volume-list {
+  position: relative;
   overflow-x: auto;
   overflow-y: hidden;
-  height: 130px;
-  min-height: 130px;
-  white-space: nowrap;
+  padding: 5px 5px 5px 40px;
+  margin: 36px 0px 0px 0px;
+  background-color: #181719;
+}
+
+.volume-cat .volume-list .hidden {
+  display: none;
 }
 
 .volume-cat .volume {
   display: inline;
   float: left;
-  height: 110px;
-  border: 1px solid #000;
-  margin: 5px 5px;
-  padding: 5px;
 }
-
-
 
 /* volume_detail specific styles */
 #volume-detail .page-list{
   position: fixed;
-  left: 240px;
+  top: 10px;
+  left: 260px;
 }
 
 #volume-detail .page-list .page {
   margin: 5px;
   float: left;
 }
-
-
 
 /* page_browser specific styles */
 #page-browser h2,
@@ -238,6 +264,7 @@ body {
 
 #page-browser .page svg {
   vertical-align: middle;
+  fill-opacity: 0.0;
 }
 
 #page-browser .prev-page,

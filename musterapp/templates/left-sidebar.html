@@ -3,17 +3,16 @@
 <div class="sidebar" id="left-sidebar">
     {% for category in categories %}
         <div class="volume-cat">
-            <h2>{{ category.name }}</h2>
+            <p class="volume-cat name {% if volume.category == category %}active{% endif %}">Collection<br>{{ category.name }}</p>
 
-            <div class="volume-list clearfix">
-
-                {% for volume in category.volumes_ordered %}
+            <div class="volume-list {% if volume.category != category %}hidden{% endif %}">
+                {% for vol in category.volumes_ordered %}
                     <div class="volume">
-                        {% with preview_page=volume.preview_page %}
-                            <img src="{% thumbnail preview_page.image "x80" %}" />
-                        {% endwith %}
-                        <div><a href="{% url "volume_detail" volume.record_id %}">{{ volume.record_id }}</a></div>
+                        <div>
+                            <a href="{% url "volume_detail" vol.record_id %}">&#x25CF; {{ vol.record_id }}</a>
+                        </div>
                     </div>
+                    <br/>
                 {% endfor %}
             </div>
         </div>
