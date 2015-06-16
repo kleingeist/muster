@@ -10,6 +10,11 @@
 
 {% block content %}
 <div id="page-browser">
+  <div class="volume-title">
+    <div class="volume-title-generic">Collection</div>
+    <div class="volume-title-name">{{ volume.category.name }}</div>
+  </div>
+
 
   <div class="page-with-nav">
       {% with prev=page.prev_page %}
