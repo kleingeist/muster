@@ -3,12 +3,17 @@
 <div class="sidebar" id="left-sidebar">
     {% for category in categories %}
         <div class="volume-cat">
-            <p class="volume-cat name {% if volume.category == category %}active{% endif %}">Collection<br>{{ category.name }}</p>
+            <div class="volume-cat name {% if volume.category == category %}active{% endif %}">
+                <h2>Collection<br></h2>
+                <p>{{ category.name }}</p>
+            </div>
 
             <ul class="volume-list {% if volume.category != category %}hidden{% endif %}">
                 {% for vol in category.volumes_ordered %}
                     <li class="volume">
-                        <a {% if vol == volume  %}class="active" {% endif %}href="{% url "volume_detail" vol.record_id %}">&#x25CF; {{ vol.record_id }}</a>
+                        <a {% if vol == volume  %}class="active" {% endif %}href="{% url "volume_detail" vol.record_id %}">
+                            <span {% if vol == volume %}style="color:#00c2ff"{% endif %}>&#x25CF; </span>{{ vol.record_id }}
+                        </a>
                     </li>
                     <br/>
                 {% endfor %}

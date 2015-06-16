@@ -191,12 +191,15 @@ body {
 }
 
 .sidebar h2{
-    font-size: 14px
+  font-family: kirvy-bold-webfont;
+  font-size: 14px;
+  line-height: 130%;
+  margin: 0;
 }
 
 /* index specific styles */
 .volume-cat {
-  font-family: kirvy-bold-webfont;
+  font-family: kirvy-regular-webfont;
   position: relative;
 }
 
@@ -207,7 +210,6 @@ body {
 }
 
 .volume-cat li {
-  font-family: "kirvy-regular-webfont";
   font-size: 12px;
   float: left;
   clear: both;
@@ -220,10 +222,11 @@ body {
 
 .volume-cat .name {
   background-color: #4d494a;
+  padding: 5px 5px 5px 5px;
   margin-top: 10px;
-  padding: 5px 0px 5px 5px;
   border: 0px solid #a19f9f;
   border-left-width: 12px;
+  cursor: pointer;
 }
 
 
@@ -238,6 +241,8 @@ body {
   overflow-x: auto;
   overflow-y: hidden;
   background-color: #181719;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .volume-cat .volume-list .hover {
