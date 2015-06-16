@@ -55,11 +55,11 @@ class Command(BaseCommand):
 
         dir_name = img_name[:-4]
         dir_src = path.join(imgdir, "edited_crops", dir_name)
-        dir_dst = path.join(mediadir, "patterns", "unsorted", dir_name)
+        dir_dst = path.join(mediadir, "patterns", dir_name)
         if not os.path.isdir(dir_dst):
             os.makedirs(dir_dst)
 
-        vector_dst = path.join(mediadir, "vector", "unsorted", dir_name)
+        vector_dst = path.join(mediadir, "vectors", dir_name)
         if not os.path.isdir(vector_dst):
             os.makedirs(vector_dst)
 
@@ -81,7 +81,7 @@ class Command(BaseCommand):
             pattern = Pattern()
 
             pattern.page = page
-            pattern.image = "patterns/unsorted/" + dir_name + "/" + img_name
+            pattern.image = "patterns/" + dir_name + "/" + img_name
             bbox = {
                 "x": start[0],
                 "y": start[1],
@@ -94,5 +94,5 @@ class Command(BaseCommand):
             vector = Vector()
 
             vector.pattern = pattern
-            vector.file = "vector/unsorted" + dir_name + "/" + vec_name
+            vector.file = "vectors/" + dir_name + "/" + vec_name
             vector.save()

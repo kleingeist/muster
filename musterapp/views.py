@@ -5,8 +5,7 @@ from .models import Page, Volume, VolumeCategory, Pattern
 
 
 def index(request):
-    volume = Volume.objects.all().first()
-    return volume_detail(request, volume.record_id)
+    return volume_detail(request, "HA.II.02")
 
 def volume_detail(request, volume_rid):
     volume = get_object_or_404(Volume, record_id=volume_rid)

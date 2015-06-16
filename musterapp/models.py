@@ -104,8 +104,8 @@ class PageType(models.Model):
 
 def _pattern_upload_to(pattern, filename):
     if pattern.page and pattern.page.record_id:
-        return "pattern/{}/{}".format(pattern.page.record_id, filename)
-    return "pattern/unsorted/{}".format(filename)
+        return "patterns/{}/{}".format(pattern.page.record_id, filename)
+    return "patterns/unsorted/{}".format(filename)
 
 
 class Pattern(models.Model):
@@ -120,7 +120,7 @@ class Pattern(models.Model):
     image_height = models.IntegerField(null=True, editable=False)
     image_width = models.IntegerField(null=True, editable=False)
 
-    tags = TaggableManager()
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return "{}:{}".format(self.page, self.id)
