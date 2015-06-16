@@ -1,7 +1,9 @@
 from django.db import models
 from sorl.thumbnail import ImageField
-from .fields import BBoxField
 from taggit.managers import TaggableManager
+
+from .fields import BBoxField
+
 
 class VolumeCategory(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -40,6 +42,10 @@ class Volume(models.Model):
 
     def preview_page(self):
         return self.pages.order_by('page_number').first()
+
+    def page_record_ids(self):
+        return self.pages.values_list('record_id', flat=True)\
+            .order_by('page_number')
 
 
 def _page_upload_to(page, filename):

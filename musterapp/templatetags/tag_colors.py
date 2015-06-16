@@ -1,6 +1,9 @@
 from django import template
+from django.utils.html import conditional_escape
+from django.utils.safestring import mark_safe
 
 register = template.Library()
+
 
 _colormap = {
     'aliceblue': '#f0f8ff', 'eisfarben': '#f0f8ff',
@@ -154,3 +157,16 @@ def color(value):
 
     h = hash(value) % (16 ** 6)
     return "#{:06x}".format(h)
+
+
+@register.filter(is_safe=True, needs_autoescape=True)
+def as_tag(value, autoescape=True):
+    if autoescape:
+        esc = conditional_escape
+    else:
+        esc = lambda x: x
+
+    tag_color = color(value)
+    html = '<span class="tag" style="background-color: {};">{}</span>'.format(
+        esc(tag_color), esc(value.upper()))
+    return mark_safe(html)

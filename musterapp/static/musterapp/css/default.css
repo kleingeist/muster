@@ -13,14 +13,6 @@ dot: #393737
 */
 
 
-/* Force fixed (non responsive) bootstrap layout */
-.container {
-  width: 1170px;
-  max-width: none !important;
-  padding: 20px 20px;
-  margin: 0 auto;
-}
-
 /* Custom Font */
 @font-face {
   font-family: 'kirvy-regular-webfont';
@@ -48,6 +40,20 @@ body {
   /* color: #333333; */
   color: #fff;
   background-color: #4d494a;
+}
+
+
+.tag {
+  padding: 1px;
+}
+
+
+/* Force fixed (non responsive) bootstrap layout */
+.container {
+  width: 1170px;
+  max-width: none !important;
+  padding: 20px 20px;
+  margin: 0 auto;
 }
 
 #nav-left, #sidebar-left, #sidebar-right {
@@ -132,7 +138,6 @@ body {
 .modal-centered.fade.in .modal-dialog {
   opacity: 1;
 }
-
 
 
 /* Left Navigation */
@@ -297,10 +302,6 @@ body {
 }
 
 /* page_browser specific styles */
-#sidebar-right {
-  background-color: #000;
-}
-
 #page-browser h2,
 #page-browser .page-with-nav {
   text-align: center;
@@ -382,9 +383,114 @@ body {
   padding: 2px 4px 2px 0;
 }
 
-.tag {
-  padding: 1px;
+.volume-dot-navigation ol {
+  display: block;
+  list-style-type: none;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
 }
+
+.volume-dot-navigation li {
+  display: inline-block;
+  padding: 0 2px;
+}
+
+.volume-dot-navigation li a {
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  background-size: 10px 10px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+
+  background-image: url(../img/dot.png);
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.volume-dot-navigation li.active a {
+  background-image: url(../img/dot-active.png);
+}
+
+
+#sidebar-right {
+  background-color: #000;
+  padding: 10px 10px;
+}
+
+#sidebar-right .page-title {
+  font-weight: bold;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 3px;
+}
+
+#sidebar-right .pattern-count,
+#sidebar-right .vect-count {
+  font-size: 0.8em;
+  color: #999999;
+}
+
+#sidebar-right .count {
+  color: #fff;
+}
+
+#sidebar-right .page-meta {
+  position: fixed;
+  bottom: 0;
+  font-size: 0.8em;
+}
+
+#sidebar-right .page-meta dt {
+  color: #999;
+  margin-top: 0.5em;
+}
+
+#sidebar-right .page-meta dd {
+  color: #fff;
+}
+
+.volume-back {
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.sb-r .volume-back {
+  right: 200px;
+}
+
+.volume-back a {
+  display: block;
+  width: 30px;
+  height: 44px;
+
+  background-size: 30px 44px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+
+  background-image: url(../img/view.png);
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+
+
 
 /* Testing */
 .page svg rect:hover {
