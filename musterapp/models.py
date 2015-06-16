@@ -54,6 +54,7 @@ def _page_upload_to(page, filename):
         return "pages/{}/{}".format(page.record_id[:8], filename)
     return "pages/unsorted/{}".format(filename)
 
+
 class Page(models.Model):
     volume = models.ForeignKey(Volume, related_name="pages")
 
@@ -86,11 +87,13 @@ class Page(models.Model):
         return self.volume.pages.filter(
             page_number__lt=self.page_number).order_by('-page_number').first()
 
+
 class PageColor(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
 
     def __str__(self): 
         return self.name
+
 
 class PageType(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
@@ -103,6 +106,7 @@ def _pattern_upload_to(pattern, filename):
     if pattern.page and pattern.page.record_id:
         return "pattern/{}/{}".format(pattern.page.record_id, filename)
     return "pattern/unsorted/{}".format(filename)
+
 
 class Pattern(models.Model):
     page = models.ForeignKey(Page, related_name="patterns")
@@ -124,7 +128,7 @@ class Pattern(models.Model):
 
 class Vector(models.Model):
     pattern = models.ForeignKey(Pattern, related_name="vectors")
-    author = models.ForeignKey(settings.AUTH_USER_MODEL )
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, blank=True, null=True)
 
     file = models.FileField(upload_to="vectors/%Y/%m", default=None,
                             max_length=255, blank=True, null=True)

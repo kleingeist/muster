@@ -6,7 +6,7 @@ import shutil
 from django.core.management.base import BaseCommand, CommandError
 from django.conf import settings
 
-from musterapp.models import Volume, Page, PageColor, PageType, VolumeCategory, Pattern
+from musterapp.models import Volume, Vector, Page, PageColor, PageType, VolumeCategory, Pattern
 from musterapp import helper
 from ._parser import MusterParser
 from sorl.thumbnail.fields import ImageField
@@ -33,7 +33,7 @@ class Command(BaseCommand):
         if not os.path.isdir(imgdir):
             raise CommandError("imgdir has to be a directory")
 
-        vid, cid, p1id, p2id  = helper.img2recids(options["page_name"])
+        vid, cid, p1id, p2id = helper.img2recids(options["page_name"])
 
         page = Page.objects.get(record_id=cid)
         if page is None:
@@ -59,14 +59,24 @@ class Command(BaseCommand):
         if not os.path.isdir(dir_dst):
             os.makedirs(dir_dst)
 
-        with open(path.join(imgdir, "edited_scans", helper.recid2img(cid, ext="txt"))) as f:
+        vector_dst = path.join(mediadir, "vector", "unsorted", dir_name)
+        if not os.path.isdir(vector_dst):
+            os.makedirs(vector_dst)
+
+        with open(path.join(imgdir, "edited_scans",
+                            helper.recid2img(cid, ext="txt"))) as f:
             pos = json.load(f)
 
         Pattern.objects.filter(page=page).delete()
 
         for i, start in enumerate(pos["start_pos"]):
             img_name = str(i) + ".png"
-            shutil.copy(path.join(dir_src, img_name), path.join(dir_dst, img_name))
+            vec_name = str(i) + ".svg"
+
+            shutil.copy(path.join(dir_src, img_name),
+                        path.join(dir_dst, img_name))
+            shutil.copy(path.join(dir_src, vec_name),
+                        path.join(vector_dst, vec_name))
 
             pattern = Pattern()
 
@@ -80,3 +90,9 @@ class Command(BaseCommand):
             }
             pattern.bbox = bbox
             pattern.save()
+
+            vector = Vector()
+
+            vector.pattern = pattern
+            vector.file = "vector/unsorted" + dir_name + "/" + vec_name
+            vector.save()
