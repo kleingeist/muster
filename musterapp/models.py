@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 from sorl.thumbnail import ImageField
 from taggit.managers import TaggableManager
 
@@ -116,3 +117,17 @@ class Pattern(models.Model):
     image_width = models.IntegerField(null=True, editable=False)
 
     tags = TaggableManager()
+
+    def __str__(self):
+        return "{}:{}".format(self.page, self.id)
+
+
+class Vector(models.Model):
+    pattern = models.ForeignKey(Pattern, related_name="vectors")
+    author = models.ForeignKey(settings.AUTH_USER_MODEL )
+
+    file = models.FileField(upload_to="vectors/%Y/%m", default=None,
+                            max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return "{}/{}".format(self.pattern, self.id)

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Page, Volume, PageColor, Pattern, VolumeCategory
+from .models import Page, Volume, PageColor, Pattern, VolumeCategory, Vector
 
 admin.site.register(VolumeCategory)
 
@@ -25,3 +25,6 @@ admin.site.register(Page, PageAdmin)
 
 
 admin.site.register(Pattern)
+
+admin.site.register(Vector)
+
