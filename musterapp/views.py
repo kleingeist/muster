@@ -4,12 +4,8 @@ from .models import Page, Volume, VolumeCategory
 
 
 def index(request):
-
-    categories = VolumeCategory.objects.all().order_by("name")
-
-    context = {"categories": categories}
-    return render(request, "musterapp/index.html", context=context)
-
+    volume = Volume.objects.all().first()
+    return volume_detail(request, volume.record_id)
 
 def volume_detail(request, volume_rid):
     volume = get_object_or_404(Volume, record_id=volume_rid)

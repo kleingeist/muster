@@ -38,11 +38,11 @@ $(document).ready(function(){
         $(this).css('display', 'flex');
     });
 
-    $("#left-sidebar .volume-cat .name").click(function() {
+    $("#sidebar-left .volume-cat .name").click(function() {
         $(this).next().toggleClass('hidden');
     });
 
-    $("#left-sidebar .volume-list .volume a").hover(
+    $("#sidebar-left .volume-list .volume a").hover(
         function () {
             $(this).addClass("hover");
         },

@@ -17,9 +17,9 @@ dot: #393737
 .container {
   width: 1170px;
   max-width: none !important;
+  padding: 20px 20px;
+  margin: 0 auto;
 }
-
-
 
 /* Custom Font */
 @font-face {
@@ -48,6 +48,52 @@ body {
   /* color: #333333; */
   color: #fff;
   background-color: #4d494a;
+}
+
+#nav-left, #sidebar-left, #sidebar-right {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+}
+
+.nav-l #nav-left {
+  display: block;
+  width: 80px;
+  left: 0;
+}
+
+.sb-l #sidebar-left {
+  display: block;
+  width: 180px;
+  position: fixed;
+  left: 0;
+}
+
+.nav-l.sb-l #sidebar-left {
+  left: 80px;
+}
+
+.sb-r #sidebar-right {
+  display: block;
+  right: 0;
+  width: 180px;
+}
+
+.nav-l .container {
+  padding-left: 100px;
+}
+
+.sb-l .container {
+  padding-left: 200px;
+}
+
+.sb-r .container {
+  padding-right: 200px;
+}
+
+.nav-l.sb-l .container {
+  padding-left: 280px;
 }
 
 /* Modals */
@@ -90,17 +136,7 @@ body {
 
 
 /* Left Navigation */
-.container {
-  padding-left: 100px;
-  margin-left: 0px;
-}
-
 #nav-left {
-  width: 80px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
   background-color: #000;
 }
 
@@ -176,13 +212,7 @@ body {
 }
 
 /* left categorybrowser sidebar */
-
-#left-sidebar {
-  width: 180px;
-  position: fixed;
-  top: 0px;
-  left: 80px;
-  bottom: 0px;
+.volume-detail #sidebar-left {
   overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 20px;
@@ -190,14 +220,14 @@ body {
   background-color: #2a2827;
 }
 
-.sidebar h2{
+
+#sidebar-left h2{
   font-family: kirvy-bold-webfont;
   font-size: 14px;
   line-height: 130%;
   margin: 0;
 }
 
-/* index specific styles */
 .volume-cat {
   font-family: kirvy-regular-webfont;
   position: relative;
@@ -261,18 +291,16 @@ body {
 }
 
 /* volume_detail specific styles */
-#volume-detail .page-list{
-  position: absolute;
-  top: 10px;
-  left: 280px;
-}
-
 #volume-detail .page-list .page {
   margin: 5px;
   float: left;
 }
 
 /* page_browser specific styles */
+#sidebar-right {
+  background-color: #000;
+}
+
 #page-browser h2,
 #page-browser .page-with-nav {
   text-align: center;
@@ -285,14 +313,15 @@ body {
 #page-browser .page svg {
   vertical-align: middle;
   fill-opacity: 0.0;
+  max-width: 720px;
 }
 
 #page-browser .prev-page,
 #page-browser .next-page {
   display: inline-block;
-  width: 100px;
+  width: 70px;
   height: 450px;
-  padding: 195px 35px;
+  padding: 195px 20px;
 }
 
 #page-browser .prev-page a,

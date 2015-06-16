@@ -6,6 +6,7 @@
 
 {% block title %}{{ page.record_id }}{% endblock %}
 
+{% block bodyclass %}page-browser sb-r{% endblock %}
 
 {% block content %}
 <div id="page-browser">
@@ -58,7 +59,13 @@
             {% endif %}
         {% endwith %}
     </div>
+
+
+    <div class="sidebar-right">
+
+    </div>
 </div>
+
 {% endblock %}
 
 {% block root %}

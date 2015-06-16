@@ -3,11 +3,9 @@
 {% load thumbnail %}
 
 {% block title %}{{ volume.record_id }}{% endblock %}
-
+{% block bodyclass %}volume-detail sb-l{% endblock %}
 
 {% block content %}
-
-    {% include "left-sidebar.html" %}
 <div id="volume-detail">
     <div class="page-list clearfix">
         {% for page in pages %}
@@ -19,4 +17,27 @@
         {% endfor %}
     </div>
 </div>
+{% endblock %}
+
+
+{% block sidebar-left %}
+    {% for category in categories %}
+        <div class="volume-cat">
+            <div class="volume-cat name {% if volume.category == category %}active{% endif %}">
+                <h2>Collection<br></h2>
+                <p>{{ category.name }}</p>
+            </div>
+
+            <ul class="volume-list {% if volume.category != category %}hidden{% endif %}">
+                {% for vol in category.volumes_ordered %}
+                    <li class="volume">
+                        <a {% if vol == volume  %}class="active" {% endif %}href="{% url "volume_detail" vol.record_id %}">
+                            <span {% if vol == volume %}style="color:#00c2ff"{% endif %}>&#x25CF; </span>{{ vol.record_id }}
+                        </a>
+                    </li>
+                    <br/>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endfor %}
 {% endblock %}

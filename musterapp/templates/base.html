@@ -7,7 +7,7 @@
     <link href="{% static 'musterapp/css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'musterapp/css/default.css' %}" rel="stylesheet">
 </head>
-<body>
+<body  class="nav-l {% block bodyclass %}{% endblock %}">
 
     <nav id="nav-left">
         <div class="logo"><a href="{% url "index" %}"><h1 class="icon">PATTREATOR</h1></a></div>
@@ -24,6 +24,13 @@
         </div>
     </nav>
 
+    <div id="sidebar-left">
+        {% block sidebar-left %}{% endblock %}
+    </div>
+
+    <div id="sidebar-right">
+        {% block sidebar-right %}{% endblock %}
+    </div>
 
 
     <div id="content" class="container">
