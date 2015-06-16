@@ -63,6 +63,9 @@ class BBoxField(models.CharField):
         if value is None:
             return ""
 
+        if isinstance(value, str):
+            value = value.split(" ")
+
         if isinstance(value, dict):
             if sorted(value.keys()) != sorted(BBoxField._dict_keys):
                 raise ValidationError("Invalid BBox")

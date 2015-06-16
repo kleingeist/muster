@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+
+{% block title %}Search{% endblock %}
+{% block bodyclass %}search{% endblock %}
+
+{% block content %}
+<div id="search">
+  <form action="{% url "search" %}" method="get">
+    <input type="text" name="q" value="{{ q_current }}">
+  </form>
+
+  <div class="search-result clearfix">
+    {% for pattern in patterns %}
+      <div class="pattern">
+        <img src="{% thumbnail pattern.image "300x350" format="PNG" %}">
+      </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

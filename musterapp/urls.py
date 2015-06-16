@@ -8,4 +8,5 @@ urlpatterns = [
         views.volume_detail, name="volume_detail"),
     url(r'^page/(?P<page_rid>[\w\.\-]+)$',
         views.page_browser, name="page_browser"),
+    url(r'^search$', views.search, name="search"),
 ]

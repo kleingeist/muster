@@ -490,9 +490,7 @@ body {
 }
 
 
-
-
-/* Testing */
+/* Page Browser SVG effects  */
 .page svg rect:hover {
   stroke-width: 5px;
   stroke: #000;
@@ -502,4 +500,22 @@ body {
 .page svg rect {
   stroke-width: none;
   stroke: none;
+}
+
+
+/* Search */
+#search form {
+  margin: 20px 0 40px;
+}
+
+#search input {
+  display: block;
+  width: 500px;
+  margin: 0 auto;
+  color: black;
+}
+
+#search .search-result .pattern {
+  float: left;
+  padding: 10px;
 }

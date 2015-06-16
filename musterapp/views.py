@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, HttpResponse
+from taggit.utils import parse_tags
 
-from .models import Page, Volume, VolumeCategory
+from .models import Page, Volume, VolumeCategory, Pattern
 
 
 def index(request):
@@ -21,27 +22,20 @@ def page_browser(request, page_rid):
     volume = page.volume
 
     patterns = page.patterns.all()
-    """
-    for pattern in page.patterns.all():
-        bbox = dict(zip(("x", "y", "width", "height"),
-                        pattern.bbox.split(" ")))
-        assert len(bbox) == 4, "Invalid BBox"
-
-        x, y, width, height = map(int, pattern.bbox.split(" "))
-        shape = "{},{} {},{} {},{} {},{}".format(
-            x, y,
-            x + width, y,
-            x + width, y + height,
-            x, y + height
-        )
-
-        patterns.append({
-            "id": pattern.id,
-            "bbox": bbox,
-            "shape": shape,
-        })
-    """
 
     context = {"page": page, "volume": volume, "patterns": patterns}
     return render(request, "musterapp/page_browser.html", context=context)
 
+def search(request):
+    q = request.GET.get("q", "")
+    tags = parse_tags(q)
+
+    qs = Pattern.objects.all()
+    for tag in tags:
+        qs = qs.filter(tags__name=tag.lower())
+
+    context = {
+        "q_current": q,
+        "patterns": qs.order_by("?")
+    }
+    return render(request, "musterapp/search.html", context=context)
