@@ -262,9 +262,9 @@ body {
 
 /* volume_detail specific styles */
 #volume-detail .page-list{
-  position: fixed;
+  position: absolute;
   top: 10px;
-  left: 260px;
+  left: 280px;
 }
 
 #volume-detail .page-list .page {
