@@ -87,6 +87,9 @@ class Page(models.Model):
         return self.volume.pages.filter(
             page_number__lt=self.page_number).order_by('-page_number').first()
 
+    def vectorized_patterns(self):
+        return self.patterns.filter(vectors__isnull=False)
+
 
 class PageColor(models.Model):
     name = models.CharField(max_length=255, primary_key=True)
