@@ -28,11 +28,11 @@
                 <p>{{ category.name }}</p>
             </div>
 
-            <ul class="volume-list {% if volume.category != category %}hidden{% endif %}">
+            <ul {% if volume.category == category %}style="border-color: #ff6f00"{% endif %}class="volume-list {% if volume.category != category %}hidden{% endif %}">
                 {% for vol in category.volumes_ordered %}
                     <li class="volume">
                         <a {% if vol == volume  %}class="active" {% endif %}href="{% url "volume_detail" vol.record_id %}">
-                            <span {% if vol == volume %}style="color:#00c2ff"{% endif %}>&#x25CF; </span>{{ vol.record_id }}
+                            {{ vol.record_id }}
                         </a>
                     </li>
                     <br/>
