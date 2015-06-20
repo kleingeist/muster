@@ -461,6 +461,17 @@ body {
   padding: 10px 10px;
 }
 
+.sb-r #sidebar-right {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+#sidebar-right .top {
+  min-height: 60px;
+}
+
+
 #sidebar-right .page-title {
   font-weight: bold;
   border-bottom: 1px solid #fff;
@@ -477,10 +488,26 @@ body {
   color: #fff;
 }
 
+#sidebar-right .patterns-vect {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+#sidebar-right .patterns-vect .pattern-sb{
+  margin-bottom: 3px;
+
+}
+
 #sidebar-right .page-meta {
-  position: fixed;
+  -position: fixed;
   bottom: 0;
   font-size: 0.8em;
+  min-height: 200px;
+}
+
+#sidebar-right .page-meta dt {
+  margin: 0;
 }
 
 #sidebar-right .page-meta dt {
@@ -525,7 +552,8 @@ body {
 
 
 /* Page Browser SVG effects  */
-.page svg rect:hover {
+.page svg rect:hover,
+.page svg rect.highlight{
   stroke-width: 5px;
   stroke: #000;
   cursor: pointer;

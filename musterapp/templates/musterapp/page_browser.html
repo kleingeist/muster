@@ -84,13 +84,21 @@
 
 
 {% block sidebar-right %}
-  <div class="page-title">{{ page.record_id }}</div>
-  <div class="pattern-count"><span class="count" >00</span> Total  Patterns</div>
-  <div class="vect-count"><span class="count">00</span> Vectorized</div>
+
+  <div class="top">
+    <div class="page-title">{{ page.record_id }}</div>
+    <div class="pattern-count"><span class="count" >{{ page.patterns.count }}</span> Total  Patterns</div>
+    <div class="vect-count"><span class="count">{{ page.vectorized_patterns.count }}</span> Vectorized</div>
+  </div>
 
 
   <div class="patterns-vect">
-
+    {% for pattern in page.vectorized_patterns %}
+      <div class="pattern-sb"
+        data-pattern-id="{{ pattern.id }}">
+        <a href="#"><img src="{% thumbnail pattern.image "145" format="PNG" %}" /></a>
+      </div>
+    {% endfor %}
   </div>
 
 
@@ -105,32 +113,17 @@
       <dt>Technique / Patterntype</dt>
       <dd>?? / ??</dd>
 
-      <dt>Tags</dt>
+      <dt>Colors</dt>
       <dd>
-        {{ "todo"|as_tag }} {{ "foo"|as_tag }} {{ "bar"|as_tag }}
+        {% for color in page.colors.all %}{{ color.name|as_tag }} {% endfor %}
+      </dd>
+      <dt>Types</dt>
+      <dd>
+        {% for type in page.types.all %}{{ type.name|as_tag }} {% endfor %}
       </dd>
     </dl>
   </div>
 
-    {% for category in categories %}
-        <div class="volume-cat">
-            <div class="volume-cat name {% if volume.category == category %}active{% endif %}">
-                <h2>Collection<br></h2>
-                <p>{{ category.name }}</p>
-            </div>
-
-            <ul class="volume-list {% if volume.category != category %}hidden{% endif %}">
-                {% for vol in category.volumes_ordered %}
-                    <li class="volume">
-                        <a {% if vol == volume  %}class="active" {% endif %}href="{% url "volume_detail" vol.record_id %}">
-                            <span {% if vol == volume %}style="color:#00c2ff"{% endif %}>&#x25CF; </span>{{ vol.record_id }}
-                        </a>
-                    </li>
-                    <br/>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endfor %}
 {% endblock %}
 
 
@@ -139,6 +132,7 @@
 {% for pattern in patterns %}
 <div class="modal fade page-pattern modal-centered"
          id="pattern-{{ pattern.id }}-content"
+         data-pattern-id="{{ pattern.id }}"
          data-related-svg="pattern-{{ pattern.id }}"
          data-keyboard="true"  tabindex="-1">
     <div class="modal-dialog">
