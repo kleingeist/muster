@@ -1,6 +1,8 @@
 from django import template
+from django.core.urlresolvers import reverse
 from django.utils.html import conditional_escape
 from django.utils.safestring import mark_safe
+from musterapp import views
 
 register = template.Library()
 
@@ -169,4 +171,17 @@ def as_tag(value, autoescape=True):
     tag_color = color(value)
     html = '<span class="tag" style="background-color: {};">{}</span>'.format(
         esc(tag_color), esc(value.upper()))
+    return mark_safe(html)
+
+@register.filter(is_safe=True, needs_autoescape=True)
+def as_taga(value, autoescape=True):
+    if autoescape:
+        esc = conditional_escape
+    else:
+        esc = lambda x: x
+
+    url = "{}?q={}".format(reverse(views.search), value.lower())
+    tag_color = color(value)
+    html = '<a href="{}" class="tag" style="background-color: {};">{}</span>'.format(
+        url, esc(tag_color), esc(value.upper()))
     return mark_safe(html)
