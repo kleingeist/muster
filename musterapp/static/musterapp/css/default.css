@@ -496,12 +496,14 @@ body {
 
 #sidebar-right .patterns-vect .pattern-sb{
   margin-bottom: 3px;
+}
 
+#sidebar-right .patterns-vect img {
+  width: 145px;
+  height: auto;
 }
 
 #sidebar-right .page-meta {
-  -position: fixed;
-  bottom: 0;
   font-size: 0.8em;
   min-height: 200px;
 }

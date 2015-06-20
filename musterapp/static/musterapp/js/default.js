@@ -22,6 +22,13 @@ $(document).ready(function(){
             $this.data("svg-classes", $classes);
 
             $rect.attr("class", $classes + " highlight");
+
+            var $img = $this.find("img");
+            console.log($img);
+            console.log($img.attr("src"));
+            $img.data("img-src", $img.attr("src"));
+            $img.attr("src", $img.data("svg-src"));
+
         }, function(e) {
             var $this = $(this);
             var pattern_id = $this.data("pattern-id");
@@ -29,6 +36,9 @@ $(document).ready(function(){
             var $classes = $this.data("svg-classes");
 
             $rect.attr("class", $classes);
+
+            var $img = $this.find("img:first");
+            $img.attr("src", $img.data("img-src"));
         }
     );
 

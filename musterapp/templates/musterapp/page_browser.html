@@ -96,7 +96,10 @@
     {% for pattern in page.vectorized_patterns %}
       <div class="pattern-sb"
         data-pattern-id="{{ pattern.id }}">
-        <a href="#"><img src="{% thumbnail pattern.image "145" format="PNG" %}" /></a>
+        <a href="#">
+          <img src="{% thumbnail pattern.image "450x450" format="PNG" %}"
+              data-svg-src="{{ pattern.vectors.first.file.url }}" />
+        </a>
       </div>
     {% endfor %}
   </div>
