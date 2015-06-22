@@ -427,45 +427,6 @@ form.login input {
   padding: 2px 4px 2px 0;
 }
 
-.volume-dot-navigation ol {
-  display: block;
-  list-style-type: none;
-  text-align: center;
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.volume-dot-navigation li {
-  display: inline-block;
-  padding: 0 2px;
-}
-
-.volume-dot-navigation li a {
-  display: block;
-  width: 20px;
-  height: 20px;
-
-  background-size: 10px 10px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
-
-  background-image: url(../img/dot.png);
-
-  /* .text-hide(); */
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
-}
-
-.volume-dot-navigation li.active a {
-  background-image: url(../img/dot-active.png);
-}
-
-
 #sidebar-right {
   background-color: #000;
   padding: 10px 10px;
@@ -582,7 +543,7 @@ form.login input {
   margin: 20px 0 40px;
 }
 
-#search input {
+#search input.query {
   display: block;
   width: 500px;
   margin: 0 auto;
@@ -590,8 +551,15 @@ form.login input {
 }
 
 #search .search-result .pattern {
+  height: 180px;
   float: left;
   padding: 10px;
+}
+
+#search .pattern img {
+  height: 120px;
+  width: auto;
+  display: block;
 }
 
 
@@ -628,4 +596,44 @@ form.login input {
 
 .favorit.unfaved .icon {
   background-image: url(../img/svg/star-unfaved.svg);
+}
+
+
+/* Navigation */
+ul.dot-paginator  {
+  display: block;
+  list-style-type: none;
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+ul.dot-paginator li {
+  display: inline-block;
+  padding: 0 2px;
+}
+
+ul.dot-paginator li a {
+  display: block;
+  width: 20px;
+  height: 20px;
+
+  background-size: 10px 10px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+
+  background-image: url(../img/dot.png);
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+ul.dot-paginator li.active a {
+  background-image: url(../img/dot-active.png);
 }

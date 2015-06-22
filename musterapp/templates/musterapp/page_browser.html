@@ -66,13 +66,13 @@
   </div>
 
   <div class="volume-dot-navigation">
-    <ol>
+    <ul class="dot-paginator">
       {% for page_rid in volume.page_record_ids %}
         <li {% if page.record_id == page_rid %} class="active" {% endif %}>
           <a href="{% url 'page_browser' page_rid %}">{% url 'page_browser' page_rid %}</a>
         </li>
       {% endfor %}
-    </ol>
+    </ul>
   </div>
 </div>
 

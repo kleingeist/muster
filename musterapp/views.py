@@ -1,7 +1,8 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.utils import parse_tags
 
-from .models import Page, Volume, VolumeCategory, Pattern, Vector
+from .models import Page, Volume, VolumeCategory, Pattern
 from favit.models import Favorite
 
 
@@ -31,20 +32,45 @@ def page_browser(request, page_rid):
         user_favs = {fav.target_object_id: True for fav in user_favs}
         favorites.update(user_favs)
 
-    context = {"page": page, "volume": volume, "patterns": patterns, "favorites": favorites}
+    context = {"page": page,
+               "volume": volume,
+               "patterns": patterns,
+               "favorites": favorites}
     return render(request, "musterapp/page_browser.html", context=context)
 
 
 def search(request):
     q = request.GET.get("q", "")
+    faved = bool(request.GET.get("faved", False))
     tags = parse_tags(q)
 
-    qs = Pattern.objects.all()
+    patterns = Pattern.objects.all().order_by("?")
     for tag in tags:
-        qs = qs.filter(tags__name=tag.lower())
+        patterns = patterns.filter(tags__name=tag.lower())
+
+    favorites = {}
+    if request.user.is_authenticated():
+        user_favs = Favorite.objects.for_user(request.user, Pattern).values_list("target_object_id", flat=True)
+        favorites = {fav_id: True for fav_id in user_favs}
+
+        if faved:
+            patterns = patterns.filter(id__in=user_favs)
+
+    paginator = Paginator(patterns, 12)
+    page = request.GET.get('page')
+    try:
+        patterns = paginator.page(page)
+    except PageNotAnInteger:
+        # If page is not an integer, deliver first page.
+        patterns = paginator.page(1)
+    except EmptyPage:
+        # If page is out of range (e.g. 9999), deliver last page of results.
+        patterns = paginator.page(paginator.num_pages)
 
     context = {
         "q_current": q,
-        "patterns": qs.order_by("?")
+        "faved": faved,
+        "favorites": favorites,
+        "patterns": patterns
     }
     return render(request, "musterapp/search.html", context=context)

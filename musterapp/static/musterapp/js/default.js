@@ -134,4 +134,11 @@ $(document).ready(function(){
         });
     });
 
+
+    /**
+     * Search
+     */
+    $("#search-form .filter").on("change", function(e) {
+       $("#search-form").submit();
+    });
 });
