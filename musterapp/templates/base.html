@@ -20,16 +20,10 @@
             <li class="about"><a href="#">About</a></li>
         </ul>
 
-        {% if user.is_anonymous %}
         <div class="bottom">
+        {% if user.is_anonymous %}
             <a class="login" href="#">Login</a>
         {% else %}
-        <div class="bottom">
-{% comment %}            <p class="name">{{ user.name }}</p>
-            <a class="account" href="#">My Account</a>
-            <a class="history" href="#">History</a>
-            <a class="favourites" href="#">Favourites</a>
-            <a class="messages" href="#">Messages</a>{% endcomment %}
             <a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
         {% endif %}
         </div>
