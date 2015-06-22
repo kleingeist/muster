@@ -21,6 +21,7 @@ from django.contrib import admin
 urlpatterns = [
     url(r'^muster/', include("musterapp.urls")),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^favit/', include('favit.urls')),
 ]
 
 

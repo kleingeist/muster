@@ -1,0 +1,3 @@
+<button class="favorit {{ faved|yesno:"faved,unfaved" }}" data-href="{% url 'favit.views.add_or_remove' %}" data-id="{{ id }}">
+  <span class="icon"></span>
+</button>

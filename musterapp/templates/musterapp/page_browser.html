@@ -2,6 +2,7 @@
 
 {% load thumbnail %}
 {% load tag_colors %}
+{% load favorit %}
 {% load staticfiles %}
 
 {% block title %}{{ page.record_id }}{% endblock %}
@@ -104,7 +105,6 @@
     {% endfor %}
   </div>
 
-
   <div class="page-meta">
     <dl>
       <dt>Collection Type</dt>
@@ -153,6 +153,10 @@
               <img src="{% static 'musterapp/img/more.png' %}" class="pattern-image-more">
               <img src="{% thumbnail pattern.image "450x450" format="PNG" %}" class="pattern-image-image">
             </a>
+          </div>
+
+          <div class="pattern-favorite">
+            {% fav_button pattern.id %}
           </div>
 
           <table class="pattern-meta">

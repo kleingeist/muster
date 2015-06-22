@@ -593,3 +593,39 @@ form.login input {
   float: left;
   padding: 10px;
 }
+
+
+/* Favorites */
+.favorit {
+  background: none !important;
+  border: none;
+  outline: none;
+  padding: 0 !important;
+  font: inherit;
+
+  cursor: pointer;
+}
+
+.favorit .icon {
+  display: block;
+  width: 30px;
+  height: 30px;
+  background-size: 30px 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+.favorit.faved .icon {
+  background-image: url(../img/svg/star-faved.svg);
+}
+
+.favorit.unfaved .icon {
+  background-image: url(../img/svg/star-unfaved.svg);
+}

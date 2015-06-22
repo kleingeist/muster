@@ -38,7 +38,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'sorl.thumbnail',
-    "taggit",
+    'taggit',
+    'favit',
+    #'debug_toolbar',
     'musterapp'
 )
 
