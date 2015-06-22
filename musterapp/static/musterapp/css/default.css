@@ -139,6 +139,10 @@ body {
   opacity: 1;
 }
 
+/* tmp login site */
+form.login input {
+  color: #000000;
+}
 
 /* Left Navigation */
 #nav-left {
@@ -164,7 +168,16 @@ body {
   padding: 25px;
 }
 
+#nav-left .unfolded {
+  height: 180px;
+}
+
 #nav-left a.login,
+#nav-left a.logout,
+#nav-left a.messages,
+#nav-left a.favourites,
+#nav-left a.history,
+#nav-left a.account,
 #nav-left .logo h1,
 #nav-left .nav a {
   width: 30px;
@@ -214,6 +227,10 @@ body {
 
 #nav-left a.login {
   background-image: url(../img/svg/login.svg);
+}
+
+#nav-left a.logout {
+  background-image: url(../img/svg/logout.svg);
 }
 
 /* left categorybrowser sidebar */

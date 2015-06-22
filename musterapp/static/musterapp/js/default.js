@@ -1,4 +1,10 @@
 $(document).ready(function(){
+    /**
+     * Base sidebar, login
+     */
+    $("#nav-left .bottom .login").click(function(){
+        $("#login-modal").modal("show");
+    });
 
     /**
      * Page Browser

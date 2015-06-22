@@ -20,8 +20,18 @@
             <li class="about"><a href="#">About</a></li>
         </ul>
 
+        {% if user.is_anonymous %}
         <div class="bottom">
             <a class="login" href="#">Login</a>
+        {% else %}
+        <div class="bottom">
+{% comment %}            <p class="name">{{ user.name }}</p>
+            <a class="account" href="#">My Account</a>
+            <a class="history" href="#">History</a>
+            <a class="favourites" href="#">Favourites</a>
+            <a class="messages" href="#">Messages</a>{% endcomment %}
+            <a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+        {% endif %}
         </div>
     </nav>
 
@@ -41,6 +51,25 @@
 
     {% block root %}{% endblock %}
 
+    <div class="modal fade page-pattern modal-centered"
+         id="login-modal" data-keyboard="true" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <form class="login" method="post"
+                          action="{% url 'django.contrib.auth.views.login' %}">
+                        {% csrf_token %}
+                        <input onClick="this.select()" type="text" name="username" value="username"
+                               id="username"/>
+                        <input onClick="this.select()" type="password" name="password" value="password"
+                               id="password"/>
+                        <input type="submit" value="login"/>
+                        <input type="hidden" name="next" value="{{ next }}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'musterapp/js/jquery-2.1.4.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
