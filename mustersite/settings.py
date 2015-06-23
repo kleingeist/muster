@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'taggit',
     'favit',
+    'avatar',
     #'debug_toolbar',
     'musterapp'
 )

@@ -17,7 +17,7 @@ dot: #393737
 @font-face {
   font-family: 'kirvy-regular-webfont';
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   src: url('../fonts/kirvy-regular-webfont.woff') format('woff'),
        url('../fonts/kirvy-regular-webfont.woff2') format('woff2');
 }
@@ -25,9 +25,17 @@ dot: #393737
 @font-face {
   font-family: 'kirvy-bold-webfont';
   font-style: normal;
-  font-weight: 400;
+  font-weight: normal;
   src: url('../fonts/kirvy-bold-webfont.woff') format('woff'),
        url('../fonts/kirvy-bold-webfont.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'kirvy-light-webfont';
+  font-style: normal;
+  font-weight: normal;
+  src: url('../fonts/kirvy-light-webfont.woff') format('woff'),
+       url('../fonts/kirvy-light-webfont.woff2') format('woff2');
 }
 
 
@@ -140,8 +148,65 @@ body {
 }
 
 /* tmp login site */
-form.login input {
-  color: #000000;
+#login-form .modal-login input {
+  width: 256px;
+  height: 36px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 10px;
+  padding-left: 10px;
+  color: #bbbdbf;
+  border-width: 0px;
+}
+
+#login-form .modal-login input[type="submit"] {
+  background-color: #ff6f00;
+  color: #ffffff;
+}
+
+#login-form .modal-login {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 400px;
+  background-color: rgba(81,81,81,0.8);
+}
+
+#login-form .modal-login p.top-border {
+  font-family: kirvy-bold-webfont;
+  font-size: large;
+  text-align: center;
+  margin-bottom: 0px;
+  background-color: rgba(0,0,0,0.6);
+}
+
+#login-form .logo h1 {
+  width: 45px;
+  height: 45px;
+  display: block;
+  background-size: 45px 45px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 35px auto 35px;
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+}
+
+#login-form .modal-login p.support-text {
+  font-family: kirvy-light-webfont;
+  font-size: small;
+  color: #bbbdbf;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#login-form .modal-login a {
+  cursor: pointer;
+  text-align: right;
 }
 
 /* Left Navigation */
@@ -161,7 +226,6 @@ form.login input {
 }
 
 #nav-left .logo,
-#nav-left .bottom,
 #nav-left .nav li {
   height: 80px;
   width: 80px;
@@ -170,9 +234,9 @@ form.login input {
 
 
 #nav-left a.login,
-#nav-left a.logout,
 #nav-left .logo h1,
-#nav-left .nav a {
+#nav-left .nav a,
+#nav-left .bottom  a.button {
   width: 30px;
   height: 30px;
   display: block;
@@ -194,7 +258,8 @@ form.login input {
   background-color: #ff6f00;
 }
 
-#nav-left .logo h1 {
+#nav-left .logo h1,
+#login-form .logo h1 {
   background-image: url(../img/svg/logo.svg);
 }
 
@@ -214,16 +279,66 @@ form.login input {
   background-image: url(../img/svg/info.svg);
 }
 
-#nav-left .bottom {
-  background-color: #1f1e1e;
-}
-
 #nav-left a.login {
   background-image: url(../img/svg/login.svg);
 }
 
-#nav-left a.logout {
-  background-image: url(../img/svg/logout.svg);
+#nav-left a.favorites {
+  background-image: url(../img/svg/info.svg);
+}
+
+#nav-left a.bookmarks {
+  background-image: url(../img/svg/info.svg);
+}
+
+#nav-left a.messages {
+  background-image: url(../img/svg/info.svg);
+}
+
+#nav-left .bottom .avatar img {
+  border-radius: 30px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-color: #000000;
+  border-width: 2px;
+  width: 30px;
+  height: 30px;
+  background: #ffffff;
+}
+
+#nav-left .bottom {
+  background-color: #1f1e1e;
+  list-style-type: none;
+  width: 80px;
+  padding: 25px;
+  margin-bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+#nav-left .bottom a.avatar,
+#nav-left .bottom a.textlink {
+  font-size: 13px;
+  font-family: kirvy-light-webfont;
+}
+
+#nav-left .bottom a.avatar {
+  color: #ffffff;
+}
+
+#nav-left .bottom a.textlink {
+  white-space: nowrap;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  border: 1px solid #2e2c2c;
+  border-left-width: 0px;
+  border-right-width: 0px;
+  color: #818080;
+}
+
+#nav-left .bottom li.hidden {
+  display: none;
 }
 
 /* left categorybrowser sidebar */
@@ -565,7 +680,21 @@ form.login input {
 
 /* Favorites */
 .favorit {
-  background: none !important;
+  background: none !important;  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: 30px 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
   border: none;
   outline: none;
   padding: 0 !important;

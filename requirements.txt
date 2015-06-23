@@ -2,3 +2,4 @@ Django>=1.8.1
 Pillow>=2.8.1
 sorl-thumbnail>=12.2
 django-taggit>=0.14.0
+django-avatar>=2.0

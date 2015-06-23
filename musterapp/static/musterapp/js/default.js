@@ -33,10 +33,17 @@ $.ajaxSetup({
 
 $(document).ready(function(){
     /**
-     * Base sidebar, login
+     * Base sidebar, login and fold/unfold
      */
     $("#nav-left .bottom .login").click(function(){
-        $("#login-modal").modal("show");
+        $("#login-form").modal("show");
+    });
+
+    $("#nav-left .bottom img").click(function(e){
+        var $content = $("#" + e.target.id).parent().parent();
+        $content.siblings().each(function() {
+            $(this).toggleClass('hidden');
+        });
     });
 
 

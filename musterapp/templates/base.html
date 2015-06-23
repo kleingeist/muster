@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load avatar_tags %}
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -20,13 +21,20 @@
             <li class="about"><a href="#">About</a></li>
         </ul>
 
-        <div class="bottom">
         {% if user.is_anonymous %}
-            <a class="login" href="#">Login</a>
+        <ul class="bottom">
+            <li class="flex-item"><a class="login" href="#">Login</a></li>
         {% else %}
-            <a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a>
+        <ul class="bottom">
+            <li><div class="avatar"><img id="gravatar" src={% avatar_url user %}</img><br/>{{ user.get_username }}</div></li>
+            <li><a class="textlink" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+            <li><a class="textlink" href="#">My Account</a></li>
+            <li><a class="textlink" href="#">History</a></li>
+            <li><a class="favorites button" href="#">Favorites</a></li>
+            <li><a class="bookmarks button" href="#">Bookmarked</a></li>
+            <li><a class="messages button" href="#">Messages</a></li>
         {% endif %}
-        </div>
+        </ul>
     </nav>
 
     <div id="sidebar-left">
@@ -46,21 +54,23 @@
     {% block root %}{% endblock %}
 
     <div class="modal fade page-pattern modal-centered"
-         id="login-modal" data-keyboard="true" tabindex="-1">
+         id="login-form" data-keyboard="true" tabindex="-1">
         <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <form class="login" method="post"
-                          action="{% url 'django.contrib.auth.views.login' %}">
-                        {% csrf_token %}
-                        <input onClick="this.select()" type="text" name="username" value="username"
-                               id="username"/>
-                        <input onClick="this.select()" type="password" name="password" value="password"
-                               id="password"/>
-                        <input type="submit" value="login"/>
-                        <input type="hidden" name="next" value="{{ next }}"/>
-                    </form>
-                </div>
+            <div class="modal-body modal-login">
+                <p class="top-border">LogIn</p>
+                <div class="logo"><a href="{% url "index" %}"><h1 class="icon">PATTREATOR</h1></a></div>
+                <form class="login" method="post"
+                      action="{% url 'django.contrib.auth.views.login' %}">
+                    {% csrf_token %}
+                    <input onFocus="this.style.color='#000000'" onClick="this.select()" type="text" name="username" value="User ID"
+                           id="username"/>
+                    <input onFocus="this.style.color='#000000'" onClick="this.select()" type="password" name="password" value="Password"
+                           id="password"/>
+                    <input type="submit" value="Login"/>
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                </form>
+                <p class="support-text">Forgot your Password or Username? <a>Retrieve it!</a></p>
+                <p class="support-text">You don't have an Account yet? <a>Sign up!</a></p>
             </div>
         </div>
     </div>
