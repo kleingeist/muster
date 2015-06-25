@@ -149,7 +149,7 @@
         <div class="modal-body">
 
           <div class="pattern-image">
-            <a href="#" class="pattern-link">
+            <a href="{% url "pattern_detail" pattern.id %}" class="pattern-link">
               <img src="{% static 'musterapp/img/more.png' %}" class="pattern-image-more">
               <img src="{% thumbnail pattern.image "450x450" format="PNG" %}" class="pattern-image-image">
             </a>

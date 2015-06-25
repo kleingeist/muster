@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from taggit.utils import parse_tags
 
-from .models import Page, Volume, VolumeCategory, Pattern
+from .models import Page, Volume, VolumeCategory, Pattern, Vector
+from .forms import VectorForm
 from favit.models import Favorite
 
 
@@ -74,3 +75,25 @@ def search(request):
         "patterns": patterns
     }
     return render(request, "musterapp/search.html", context=context)
+
+
+def pattern_detail(request, pattern_id):
+    pattern = get_object_or_404(Pattern, id=pattern_id)
+    vectors = pattern.vectors.all()
+
+    if request.method == 'POST' and request.user.is_authenticated():
+        form = VectorForm(request.POST, request.FILES)
+        issvg = request.FILES['vectorfile'].content_type == 'image/svg+xml'
+
+        if form.is_valid() and issvg:
+            newvector = Vector(pattern=Pattern(id=pattern_id),
+                               file=request.FILES['vectorfile'],
+                               author=request.user)
+            newvector.save()
+
+            return redirect('musterapp.views.pattern_detail', pattern_id)
+    else:
+        form = VectorForm()
+
+    context = {"pattern": pattern, "vectors": vectors, "form": form}
+    return render(request, "musterapp/pattern_detail.html", context=context)

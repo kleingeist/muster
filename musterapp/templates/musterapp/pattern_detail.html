@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load thumbnail %}
+{% load favorit %}
+
+{% block title %}{{ page.record_id }} {{ pattern.id }}{% endblock %}
+{% block bodyclass %}pattern-detail{% endblock %}
+
+{% block content %}
+<div class="volume-title">
+    <div class="volume-title-generic">Collection</div>
+    <div class="volume-title-name">{{ pattern.page.volume.category.name }} | {{ pattern.page.volume.record_id }} |</div>
+</div>
+
+
+    <div class="original-view">
+        <p>ORIGINAL VIEW</p>
+        <img src="{% thumbnail pattern.image "450x450" format="PNG" %}" class="pattern-image-image"/>
+    <p>Tags</p>
+    <p>Status</p>
+    </div>
+
+
+    <div class="vector-list">
+        <p>VECTORIZED PATTERN</p>
+        {% for vector in vectors %}
+        <img class="vector-item" src="/media/{{ vector.file }}" width="450"/>
+        {% endfor %}
+    </div>
+    {% if not user.is_anonymous %}
+    <div class="upload-field">
+        <p>UPLOAD</p>
+        <form action="{% url 'pattern_detail' pattern.id %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.vectorfile.label_tag }} {{ form.vectorfile.help_text }}</p>
+            <p>
+                {{ form.vectorfile.errors }}
+                {{ form.vectorfile }}
+            </p>
+            <p><input type="submit" value="Upload" /></p>
+        </form>
+        <p>Upload your own PATTERN!</p>
+    </div>
+    {% endif %}
+{% endblock %}
