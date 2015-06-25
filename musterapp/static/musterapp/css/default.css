@@ -56,6 +56,10 @@ body {
 }
 
 
+input {
+  color: #000;
+}
+
 /* Force fixed (non responsive) bootstrap layout */
 .container {
   width: 1170px;
@@ -118,7 +122,7 @@ body {
 .modal-header {
   padding: 2px;
   border-bottom: 1px solid #575656;
-  min-height: 16.42857143px;
+  min-height: 17px;
 
   background-color: #000;
 }
@@ -708,21 +712,7 @@ body {
 
 /* Favorites */
 .favorit {
-  background: none !important;  width: 30px;
-  height: 30px;
-  display: block;
-  background-size: 30px 30px;
-  background-position: center center;
-  background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
-
-  /* .text-hide(); */
-  font: 0/0 a;
-  color: transparent;
-  text-shadow: none;
-  background-color: transparent;
-  border: 0;
+  background: none !important;
   border: none;
   outline: none;
   padding: 0 !important;

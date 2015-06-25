@@ -97,7 +97,7 @@
     {% for pattern in page.vectorized_patterns %}
       <div class="pattern-sb"
         data-pattern-id="{{ pattern.id }}">
-        <a href="#">
+        <a href="{% url 'pattern_detail' pattern.id %}">
           <img src="{% thumbnail pattern.image "450x450" format="PNG" %}"
               data-svg-src="{{ pattern.vectors.first.file.url }}" />
         </a>
@@ -118,11 +118,11 @@
 
       <dt>Colors</dt>
       <dd>
-        {% for color in page.colors.all %}{{ color.name|as_tag }} {% endfor %}
+        {% for color in page.colors.all %}{{ color.name|as_taga }} {% endfor %}
       </dd>
       <dt>Types</dt>
       <dd>
-        {% for type in page.types.all %}{{ type.name|as_tag }} {% endfor %}
+        {% for type in page.types.all %}{{ type.name|as_taga }} {% endfor %}
       </dd>
     </dl>
   </div>

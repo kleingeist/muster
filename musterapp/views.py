@@ -6,6 +6,8 @@ from .models import Page, Volume, VolumeCategory, Pattern, Vector
 from .forms import VectorForm
 from favit.models import Favorite
 
+from .forms import TagForm
+
 
 def index(request):
     return volume_detail(request, "HA.II.02")
@@ -26,12 +28,10 @@ def page_browser(request, page_rid):
 
     patterns = page.patterns.all()
 
-    favorites = {pattern.id: False for pattern in patterns}
-
+    favorites = {}
     if request.user.is_authenticated():
         user_favs = Favorite.objects.for_user(request.user, Pattern).filter(target_object_id__in=patterns)
-        user_favs = {fav.target_object_id: True for fav in user_favs}
-        favorites.update(user_favs)
+        favorites = {fav.target_object_id: True for fav in user_favs}
 
     context = {"page": page,
                "volume": volume,
@@ -80,13 +80,15 @@ def search(request):
 def pattern_detail(request, pattern_id):
     pattern = get_object_or_404(Pattern, id=pattern_id)
     vectors = pattern.vectors.all()
+    page = pattern.page
+    tags = pattern.tags.all()
 
     if request.method == 'POST' and request.user.is_authenticated():
         form = VectorForm(request.POST, request.FILES)
         issvg = request.FILES['vectorfile'].content_type == 'image/svg+xml'
 
         if form.is_valid() and issvg:
-            newvector = Vector(pattern=Pattern(id=pattern_id),
+            newvector = Vector(pattern=pattern,
                                file=request.FILES['vectorfile'],
                                author=request.user)
             newvector.save()
@@ -95,5 +97,20 @@ def pattern_detail(request, pattern_id):
     else:
         form = VectorForm()
 
-    context = {"pattern": pattern, "vectors": vectors, "form": form}
+    favorites = {}
+    if request.user.is_authenticated():
+        fav = Favorite.objects.get_favorite(request.user, pattern, Pattern)
+        favorites[pattern.id] = (fav is not None)
+
+    tag_form = TagForm(instance=pattern)
+
+    context = {
+        "pattern": pattern,
+        "page": page,
+        "favorites": favorites,
+        "vectors": vectors,
+        "tags": tags,
+        "tag_form": tag_form,
+        "form": form
+    }
     return render(request, "musterapp/pattern_detail.html", context=context)

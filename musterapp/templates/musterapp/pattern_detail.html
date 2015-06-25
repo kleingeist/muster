@@ -1,32 +1,46 @@
 {% extends "base.html" %}
 
 {% load thumbnail %}
+{% load tag_colors %}
 {% load favorit %}
 
-{% block title %}{{ page.record_id }} {{ pattern.id }}{% endblock %}
+{% block title %}{{ page.record_id }}/{{ pattern.id }}{% endblock %}
 {% block bodyclass %}pattern-detail{% endblock %}
 
 {% block content %}
+<div id="pattern-detail">
+
+  <div>
+    <img src="{{ pattern.image.url }}">
+  </div>
+  {% fav_button pattern.id %}
+
+  <div>
+    {% for tag in tags %}
+      {{ tag.name|as_taga }}
+    {% endfor %}
+
+    <div>
+      {{ tag_form }}
+    </div>
+
+  </div>
+
+  
+  <div>
+    {% for vector in vectors %}
+      <div>
+        <img src="{{ vector.file.url }}">
+      </div>
+    {% endfor %}
+  </div>
+
+
 <div class="volume-title">
     <div class="volume-title-generic">Collection</div>
     <div class="volume-title-name">{{ pattern.page.volume.category.name }} | {{ pattern.page.volume.record_id }} |</div>
 </div>
 
-
-    <div class="original-view">
-        <p>ORIGINAL VIEW</p>
-        <img src="{% thumbnail pattern.image "450x450" format="PNG" %}" class="pattern-image-image"/>
-    <p>Tags</p>
-    <p>Status</p>
-    </div>
-
-
-    <div class="vector-list">
-        <p>VECTORIZED PATTERN</p>
-        {% for vector in vectors %}
-        <img class="vector-item" src="/media/{{ vector.file }}" width="450"/>
-        {% endfor %}
-    </div>
     {% if not user.is_anonymous %}
     <div class="upload-field">
         <p>UPLOAD</p>
@@ -43,4 +57,8 @@
         <p>Upload your own PATTERN!</p>
     </div>
     {% endif %}
+
+
+</div>
 {% endblock %}
+

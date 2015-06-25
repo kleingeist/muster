@@ -182,6 +182,6 @@ def as_taga(value, autoescape=True):
 
     url = "{}?q={}".format(reverse(views.search), value.lower())
     tag_color = color(value)
-    html = '<a href="{}" class="tag" style="background-color: {};">{}</span>'.format(
+    html = '<a href="{}" class="tag" style="background-color: {};">{}</a>'.format(
         url, esc(tag_color), esc(value.upper()))
     return mark_safe(html)

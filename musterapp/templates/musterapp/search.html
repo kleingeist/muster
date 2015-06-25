@@ -18,7 +18,9 @@
   <div class="search-result clearfix">
     {% for pattern in patterns %}
       <div class="pattern">
-        <img src="{% thumbnail pattern.image "300x350" format="PNG" %}">
+        <a href="{% url 'pattern_detail' pattern.id %}">
+          <img src="{% thumbnail pattern.image "300x350" format="PNG" %}">
+        </a>
         {% fav_button pattern.id %}
       </div>
     {% endfor %}
