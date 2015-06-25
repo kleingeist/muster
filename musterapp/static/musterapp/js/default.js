@@ -39,13 +39,20 @@ $(document).ready(function(){
         $("#login-form").modal("show");
     });
 
-    $("#nav-left .bottom img").click(function(e){
-        var $content = $("#" + e.target.id).parent().parent();
+    $("#nav-left p.fold-button").click(function(){
+        var $content = $("#gravatar").parent().parent();
         $content.siblings().each(function() {
             $(this).toggleClass('hidden');
         });
-    });
 
+        $("#fold-button").toggleClass('down');
+
+        if (Cookies.get('folded') == 'true') {
+            Cookies.remove('folded');
+        } else {
+            Cookies.set('folded', 'true');
+        }
+    });
 
     /**
      * Page Browser

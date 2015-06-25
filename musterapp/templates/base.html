@@ -17,24 +17,23 @@
         <ul class="nav">
             <li class="home"><a href="{% url "index" %}">Home</a></li>
             <li class="search"><a href="{% url "search" %}">Search</a></li>
-            <li class="network"><a href="#">Network</a></li>
             <li class="about"><a href="#">About</a></li>
         </ul>
 
+        <div class="fold">
         {% if user.is_anonymous %}
-        <ul class="bottom">
-            <li class="flex-item"><a class="login" href="#">Login</a></li>
+            <ul class="bottom">
+                <li class="flex-item"><a class="login" href="#">Login</a></li>
         {% else %}
-        <ul class="bottom">
-            <li><div class="avatar"><img id="gravatar" src={% avatar_url user %}</img><br/>{{ user.get_username }}</div></li>
-            <li><a class="textlink" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
-            <li><a class="textlink" href="#">My Account</a></li>
-            <li><a class="textlink" href="#">History</a></li>
-            <li><a class="favorites button" href="#">Favorites</a></li>
-            <li><a class="bookmarks button" href="#">Bookmarked</a></li>
-            <li><a class="messages button" href="#">Messages</a></li>
-        {% endif %}
-        </ul>
+            <p id="fold-button" class="fold-button{% if request.COOKIES.folded == 'true' %} down{% endif %}">Foldbutton</p>
+            <ul class="bottom">
+                <li><div style="margin-left: -3px" class="avatar"><img id="gravatar" src={% avatar_url user %}</img><br/>{{ user.get_username }}</div></li>
+                <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="textlink" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+                <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="favorites button" href="#">Favorites</a></li>
+                <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="bookmarks button" href="#">Bookmarked</a></li>
+            {% endif %}
+            </ul>
+        </div>
     </nav>
 
     <div id="sidebar-left">
@@ -76,6 +75,7 @@
     </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'musterapp/js/jquery-2.1.4.js' %}"></script>
+    <script src="{% static 'musterapp/js/js-cookie-2.0.1.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'musterapp/bootstrap/js/bootstrap.js' %}"></script>
 
