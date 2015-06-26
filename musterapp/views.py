@@ -1,12 +1,14 @@
+import re
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
+from django.views.decorators.http import require_POST
 from taggit.utils import parse_tags
 
 from .models import Page, Volume, VolumeCategory, Pattern, Vector
 from .forms import VectorForm
 from favit.models import Favorite
 
-from .forms import TagForm
 
 
 def index(request):
@@ -102,15 +104,35 @@ def pattern_detail(request, pattern_id):
         fav = Favorite.objects.get_favorite(request.user, pattern, Pattern)
         favorites[pattern.id] = (fav is not None)
 
-    tag_form = TagForm(instance=pattern)
-
     context = {
         "pattern": pattern,
         "page": page,
         "favorites": favorites,
         "vectors": vectors,
         "tags": tags,
-        "tag_form": tag_form,
         "form": form
     }
     return render(request, "musterapp/pattern_detail.html", context=context)
+
+@require_POST
+def add_tag(request, pattern_id):
+    if not request.user.is_authenticated():
+        return HttpResponseForbidden()
+
+    tag = request.POST.get("tag", "")
+    if not re.match(r'^[-\w]+$', tag):
+        return HttpResponseBadRequest()
+
+    pattern = get_object_or_404(Pattern, id=pattern_id)
+    exists = pattern.tags.filter(name=tag).exists()
+
+    if not exists:
+        pattern.tags.add(tag)
+
+    from .templatetags.tag_colors import as_taga
+    data = {
+        "created": not exists,
+        "tag": tag,
+        "html": str(as_taga(tag))
+    }
+    return JsonResponse(data)

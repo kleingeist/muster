@@ -1,21 +1,5 @@
 // Get the Django csrftoken
-function getCookie(name) {
-    var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
-        var cookies = document.cookie.split(';');
-        for (var i = 0; i < cookies.length; i++) {
-            var cookie = jQuery.trim(cookies[i]);
-            // Does this cookie string begin with the name we want?
-            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    return cookieValue;
-}
-
-var csrftoken = getCookie('csrftoken');
+var csrftoken = Cookies.get('csrftoken');
 
 // Apply the csrftoken to every POST method
 function csrfSafeMethod(method) {
@@ -154,5 +138,86 @@ $(document).ready(function(){
      */
     $("#search-form .filter").on("change", function(e) {
        $("#search-form").submit();
+    });
+
+
+
+    /**
+     * Tag Adding
+     */
+    $(".tags-editable").each(function() {
+        var $container = $(this);
+        var $form = $container.find(".tag-add-form").first();
+
+        var $button = $form.find(".tag-add-button").first();
+        var $input = $form.find(".tag-add-input").first();
+
+        function show() {
+            $button.prop('disabled', true);
+            $input.show().focus();
+        }
+
+        function hide() {
+            $input.hide().val("");
+            $button.prop('disabled', false);
+        }
+
+        function abort() {
+            hide();
+        }
+
+        function submit(value) {
+            $.ajax({
+                url: $form.data("action"),
+                type: 'POST',
+                data: {
+                    tag: value,
+                },
+                success: function(response) {
+                    console.log(response);
+
+                    if (response.created) {
+                        $container.find(".tags").append(" " + response.html);
+                    }
+                    hide();
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                    hide();
+                }
+            });
+        }
+
+
+        $button.click(function() {
+           show();
+        });
+
+        $input
+            .on("focusout", function(e) {
+                abort();
+            })
+            .on("keydown", function(event) {
+                if (event.which == 13) {
+                    event.preventDefault();
+                    submit($input.val());
+                }
+                if (event.which == 27) {
+                    event.preventDefault();
+                    abort();
+                }
+            })
+            .autoGrowInput({
+                comfortZone: 20
+            })
+            .autocomplete({
+                lookup: tag_list_all,
+                triggerSelectOnValidInput: false,
+                tabDisabled: true,
+                onSelect: function (value) {
+                    console.log(value);
+                }
+            })
+        ;
     });
 });

@@ -15,15 +15,17 @@
   </div>
   {% fav_button pattern.id %}
 
-  <div>
-    {% for tag in tags %}
-      {{ tag.name|as_taga }}
-    {% endfor %}
+  <div class="tags-editable">
+    <span class="tags">
+      {% for tag in tags %}
+        {{ tag.name|as_taga }}
+      {% endfor %}
+    </span>
 
-    <div>
-      {{ tag_form }}
+    <div class="tag-add-form" data-action="{% url 'add_tag' pattern.id %}">
+      <input type="text" class="tag-add-input">
+      <button class="tag-add-button">add</button>
     </div>
-
   </div>
 
   

@@ -73,11 +73,19 @@
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        var tag_list_all = [{% for tag in tag_list_all %}"{{ tag }}",{% endfor %}];
+    </script>
+
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="{% static 'musterapp/js/jquery-2.1.4.js' %}"></script>
-    <script src="{% static 'musterapp/js/js-cookie-2.0.1.js' %}"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="{% static 'musterapp/bootstrap/js/bootstrap.js' %}"></script>
+    <script src="{% static 'musterapp/js/js-cookie-2.0.1.js' %}"></script>
+    <script src="{% static 'musterapp/js/jquery.autocomplete.js' %}"></script>
+    <script src="{% static 'musterapp/js/jquery.autoGrowInput.js' %}"></script>
+
 
     <script src="{% static 'musterapp/js/default.js' %}"></script>
 </body>

@@ -72,6 +72,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 # 'musterapp.context_processors.volume_menu',
+                'musterapp.context_processors.tag_list_all',
             ],
         },
     },
