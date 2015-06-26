@@ -1,11 +1,12 @@
 import re
 from django.shortcuts import render, get_object_or_404, redirect
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
 from django.views.decorators.http import require_POST
 from taggit.utils import parse_tags
 
-from .models import Page, Volume, VolumeCategory, Pattern, Vector
+from .models import *
 from .forms import VectorForm
 from favit.models import Favorite
 
@@ -134,5 +135,33 @@ def add_tag(request, pattern_id):
         "created": not exists,
         "tag": tag,
         "html": str(as_taga(tag))
+    }
+    return JsonResponse(data)
+
+
+@require_POST
+def rate_vector(request, vector_id):
+    if not request.user.is_authenticated():
+        return HttpResponseForbidden()
+
+    rating = int(request.REQUEST.get("rating", -1))
+
+    if not (0 <= rating <= 5):
+        return HttpResponseBadRequest()
+
+    vector = get_object_or_404(Vector, id=vector_id)
+
+    # try:
+    #     vector_rating = VectorRating.objects.get(vector=vector, user=request.user)
+    # except ObjectDoesNotExist:
+    #     vector_rating = VectorRating(vector=vector, user=request.user)
+
+    vector_rating, created = VectorRating.objects.get_or_create(vector=vector, user=request.user)
+    vector_rating.rating = rating
+    vector_rating.save()
+
+    data = {
+        "created": created,
+        "rating": vector_rating.vector.rating
     }
     return JsonResponse(data)

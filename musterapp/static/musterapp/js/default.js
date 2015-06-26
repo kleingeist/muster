@@ -220,4 +220,30 @@ $(document).ready(function(){
             })
         ;
     });
+
+    /**
+     * Ratings
+     */
+    $(".vector-rating").raty({
+        score: function () {
+            return $(this).attr('data-score');
+        },
+        click: function (score, evt) {
+            $this = $(this);
+            $.ajax({
+                url: $this.data("action"),
+                type: 'POST',
+                data: {
+                    rating: score,
+                },
+                success: function (response) {
+                    $this.raty({score: response.rating});
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    console.log(thrownError);
+                }
+            });
+            return false;
+        }
+    })
 });

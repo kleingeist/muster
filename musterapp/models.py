@@ -136,5 +136,23 @@ class Vector(models.Model):
     file = models.FileField(upload_to="vectors/%Y/%m", default=None,
                             max_length=255, blank=True, null=True)
 
+    rating = models.FloatField(default=0, blank=True)
+
+    def update_rating(self):
+        r = self.ratings.all().aggregate(rating=models.Avg("rating"))
+        self.rating = round(r["rating"], 2) if r["rating"] is not None else 0
+        self.save()
+
     def __str__(self):
         return "{}/{}".format(self.pattern, self.id)
+
+
+class VectorRating(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL)
+    vector = models.ForeignKey(Vector, related_name="ratings")
+    rating = models.IntegerField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        self.vector.update_rating()

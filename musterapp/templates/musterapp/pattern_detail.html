@@ -33,6 +33,7 @@
     {% for vector in vectors %}
       <div>
         <img src="{{ vector.file.url }}">
+        <div class="vector-rating" data-action="{% url 'rate_vector' vector.id %}" data-score="{{ vector.rating }}"></div>
       </div>
     {% endfor %}
   </div>
