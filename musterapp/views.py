@@ -139,7 +139,7 @@ def add_tag(request, pattern_id):
     return JsonResponse(data)
 
 
-@require_POST
+#@require_POST
 def rate_vector(request, vector_id):
     if not request.user.is_authenticated():
         return HttpResponseForbidden()
@@ -151,12 +151,14 @@ def rate_vector(request, vector_id):
 
     vector = get_object_or_404(Vector, id=vector_id)
 
-    # try:
-    #     vector_rating = VectorRating.objects.get(vector=vector, user=request.user)
-    # except ObjectDoesNotExist:
-    #     vector_rating = VectorRating(vector=vector, user=request.user)
+    try:
+        vector_rating = VectorRating.objects.get(vector=vector, user=request.user)
+        created = False
+    except ObjectDoesNotExist:
+        vector_rating = VectorRating(vector=vector, user=request.user)
+        created = True
 
-    vector_rating, created = VectorRating.objects.get_or_create(vector=vector, user=request.user)
+    #vector_rating, created = VectorRating.objects.get_or_create(vector=vector, user=request.user)
     vector_rating.rating = rating
     vector_rating.save()
 
