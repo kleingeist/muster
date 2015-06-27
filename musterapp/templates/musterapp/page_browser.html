@@ -95,9 +95,9 @@
   <div class="top">
     <div class="page-title">{{ page.record_id }}</div>
     <div class="pattern-count">
-      <span class="count" >{{ page.patterns.count }}</span> Patterns
+      <span class="count" >{{ page.patterns.count|stringformat:"02d" }}</span> Patterns
        /
-      <span class="count">{{ page.vectorized_patterns.count }}</span> Vectorized
+      <span class="count">{{ page.vectorized_patterns.count|stringformat:"02d" }}</span> Vectorized
     </div>
   </div>
 
@@ -173,7 +173,7 @@
             </tr>
             <tr class="status">
               <td>Status</td>
-              <td>...</td>
+              <td><span class="count">{{ pattern.vector_count|stringformat:"02d" }}</span> Vectorized</td>
             </tr>
           </table>
         </div>

@@ -649,6 +649,7 @@ input, button, select, textarea {
   color: #999999;
 }
 
+span.count,
 #sidebar-right .count {
   font-family: kirvy-bold-webfont;
   color: rgb(255,111,0);
