@@ -517,6 +517,13 @@ input, button, select, textarea {
   padding: 195px 20px;
 }
 
+#page-browser .prev-page .placeholder,
+#page-browser .next-page .placeholder {
+  width: 30px;
+  height: 30px;
+  display: block;
+}
+
 #page-browser .prev-page a,
 #page-browser .next-page a {
   width: 30px;

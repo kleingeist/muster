@@ -19,11 +19,13 @@
 
   <div class="page-with-nav">
       {% with prev=page.prev_page %}
-          {% if prev %}
-              <div class="prev-page">
-                  <a href="{% url 'page_browser' prev.record_id %}">Prev</a>
-              </div>
-          {% endif %}
+          <div class="prev-page">
+            {% if prev %}
+              <a href="{% url 'page_browser' prev.record_id %}">Prev</a>
+            {% else %}
+              <span class="placeholder">&nbsp;</span>
+            {% endif %}
+          </div>
       {% endwith %}
 
       <div class="page">
@@ -57,12 +59,16 @@
       </div>
 
       {% with next=page.next_page %}
-          {% if next %}
-              <div class="next-page">
-                  <a href="{% url 'page_browser' next.record_id %}">Next</a>
-              </div>
-          {% endif %}
+          <div class="next-page">
+            {% if next %}
+              <a href="{% url 'page_browser' next.record_id %}">Prev</a>
+            {% else %}
+              <span class="placeholder">&nbsp;</span>
+            {% endif %}
+          </div>
       {% endwith %}
+
+
   </div>
 
   <div class="volume-dot-navigation">
@@ -113,15 +119,9 @@
       <dt>Manufactor / Location</dt>
       <dd>{{ volume.producer_name }} / {{ volume.producer_location }}</dd>
 
-      <dt>Technique / Patterntype</dt>
-      <dd>?? / ??</dd>
-
-      <dt>Colors</dt>
+      <dt>Tags</dt>
       <dd>
         {% for color in page.colors.all %}{{ color.name|as_taga }} {% endfor %}
-      </dd>
-      <dt>Types</dt>
-      <dd>
         {% for type in page.types.all %}{{ type.name|as_taga }} {% endfor %}
       </dd>
     </dl>
