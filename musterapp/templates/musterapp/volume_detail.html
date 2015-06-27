@@ -23,7 +23,7 @@
 {% block sidebar-left %}
     {% for category in categories %}
         <div class="volume-cat">
-            <div class="volume-cat name {% if volume.category == category %}active{% endif %}">
+            <div class="name {% if volume.category == category %}active{% endif %}">
                 <h2>Collection<br></h2>
                 <p>{{ category.name }}</p>
             </div>

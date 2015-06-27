@@ -84,13 +84,13 @@ input, button, select, textarea {
 
 .sb-l #sidebar-left {
   display: block;
-  width: 180px;
+  width: 200px;
   position: fixed;
   left: 0;
 }
 
 .nav-l.sb-l #sidebar-left {
-  left: 80px;
+  left: 70px;
 }
 
 .sb-r #sidebar-right {
@@ -104,7 +104,7 @@ input, button, select, textarea {
 }
 
 .sb-l .container {
-  padding-left: 200px;
+  padding-left: 220px;
 }
 
 .sb-r .container {
@@ -112,7 +112,7 @@ input, button, select, textarea {
 }
 
 .nav-l.sb-l .container {
-  padding-left: 280px;
+  padding-left: 300px;
 }
 
 /* Modals */
@@ -382,7 +382,7 @@ input, button, select, textarea {
   overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 20px;
-  padding-top: 65px;
+  padding-top: 55px;
   background-color: #2a2827;
 }
 
@@ -397,7 +397,6 @@ input, button, select, textarea {
 .volume-cat {
   font-family: kirvy-regular-webfont;
   position: relative;
-  margin-top: -5px;
 }
 
 .volume-cat p {
