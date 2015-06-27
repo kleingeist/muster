@@ -117,6 +117,10 @@ input, button, select, textarea {
 /* Modals */
 .modal-content {
   border-radius: 0;
+  border-width: 0;
+  background-color: #000;
+  opacity: 0.8;
+  color: rgb(153,153,153)
 }
 
 .modal-header {
@@ -129,6 +133,11 @@ input, button, select, textarea {
 
 .modal-title {
   text-align: center;
+}
+
+.modal-body {
+  background-color: #000;
+  border-width: 0px;
 }
 
 .modal-centered {
@@ -149,6 +158,11 @@ input, button, select, textarea {
 
 .modal-centered.fade.in .modal-dialog {
   opacity: 1;
+}
+
+.modal-backdrop.in {
+  opacity: 0.6;
+  background-color: #000
 }
 
 /* tmp login site */
@@ -586,6 +600,11 @@ input, button, select, textarea {
   display: block;
 }
 
+.page-pattern .pattern-meta {
+  position: relative;
+  top: 10px;
+}
+
 .page-pattern .pattern-meta td {
   padding: 2px 4px 2px 0;
 }
@@ -729,10 +748,12 @@ input, button, select, textarea {
 
 /* Favorites */
 .favorit {
+  float: right;
+
   background: none !important;
   border: none;
   outline: none;
-  padding: 0 !important;
+  padding-top: 15px;
   font: inherit;
 
   cursor: pointer;
@@ -759,7 +780,7 @@ input, button, select, textarea {
 }
 
 .favorit.unfaved .icon {
-  background-image: url(../img/svg/star-unfaved.svg);
+  background-image: url(../img/svg/paper-clip.svg);
 }
 
 
