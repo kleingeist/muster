@@ -139,7 +139,7 @@ def add_tag(request, pattern_id):
     return JsonResponse(data)
 
 
-#@require_POST
+@require_POST
 def rate_vector(request, vector_id):
     if not request.user.is_authenticated():
         return HttpResponseForbidden()

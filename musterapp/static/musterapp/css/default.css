@@ -53,6 +53,7 @@ body {
 
 .tag {
   padding: 1px;
+  color: #000 !important;
 }
 
 
@@ -77,7 +78,7 @@ input, button, select, textarea {
 
 .nav-l #nav-left {
   display: block;
-  width: 80px;
+  width: 70px;
   left: 0;
 }
 
@@ -226,9 +227,9 @@ input, button, select, textarea {
 
 #nav-left .logo,
 #nav-left .nav li {
-  height: 80px;
-  width: 80px;
-  padding: 25px;
+  height: 70px;
+  width: 70px;
+  padding: 20px;
 }
 
 
@@ -293,7 +294,7 @@ input, button, select, textarea {
 #nav-left .fold {
   position: fixed;
   bottom: 0;
-  width: 80px;
+  width: 70px;
 }
 
 #nav-left p.fold-button {
@@ -301,7 +302,7 @@ input, button, select, textarea {
   text-align: center;
   cursor: pointer;
   background-color: #393536;
-  width: 80px;
+  width: 70px;
   height: 15px;
   background-image: url(../img/svg/popdown.svg);
   background-position: center center;
@@ -332,8 +333,8 @@ input, button, select, textarea {
   bottom: 0;
   background-color: #1f1e1e;
   list-style-type: none;
-  width: 80px;
-  padding: 25px;
+  width: 70px;
+  padding: 20px;
   padding-bottom: 10px;
   padding-top: 10px;
   margin-bottom: 0px;
