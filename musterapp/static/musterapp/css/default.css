@@ -382,7 +382,7 @@ input, button, select, textarea {
   overflow-y: hidden;
   overflow-x: hidden;
   padding-left: 20px;
-  padding-top: 55px;
+  padding-top: 50px;
   background-color: #2a2827;
 }
 
@@ -418,8 +418,8 @@ input, button, select, textarea {
 
 .volume-cat .name {
   /*background-color: #4d494a;*/
-  padding: 5px 5px 5px 5px;
-  margin-top: 15px;
+  padding: 6px 5px;
+  margin-top: 20px;
   border: 0px solid #a19f9f;
   border-left-width: 8px;
   cursor: pointer;
