@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.db.models import signals
 from sorl.thumbnail import ImageField
 from taggit.managers import TaggableManager
 
@@ -88,7 +89,7 @@ class Page(models.Model):
             page_number__lt=self.page_number).order_by('-page_number').first()
 
     def vectorized_patterns(self):
-        return self.patterns.filter(vectors__isnull=False)
+        return self.patterns.filter(vector_count__gt=0)
 
 
 class PageColor(models.Model):
@@ -125,8 +126,16 @@ class Pattern(models.Model):
 
     tags = TaggableManager(blank=True)
 
+    vector_count = models.IntegerField(default=0, editable=False)
+
+    def update_vector_count(self):
+        c = self.vectors.count()
+        self.vector_count = c
+        self.save()
+
     def __str__(self):
         return "{}:{}".format(self.page, self.id)
+
 
 
 class Vector(models.Model):
@@ -143,8 +152,16 @@ class Vector(models.Model):
         self.rating = round(r["rating"], 2) if r["rating"] is not None else 0
         self.save()
 
+    @staticmethod
+    def update_vector_count(sender, instance, **kwargs):
+        instance.pattern.update_vector_count()
+
     def __str__(self):
         return "{}/{}".format(self.pattern, self.id)
+
+signals.post_delete.connect(Vector.update_vector_count, sender=Vector)
+signals.post_save.connect(Vector.update_vector_count, sender=Vector)
+
 
 
 class VectorRating(models.Model):
