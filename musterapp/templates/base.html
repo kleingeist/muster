@@ -28,9 +28,9 @@
             <p id="fold-button" class="fold-button{% if request.COOKIES.folded == 'true' %} down{% endif %}">Foldbutton</p>
             <ul class="bottom">
                 <li><div style="margin-left: -3px" class="avatar"><img id="gravatar" src={% avatar_url user %}</img><br/>{{ user.get_username }}</div></li>
-                <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="textlink" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
                 <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="favorites button" href="#">Favorites</a></li>
                 <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="bookmarks button" href="#">Bookmarked</a></li>
+                <li{% if request.COOKIES.folded == 'true' %} class="hidden"{% endif %}><a class="logout button" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
             {% endif %}
             </ul>
         </div>

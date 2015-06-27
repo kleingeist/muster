@@ -291,6 +291,10 @@ input, button, select, textarea {
   background-image: url(../img/svg/bookmark.svg);
 }
 
+#nav-left a.logout {
+  background-image: url(../img/svg/login.svg);
+}
+
 #nav-left .fold {
   position: fixed;
   bottom: 0;
