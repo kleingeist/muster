@@ -465,9 +465,15 @@ input, button, select, textarea {
 }
 
 /* volume_detail specific styles */
+#volume-detail .page-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 #volume-detail .page-list .page {
-  margin: 5px;
-  float: left;
+  margin: 10px;
 }
 
 /* page_browser specific styles */
