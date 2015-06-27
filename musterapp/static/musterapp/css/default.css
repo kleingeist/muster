@@ -65,7 +65,7 @@ input, button, select, textarea {
 .container {
   width: 1170px;
   max-width: none !important;
-  padding: 20px 20px;
+  padding: 70px 20px 20px;
   margin: 0 auto;
 }
 
@@ -397,6 +397,7 @@ input, button, select, textarea {
 .volume-cat {
   font-family: kirvy-regular-webfont;
   position: relative;
+  margin-top: -5px;
 }
 
 .volume-cat p {
@@ -494,9 +495,6 @@ input, button, select, textarea {
   height: 1em;
 }
 
-.page-browser .container {
-  padding-top: 100px;
-}
 
 #page-browser .page-with-nav {
   text-align: center;
@@ -692,7 +690,7 @@ input, button, select, textarea {
 
 /* Search */
 #search form {
-  margin: 20px 0 40px;
+  margin-left: 40px;
 }
 
 #search input.query {
