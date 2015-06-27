@@ -153,7 +153,7 @@ input, button, select, textarea {
 
 /* tmp login site */
 #login-form .modal-login input {
-  width: 256px;
+  width: 300px;
   height: 36px;
   display: block;
   margin-left: auto;
@@ -162,6 +162,11 @@ input, button, select, textarea {
   padding-left: 10px;
   color: #bbbdbf;
   border-width: 0px;
+}
+
+#login-form .modal-login table.login {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #login-form .modal-login input[type="submit"] {
@@ -188,10 +193,10 @@ input, button, select, textarea {
 }
 
 #login-form .logo h1 {
-  width: 45px;
-  height: 45px;
+  width: 30px;
+  height: 30px;
   display: block;
-  background-size: 45px 45px;
+  background-size: 30px 30px;
   background-position: center center;
   background-repeat: no-repeat;
   margin: 35px auto 35px;
@@ -200,17 +205,23 @@ input, button, select, textarea {
   text-shadow: none;
 }
 
+#login-form .modal-login td {
+  padding-right: 3px;
+}
+
 #login-form .modal-login p.support-text {
   font-family: kirvy-light-webfont;
   font-size: small;
   color: #bbbdbf;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
 }
 
-#login-form .modal-login a {
+#login-form .modal-login a.support-link {
   cursor: pointer;
   text-align: right;
+  font-family: kirvy-light-webfont;
+  font-size: small;
+  margin: 0;
 }
 
 /* Left Navigation */
