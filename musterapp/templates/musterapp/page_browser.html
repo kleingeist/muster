@@ -94,8 +94,11 @@
 
   <div class="top">
     <div class="page-title">{{ page.record_id }}</div>
-    <div class="pattern-count"><span class="count" >{{ page.patterns.count }}</span> Total  Patterns</div>
-    <div class="vect-count"><span class="count">{{ page.vectorized_patterns.count }}</span> Vectorized</div>
+    <div class="pattern-count">
+      <span class="count" >{{ page.patterns.count }}</span> Patterns
+       /
+      <span class="count">{{ page.vectorized_patterns.count }}</span> Vectorized
+    </div>
   </div>
 
 
