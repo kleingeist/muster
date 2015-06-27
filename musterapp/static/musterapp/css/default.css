@@ -120,6 +120,10 @@ input, button, select, textarea {
 /* Modals */
 .modal-content {
   border-radius: 0;
+  border-width: 0;
+  background-color: #000;
+  opacity: 0.8;
+  color: rgb(153,153,153)
 }
 
 .modal-header {
@@ -132,6 +136,11 @@ input, button, select, textarea {
 
 .modal-title {
   text-align: center;
+}
+
+.modal-body {
+  background-color: #000;
+  border-width: 0px;
 }
 
 .modal-centered {
@@ -154,9 +163,14 @@ input, button, select, textarea {
   opacity: 1;
 }
 
+.modal-backdrop.in {
+  opacity: 0.6;
+  background-color: #000
+}
+
 /* tmp login site */
 #login-form .modal-login input {
-  width: 256px;
+  width: 300px;
   height: 36px;
   display: block;
   margin-left: auto;
@@ -165,6 +179,11 @@ input, button, select, textarea {
   padding-left: 10px;
   color: #bbbdbf;
   border-width: 0px;
+}
+
+#login-form .modal-login table.login {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #login-form .modal-login input[type="submit"] {
@@ -191,10 +210,10 @@ input, button, select, textarea {
 }
 
 #login-form .logo h1 {
-  width: 45px;
-  height: 45px;
+  width: 30px;
+  height: 30px;
   display: block;
-  background-size: 45px 45px;
+  background-size: 30px 30px;
   background-position: center center;
   background-repeat: no-repeat;
   margin: 35px auto 35px;
@@ -203,17 +222,23 @@ input, button, select, textarea {
   text-shadow: none;
 }
 
+#login-form .modal-login td {
+  padding-right: 3px;
+}
+
 #login-form .modal-login p.support-text {
   font-family: kirvy-light-webfont;
   font-size: small;
   color: #bbbdbf;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 0;
 }
 
-#login-form .modal-login a {
+#login-form .modal-login a.support-link {
   cursor: pointer;
   text-align: right;
+  font-family: kirvy-light-webfont;
+  font-size: small;
+  margin: 0;
 }
 
 /* Left Navigation */
@@ -461,9 +486,15 @@ input, button, select, textarea {
 }
 
 /* volume_detail specific styles */
+#volume-detail .page-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
 #volume-detail .page-list .page {
-  margin: 5px;
-  float: left;
+  margin: 10px;
 }
 
 /* page_browser specific styles */
@@ -578,6 +609,11 @@ input, button, select, textarea {
 
 .page-pattern .pattern-link:hover img.pattern-image-more {
   display: block;
+}
+
+.page-pattern .pattern-meta {
+  position: relative;
+  top: 10px;
 }
 
 .page-pattern .pattern-meta td {
@@ -725,10 +761,12 @@ input, button, select, textarea {
 
 /* Favorites */
 .favorit {
+  float: right;
+
   background: none !important;
   border: none;
   outline: none;
-  padding: 0 !important;
+  padding-top: 15px;
   font: inherit;
 
   cursor: pointer;
@@ -755,7 +793,7 @@ input, button, select, textarea {
 }
 
 .favorit.unfaved .icon {
-  background-image: url(../img/svg/star-unfaved.svg);
+  background-image: url(../img/svg/paper-clip.svg);
 }
 
 
