@@ -319,7 +319,7 @@ input, button, select, textarea {
 }
 
 #nav-left a.logout {
-  background-image: url(../img/svg/login.svg);
+  background-image: url(../img/svg/logout.svg);
 }
 
 #nav-left .fold {
@@ -607,7 +607,8 @@ input, button, select, textarea {
   margin-top: -15px;
 }
 
-.page-pattern .pattern-link:hover img.pattern-image-more {
+.page-pattern .pat
+tern-link:hover img.pattern-image-more {
   display: block;
 }
 
@@ -790,7 +791,7 @@ span.count,
 }
 
 .favorit.faved .icon {
-  background-image: url(../img/svg/star-faved.svg);
+  background-image: url(../img/svg/paper-clip-faved.svg);
 }
 
 .favorit.unfaved .icon {
