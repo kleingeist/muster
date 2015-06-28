@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models import signals
 from sorl.thumbnail import ImageField
 from taggit.managers import TaggableManager
+from django.contrib.auth.models import User
 
 from .fields import BBoxField
 
@@ -173,3 +174,9 @@ class VectorRating(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.vector.update_rating()
+
+
+
+class Professional(models.Model):
+    user = models.OneToOneField(User)
+    profession = models.CharField(max_length=50)

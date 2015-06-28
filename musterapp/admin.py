@@ -1,6 +1,8 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
+from django.contrib.auth.models import User
 
-from .models import Page, Volume, PageColor, Pattern, VolumeCategory, Vector
+from .models import Page, Volume, PageColor, Pattern, VolumeCategory, Vector, Professional
 
 admin.site.register(VolumeCategory)
 
@@ -21,10 +23,21 @@ class PageAdmin(AdminImageMixin, admin.ModelAdmin):
 
     # inlines = (PageColorInline,)
 
-admin.site.register(Page, PageAdmin)
 
+class ProfessionalInline(admin.StackedInline):
+    model = Professional
+    can_delete = False
+    verbose_name_plural = 'professional'
+
+
+class UserAdmin(UserAdmin):
+    inlines = (ProfessionalInline, )
+
+admin.site.register(Page, PageAdmin)
 
 admin.site.register(Pattern)
 
 admin.site.register(Vector)
 
+admin.site.unregister(User)
+admin.site.register(User, UserAdmin)
