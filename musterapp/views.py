@@ -80,8 +80,9 @@ def search(request):
     return render(request, "musterapp/search.html", context=context)
 
 
-def pattern_detail(request, pattern_id):
+def pattern_detail(request, pattern_id, vector_id):
     pattern = get_object_or_404(Pattern, id=pattern_id)
+    vector = get_object_or_404(Vector, id=vector_id)
     vectors = pattern.vectors.all()
     page = pattern.page
     tags = pattern.tags.all()
@@ -96,7 +97,7 @@ def pattern_detail(request, pattern_id):
                                author=request.user)
             newvector.save()
 
-            return redirect('musterapp.views.pattern_detail', pattern_id)
+            return redirect('musterapp.views.pattern_detail', pattern_id, newvector.id)
     else:
         form = VectorForm()
 
@@ -110,6 +111,7 @@ def pattern_detail(request, pattern_id):
         "page": page,
         "favorites": favorites,
         "vectors": vectors,
+        "vector": vector,
         "tags": tags,
         "form": form
     }

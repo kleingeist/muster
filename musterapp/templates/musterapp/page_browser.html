@@ -106,7 +106,7 @@
     {% for pattern in page.vectorized_patterns %}
       <div class="pattern-sb"
         data-pattern-id="{{ pattern.id }}">
-        <a href="{% url 'pattern_detail' pattern.id %}">
+        <a href="{% url 'pattern_detail' pattern.id pattern.vectors.first.id %}">
           <img src="{% thumbnail pattern.image "450x450" format="PNG" %}"
               data-svg-src="{{ pattern.vectors.first.file.url }}" />
         </a>
@@ -152,7 +152,7 @@
         <div class="modal-body">
 
           <div class="pattern-image">
-            <a href="{% url "pattern_detail" pattern.id %}" class="pattern-link">
+            <a href="{% url "pattern_detail" pattern.id pattern.vectors.first.id %}" class="pattern-link">
               <img src="{% static 'musterapp/img/more.png' %}" class="pattern-image-more">
               <img src="{% thumbnail pattern.image "450x450" format="PNG" %}" class="pattern-image-image">
             </a>
