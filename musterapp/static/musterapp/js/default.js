@@ -151,6 +151,7 @@ $(document).ready(function(){
 
         var $button = $form.find(".tag-add-button").first();
         var $input = $form.find(".tag-add-input").first();
+        var pending = false;
 
         function show() {
             $button.prop('disabled', true);
@@ -167,25 +168,30 @@ $(document).ready(function(){
         }
 
         function submit(value) {
-            $.ajax({
-                url: $form.data("action"),
-                type: 'POST',
-                data: {
-                    tag: value,
-                },
-                success: function(response) {
-                    console.log(response);
+            if (!pending) {
+                pending = true;
+                $.ajax({
+                    url: $form.data("action"),
+                    type: 'POST',
+                    data: {
+                        tag: value,
+                    },
+                    success: function (response) {
+                        console.log(response);
 
-                    if (response.created) {
-                        $container.find(".tags").append(" " + response.html);
+                        if (response.created) {
+                            $container.find(".tags").append(" " + response.html);
+                        }
+                        pending = false;
+                        hide();
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        console.log(thrownError);
+                        pending = false;
+                        hide();
                     }
-                    hide();
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log(thrownError);
-                    hide();
-                }
-            });
+                });
+            }
         }
 
 
@@ -215,7 +221,7 @@ $(document).ready(function(){
                 triggerSelectOnValidInput: false,
                 tabDisabled: true,
                 onSelect: function (value) {
-                    console.log(value);
+                    submit($input.val());
                 }
             })
         ;
@@ -245,5 +251,7 @@ $(document).ready(function(){
             });
             return false;
         }
-    })
+    });
+
+
 });
