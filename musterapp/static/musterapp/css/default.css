@@ -607,8 +607,7 @@ input, button, select, textarea {
   margin-top: -15px;
 }
 
-.page-pattern .pat
-tern-link:hover img.pattern-image-more {
+.page-pattern .pattern-link:hover img.pattern-image-more {
   display: block;
 }
 
