@@ -81,6 +81,13 @@ $(document).ready(function(){
     );
 
     /**
+     * Patterndetail
+     */
+    $("#pattern-detail .middle-col .upload-field a").click(function() {
+        $("#upload-form").modal("show");
+    });
+
+    /**
      * Sidebar Left
      */
     $("#sidebar-left .volume-cat .name").click(function() {

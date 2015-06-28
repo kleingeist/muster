@@ -498,7 +498,8 @@ input, button, select, textarea {
 }
 
 /* page_browser specific styles */
-#page-browser .volume-title {
+#page-browser .volume-title,
+#pattern-detail .volume-title {
   position: absolute;
   top: 15px;
   left: 100px;
@@ -507,7 +508,8 @@ input, button, select, textarea {
   border-left: 12px solid #00c2ff;
 }
 
-#page-browser .volume-title-generic {
+#page-browser .volume-title-generic,
+#pattern-detail .volume-title-generic {
   display: block;
   font-family: kirvy-bold-webfont;
   font-size: 14px;
@@ -515,13 +517,15 @@ input, button, select, textarea {
 }
 
 /* Baselinetrick from http://blogs.adobe.com/webplatform/2014/08/13/one-weird-trick-to-baseline-align-text/ */
-#page-browser .volume-title-name {
+#page-browser .volume-title-name,
+#pattern-detail .volume-title-name {
   display: block;
   line-height: 0;
   font-stretch: ultra-expanded;
 }
 
-#page-browser .volume-title-name:after {
+#page-browser .volume-title-name:after,
+#pattern-detail .volume-title-name:after {
   content: "";
   display: inline-block;
   height: 1em;
@@ -618,6 +622,52 @@ input, button, select, textarea {
 
 .page-pattern .pattern-meta td {
   padding: 2px 4px 2px 0;
+}
+
+/* Patterndetail */
+#pattern-detail {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  top: 100px;
+  left: 100px;
+}
+
+#pattern-detail .left-col,
+#pattern-detail .middle-col,
+#pattern-detail .right-col {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+#pattern-detail .top-bar {
+  position: fixed;
+  top: 0;
+  left: 70px;
+  width: 100%;
+  height: 70px;
+  background-color: #232121;
+}
+
+#pattern-detail .volume-title {
+  position: relative;
+  top: 15px;
+  left: 30px;
+  border-color: #ff6f00;
+}
+
+#pattern-detail #current-pattern,
+#pattern-detail #current-vector {
+  border: solid 1px white;
+  width: 400px;
+}
+
+#pattern-detail #current-pattern .favorit {
+  display: block;
+  float: none;
+  padding: 0;
 }
 
 /* Sidebar  */

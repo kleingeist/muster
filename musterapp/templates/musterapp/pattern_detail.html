@@ -3,68 +3,97 @@
 {% load thumbnail %}
 {% load tag_colors %}
 {% load favorit %}
+{% load avatar_tags %}
 
 {% block title %}{{ page.record_id }}/{{ pattern.id }}{% endblock %}
 {% block bodyclass %}pattern-detail{% endblock %}
 
 {% block content %}
-<div id="pattern-detail">
+    <div id="pattern-detail">
+        <div class="top-bar">
+            <div class="volume-title">
+                <div class="volume-title-generic">Collection</div>
+                <div class="volume-title-name">{{ pattern.page.volume.category.name }} <span style="color: lightgray">|</span> {{ pattern.page.volume.record_id }} <span style="color: lightgray">|</span> <span style="color: #00c2ff">CurrentPattern</span></div>
+            </div>
+        </div>
 
-  <div>
-    <img src="{{ pattern.image.url }}">
-  </div>
-  {% fav_button pattern.id %}
+        <div class="left-coll">
+            <div id="current-pattern">
+                <p>ORIGINAL VIEW</p>
+                <img src="{{ pattern.image.url }}" width="350">
+                {% fav_button pattern.id %}
 
-  <div class="tags-editable">
-    <span class="tags">
-      {% for tag in tags %}
-        {{ tag.name|as_taga }}
-      {% endfor %}
-    </span>
+                <div class="tags-editable">
+                  <span class="tags">
+                    {% for tag in tags %}
+                        {{ tag.name|as_taga }}
+                    {% endfor %}
+                  </span>
 
-    <div class="tag-add-form" data-action="{% url 'add_tag' pattern.id %}">
-      <input type="text" class="tag-add-input">
-      <button class="tag-add-button">add</button>
+                    <div class="tag-add-form" data-action="{% url 'add_tag' pattern.id %}">
+                        <input type="text" class="tag-add-input">
+                        <button class="tag-add-button">add</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="current-vector">
+                <p>VECtORIZED VIEW</p>
+                <img src="{{ vector.file.url }}" width="350">
+                <p>Preference Score</p>
+                <div class="vector-rating" data-action="{% url 'rate_vector' vector.id %}" data-score="{{ vector.rating }}"></div>
+            </div>
+        </div>
+
+        <div class="middle-col">
+            {% if not user.is_anonymous %}
+                <div class="upload-field">
+                    <h1>UPLOAD</h1>
+                    <a>upload</a>
+                    <p>Upload your own PATTERN!</p>
+                </div>
+            {% endif %}
+        {% if author in vector %}
+            <div class="uploader">
+                <p>MANUFACtOR INFO</p>
+                <img id="gravatar" src={% avatar_url vector.author.get_username %}>
+            <p>{{ vector.author.name }}</p>
+            <p>{{ vector.author.profession }}</p>
+            </div>
+        {% endif %}
+        </div>
+
+        <div class="right-col">
+            <div id="vector-list">
+                <p>Vectorized Pattern</p>
+                {% for vec in vectors %}
+                    <div>
+                        <a href="{% url 'pattern_detail' pattern.id vec.id %}">
+                            <img src="{{ vec.file.url }}" width="350">
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
-  </div>
 
-  <div>
-        <img src="{{ vector.file.url }}">
-        <div class="vector-rating" data-action="{% url 'rate_vector' vector.id %}" data-score="{{ vector.rating }}"></div>
-  </div>
-
-  <div>
-    {% for vec in vectors %}
-      <div>
-        <img src="{{ vec.file.url }}">
-      </div>
-    {% endfor %}
-  </div>
-
-
-<div class="volume-title">
-    <div class="volume-title-generic">Collection</div>
-    <div class="volume-title-name">{{ pattern.page.volume.category.name }} | {{ pattern.page.volume.record_id }} |</div>
-</div>
-
-    {% if not user.is_anonymous %}
-    <div class="upload-field">
-        <p>UPLOAD</p>
-        <form action="{% url 'pattern_detail' pattern.id vector.id %}" method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <p>{{ form.non_field_errors }}</p>
-            <p>{{ form.vectorfile.label_tag }} {{ form.vectorfile.help_text }}</p>
-            <p>
-                {{ form.vectorfile.errors }}
-                {{ form.vectorfile }}
-            </p>
-            <p><input type="submit" value="Upload" /></p>
-        </form>
-        <p>Upload your own PATTERN!</p>
+    <div class="modal fade page-pattern modal-centered"
+     id="upload-form" data-keyboard="true" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-body modal-login">
+            <p class="top-border">Upload</p>
+            <form action="{% url 'pattern_detail' pattern.id vector.id %}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>{{ form.non_field_errors }}</p>
+                <p>{{ form.vectorfile.label_tag }} {{ form.vectorfile.help_text }}</p>
+                <p>
+                    {{ form.vectorfile.errors }}
+                    {{ form.vectorfile }}
+                </p>
+                <p><input type="submit" value="Upload" /></p>
+            </form>
+        </div>
     </div>
-    {% endif %}
-
-
 </div>
 {% endblock %}
 
