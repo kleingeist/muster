@@ -21,7 +21,7 @@
         <div class="left-col">
             <div id="current-pattern">
                 <h3>ORIGINAL VIEW</h3>
-                <a href="#" class="download-link">
+                <a href="{{ pattern.image.url }}" download class="download-link">
                     <img src="{% static 'musterapp/img/download.png' %}" class="pattern-download">
                     <img src="{{ pattern.image.url }}" width="350">
                 </a>
@@ -52,7 +52,7 @@
 
             <div id="current-vector">
                 <h3>VECTORIZED VIEW</h3>
-                <a href="#" class="download-link">
+                <a href="{{ vector.file.url }}" download class="download-link">
                     <img src="{% static 'musterapp/img/download.png' %}" class="vector-download">
                     <img src="{{ vector.file.url }}" width="350" class="darken">
                 </a>
