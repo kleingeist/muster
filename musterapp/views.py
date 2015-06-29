@@ -4,6 +4,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponseForbidden, HttpResponseBadRequest, JsonResponse
 from django.views.decorators.http import require_POST
+from django.contrib.auth.models import User
 from taggit.utils import parse_tags
 
 from .models import *
@@ -87,6 +88,11 @@ def pattern_detail(request, pattern_id, vector_id):
     page = pattern.page
     tags = pattern.tags.all()
 
+    try:
+        author = User.objects.get(id=vector.author_id)
+    except User.DoesNotExist:
+        author = User.objects.get(username='Computer')
+
     if request.method == 'POST' and request.user.is_authenticated():
         form = VectorForm(request.POST, request.FILES)
         issvg = request.FILES['vectorfile'].content_type == 'image/svg+xml'
@@ -112,6 +118,7 @@ def pattern_detail(request, pattern_id, vector_id):
         "favorites": favorites,
         "vectors": vectors,
         "vector": vector,
+        "author": author,
         "tags": tags,
         "form": form
     }
