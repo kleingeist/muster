@@ -19,26 +19,33 @@
 
         <div class="left-coll">
             <div id="current-pattern">
-                <p>ORIGINAL VIEW</p>
+                <h3>ORIGINAL VIEW</h3>
                 <img src="{{ pattern.image.url }}" width="350">
-                {% fav_button pattern.id %}
-
                 <div class="tags-editable">
-                  <span class="tags">
-                    {% for tag in tags %}
-                        {{ tag.name|as_taga }}
-                    {% endfor %}
-                  </span>
-
+                    <table class="pattern-meta">
+                        <tr class="tags">
+                            <td>Tags</td>
+                            <td>
+                                {% for tag in pattern.tags.names %}
+                                    {{ tag|as_taga }}
+                                {% endfor %}
+                            </td>
+                        </tr>
+                        <tr class="status">
+                            <td>Status</td>
+                            <td><span class="count">{{ pattern.vector_count|stringformat:"02d" }}</span> Vectorized</td>
+                        </tr>
+                    </table>
                     <div class="tag-add-form" data-action="{% url 'add_tag' pattern.id %}">
                         <input type="text" class="tag-add-input">
                         <button class="tag-add-button">add</button>
                     </div>
                 </div>
+                {% fav_button pattern.id %}
             </div>
 
             <div id="current-vector">
-                <p>VECTORIZED VIEW</p>
+                <h3>VECTORIZED VIEW</h3>
                 <img src="{{ vector.file.url }}" width="350">
                 <p>Preference Score</p>
                 <div class="vector-rating" data-action="{% url 'rate_vector' vector.id %}" data-score="{{ vector.rating }}"></div>
@@ -48,7 +55,7 @@
         <div class="middle-col">
             {% if not user.is_anonymous %}
                 <div class="upload-field">
-                    <p>UPLOAD</p>
+                    <h3>UPLOAD</h3>
                     <span class="x-centered">
                         <a class="upload" style="cursor: pointer">UPLOAD</a>
                         <p>Upload your own PATTERN!</p>
@@ -57,7 +64,7 @@
             {% endif %}
 
             <div class="uploader">
-                <p>MANUFACTOR INFO</p>
+                <h3>MANUFACTOR INFO</h3>
                 <img class="avatar" id="gravatar" src={% avatar_url author %}>
             <p style="font-family: kirvy-bold-webfont; font-size: 12px"> {{ author.first_name }} {{ author.last_name|slice:"1" }}.</p>
             <p style="color: lightgray">{{ author.professional.profession }}</p>
@@ -66,7 +73,7 @@
 
         <div class="right-col">
             <div id="vector-list">
-                <p>Vectorized Pattern</p>
+                <h3>Vectorized Pattern</h3>
                 <div class="listing">
                 {% for vec in vectors %}
                     <div class="vector-list-element">

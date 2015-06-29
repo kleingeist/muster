@@ -684,7 +684,22 @@ input, button, select, textarea {
   height: 230px;
   text-align: center;
   margin: 0px 30px 30px 0px;
+}
 
+#pattern-detail #current-pattern h3,
+#pattern-detail #current-vector h3,
+#pattern-detail #vector-list h3 {
+  padding: 0;
+  margin: 5px;
+  font-size: 14px;
+  text-align: left;
+}
+
+#pattern-detail .upload-field h3,
+#pattern-detail .uploader h3 {
+  padding: 0;
+  margin: 5px;
+  font-size: 14px;
 }
 
 #pattern-detail #vector-list {
@@ -731,9 +746,7 @@ input, button, select, textarea {
 }
 
 #pattern-detail #current-pattern .favorit {
-  display: block;
-  float: none;
-  padding: 0;
+  position: relative;
 }
 
 /* Sidebar  */
