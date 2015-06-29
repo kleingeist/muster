@@ -47,6 +47,7 @@ def page_browser(request, page_rid):
 def search(request):
     q = request.GET.get("q", "")
     faved = bool(request.GET.get("faved", False))
+    vectorized = bool(request.GET.get("vectorized", False))
     tags = parse_tags(q)
 
     patterns = Pattern.objects.all().order_by("id")
@@ -61,8 +62,11 @@ def search(request):
         if faved:
             patterns = patterns.filter(id__in=user_favs)
 
+    if vectorized:
+        patterns = patterns.filter(vector_count__gt=0)
+
     paginator = Paginator(patterns, 12)
-    page = request.GET.get('page')
+    page = request.REQUEST.get('page')
     try:
         patterns = paginator.page(page)
     except PageNotAnInteger:
@@ -73,18 +77,26 @@ def search(request):
         patterns = paginator.page(paginator.num_pages)
 
     context = {
-        "q_current": ",".join([tag.lower() for tag in tags]),
+        "q": ",".join([tag.lower() for tag in tags]),
         "faved": faved,
+        "vectorized": vectorized,
         "favorites": favorites,
         "patterns": patterns
     }
+
+    is_ajax = bool(request.GET.get("ajax", request.is_ajax()))
+    if is_ajax:
+        return render(request, "musterapp/search_list.html", context=context)
+
     return render(request, "musterapp/search.html", context=context)
 
-
-def pattern_detail(request, pattern_id, vector_id):
+def pattern_detail(request, pattern_id, vector_id=None):
     pattern = get_object_or_404(Pattern, id=pattern_id)
-    vector = get_object_or_404(Vector, id=vector_id)
     vectors = pattern.vectors.all()
+    if vector_id is not None:
+        vector = get_object_or_404(Vector, id=vector_id)
+    else:
+        vector = vectors.first()
     page = pattern.page
     tags = pattern.tags.all()
 

@@ -10,39 +10,23 @@
 <div id="search">
   <form id="search-form" action="{% url "search" %}" method="get">
     <div class="query-block clearfix">
-      <input class="query" type="text" name="q" value="{{ q_current }}">
+      <input class="query" type="text" name="q" value="{{ q }}">
       <input type="submit" value="" class="search-button">
     </div>
     <div class="filter-block">
       FILTER:
-      <input id="cb-faved" class="filter" type="checkbox" name="faved" value="only"
+      <input id="faved" class="filter" type="checkbox" name="faved" value="only"
              {% if faved  %}checked{% endif %}
              {% if not user.is_authenticated %}disabled{% endif %}/>
-      <label for="cb-faved"><span></span>Favoriten</label>
+      <label for="faved"><span></span>Favorited</label>
+
+      <input id="vectorized" class="filter" type="checkbox" name="vectorized" value="only"
+             {% if vectorized  %}checked{% endif %} />
+      <label for="vectorized"><span></span>Vectorized</label>
     </div>
   </form>
 
-  <div class="search-result clearfix">
-    {% for pattern in patterns %}
-      <div class="pattern">
-        <a href="{% url 'pattern_detail' pattern.id pattern.vectors.first.id %}">
-          <img src="{% thumbnail pattern.image "300x350" format="PNG" %}">
-        </a>
-        {% fav_button pattern.id %}
-      </div>
-    {% endfor %}
-  </div>
-
-  <div class="pagination">
-    <ul class="dot-paginator">
-      {% for page in patterns.paginator.page_range %}
-        <li {% if page == patterns.number %} class="active" {% endif %}>
-          <a href="{% url 'search' %}?q={{ q_current }}{% if faved %}&faved=only{% endif %}&page={{ page }}">
-            {{ page }}</a>
-        </li>
-      {% endfor %}
-    </ul>
-  </div>
+  {% include "musterapp/search_list.html" %}
 
 </div>
 {% endblock %}

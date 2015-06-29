@@ -646,6 +646,11 @@ input, button, select, textarea {
   z-index: -1;
 }
 
+#pattern-detail .favorit {
+  float: right;
+  padding-top: 15px;
+}
+
 #pattern-detail .left-col,
 #pattern-detail .middle-col,
 #pattern-detail .right-col {
@@ -963,6 +968,11 @@ span.count,
   margin: 0 auto;
 }
 
+#search .filter-block {
+  font-size: 0.8em;
+}
+
+
 #search .search-button {
   float: left;
   height: 35px;
@@ -977,6 +987,7 @@ span.count,
   background-size: 22px 22px;
 }
 
+#search .query,
 #search ul.tagit {
   float: left;
   width: 500px;
@@ -993,6 +1004,10 @@ span.count,
   padding: 0.05em 4px .05em 0;
 }
 
+
+#search .filter + label {
+  margin: 0 10px;
+}
 
 #search input[type="checkbox"] {
     display:none;
@@ -1016,10 +1031,52 @@ input[type="checkbox"]:checked + label span {
     background: url(../img/svg/checked.svg) center center no-repeat;
 }
 
-#search .search-result .pattern {
-  height: 180px;
+#search .search-list {
+  margin-top: 15px;
+}
+
+#search .search-list.ajax {
+  display: none;
+}
+
+#search .pattern {
+  height: 150px;
   float: left;
-  padding: 10px;
+  margin: 10px;
+  position: relative;
+
+  box-shadow: 3px 3px 5px 0px rgba(0,0,0,0.5);
+}
+
+#search .tags {
+  position: absolute;
+  bottom: 35px;
+  left: 8px;
+  padding-right: 45px;
+  font-size: 0.7em;
+}
+
+#search .fav {
+  height: 30px;
+  position: absolute;
+  bottom: 15px;
+  right: 8px;
+}
+
+#search .status {
+  background-color: #000;
+  line-height: 30px;
+  padding-left: 8px;
+
+  font-size: 0.8em;
+  color: #999999;
+
+  display: block;
+  text-decoration: none !important;
+}
+
+#search .status .count {
+  margin-left: 10px;
 }
 
 #search .pattern img {
@@ -1031,13 +1088,12 @@ input[type="checkbox"]:checked + label span {
 
 /* Favorites */
 .favorit {
-  float: right;
-
   background: none !important;
   border: none;
   outline: none;
-  padding-top: 15px;
   font: inherit;
+  padding: 0;
+  margin: 0;
 
   cursor: pointer;
 }

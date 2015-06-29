@@ -171,9 +171,12 @@ class VectorRating(models.Model):
     rating = models.IntegerField()
     updated_at = models.DateTimeField(auto_now=True)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        self.vector.update_rating()
+    @staticmethod
+    def update_avg_rating(sender, instance, **kwargs):
+        instance.vector.update_rating()
+
+signals.post_delete.connect(VectorRating.update_avg_rating, sender=VectorRating)
+signals.post_save.connect(VectorRating.update_avg_rating, sender=VectorRating)
 
 
 

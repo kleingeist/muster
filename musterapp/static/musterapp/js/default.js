@@ -143,19 +143,38 @@ $(document).ready(function(){
     /**
      * Search
      */
+
+    function load_results(url) {
+        url = url + "&is_ajax=true"
+        $.ajax(url, {
+            success: function(data, status, jqXHR) {
+                $(".search-list").fadeOut(100, function() {
+                    $(this).replaceWith(data);
+                    $(".search-list").fadeIn(100);
+                });
+            }
+        });
+    }
+
+    function refresh_search(url) {
+        history.pushState({}, '', url);
+        load_results(url);
+    }
+
+    $(window).on("popstate", function() {
+        load_results(location.href);
+    });
+
+    $("#search-form").on("submit", function(e) {
+        var $this = $(this);
+        refresh_search($this.attr("action") + "?" + $this.serialize());
+        return false;
+    });
+
     $("#search-form .filter").on("change", function(e) {
-       $("#search-form").submit();
+        $("#search-form").submit();
     });
 
-    var tag_token_list = $.map(tag_list_all, function(tag, i) {
-       return {id: i, name: tag};
-    });
-
-    /*
-    $("#search-form .query").tokenInput(tag_token_list, {
-        allowFreeTagging: true,
-    });
-    */
     $("#search-form .query").tagit({
         singleField: true,
         autocomplete: {
@@ -163,10 +182,21 @@ $(document).ready(function(){
                 response( $.ui.autocomplete.filter( tag_list_all, request.term ) );
             }
         },
+        afterTagAdded: function(event, ui) {
+            if (!ui.duringInitialization) {
+                $("#search-form").submit();
+            }
+        },
+        afterTagRemoved: function(event, ui) {
+            $("#search-form").submit();
+        }
 
     });
-    //$("#search-form .tagit").append('<li class="search-button"><button></li>');
 
+    $("#search").on("click", ".dot-paginator a", function(event) {
+        refresh_search(this.href);
+        return false;
+    });
 
     /**
      * Tag Adding
