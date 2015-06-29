@@ -638,6 +638,12 @@ input, button, select, textarea {
   padding: 2px 4px 2px 0;
 }
 
+.page-pattern .pattern-favorite {
+  position: absolute;
+  right: 25px;
+  margin-top: -15px;
+}
+
 /* Patterndetail */
 #pattern-detail {
   display: flex;
