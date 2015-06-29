@@ -819,6 +819,15 @@ input, button, select, textarea {
   text-decoration: none;
 }
 
+#pattern-detail .modal-dialog .modal-upload h3.top-border {
+  background-color: #ff6f00;
+  font-size: 11px !important;
+}
+
+#pattern-detail .modal-upload {
+  text-align: center;
+}
+
 /* Sidebar  */
 #sidebar-right {
   background-color: #000;
