@@ -767,6 +767,10 @@ input, button, select, textarea {
   margin-bottom: 20px;
 }
 
+#pattern-detail .uploader p {
+  margin-bottom: 0px;
+}
+
 #pattern-detail .vector-list-element {
   margin: 0px 0px 10px;
 }
@@ -807,6 +811,12 @@ input, button, select, textarea {
 #pattern-detail #current-pattern .download-link:hover img.pattern-download,
 #pattern-detail #current-vector .download-link:hover img.vector-download{
   display: block;
+}
+
+#pattern-detail .top-bar a {
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 /* Sidebar  */

@@ -14,7 +14,7 @@
         <div class="top-bar">
             <div class="volume-title">
                 <div class="volume-title-generic">Collection</div>
-                <div class="volume-title-name">{{ pattern.page.volume.category.name }} <span style="color: lightgray">|</span> {{ pattern.page.volume.record_id }} <span style="color: lightgray">|</span> <span style="color: #00c2ff">CurrentPattern</span></div>
+                <div class="volume-title-name"><a href="{% url "volume_detail" pattern.page.volume.record_id %}">{{ pattern.page.volume.category.name }}</a> <span style="color: lightgray">|</span> <a href="{% url "volume_detail" pattern.page.volume.record_id %}">{{ pattern.page.volume.record_id }}</a> <span style="color: lightgray">|</span> <span style="color: #00c2ff">CurrentPattern</span></div>
             </div>
         </div>
 
@@ -29,7 +29,7 @@
                     <table class="pattern-meta">
                         <tr class="tags">
                             <td>Tags</td>
-                            <td>
+                            <td class="taglist">
                                 {% for tag in pattern.tags.names %}
                                     {{ tag|as_taga }}
                                 {% endfor %}
@@ -62,15 +62,13 @@
         </div>
 
         <div class="middle-col">
-            {% if not user.is_anonymous %}
                 <div class="upload-field">
                     <h3>UPLOAD</h3>
                     <span class="x-centered">
                         <a class="upload" style="cursor: pointer">UPLOAD</a>
-                        <p>Upload your own PATTERN!</p>
+                        <p><span style="color: #00c2ff">Upload </span><span style="color: #a19f9f">your own</span> PATTERN!</p>
                     </span>
                 </div>
-            {% endif %}
 
             <div class="uploader">
                 <h3>MANUFACTOR INFO</h3>
@@ -109,7 +107,7 @@
                     {{ form.vectorfile.errors }}
                     {{ form.vectorfile }}
                 </p>
-                <p><input type="submit" value="Upload" /></p>
+                <p><input type="submit" value="Upload" {% if not user.is_authenticated %}disabled{% endif %}/></p>
             </form>
         </div>
     </div>

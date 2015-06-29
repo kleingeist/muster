@@ -206,7 +206,7 @@ $(document).ready(function(){
                         console.log(response);
 
                         if (response.created) {
-                            $container.find(".tags").append(" " + response.html);
+                            $container.find(".taglist").append(response.html);
                         }
                         pending = false;
                         hide();
