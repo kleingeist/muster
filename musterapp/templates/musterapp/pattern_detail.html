@@ -4,6 +4,7 @@
 {% load tag_colors %}
 {% load favorit %}
 {% load avatar_tags %}
+{% load staticfiles %}
 
 {% block title %}{{ page.record_id }}/{{ pattern.id }}{% endblock %}
 {% block bodyclass %}pattern-detail{% endblock %}
@@ -20,7 +21,10 @@
         <div class="left-col">
             <div id="current-pattern">
                 <h3>ORIGINAL VIEW</h3>
-                <img src="{{ pattern.image.url }}" width="350">
+                <a href="#" class="download-link">
+                    <img src="{% static 'musterapp/img/download.png' %}" class="pattern-download">
+                    <img src="{{ pattern.image.url }}" width="350">
+                </a>
                 <div class="tags-editable">
                     <table class="pattern-meta">
                         <tr class="tags">
@@ -30,23 +34,28 @@
                                     {{ tag|as_taga }}
                                 {% endfor %}
                             </td>
+                            <td>
+                                <div class="tag-add-form" data-action="{% url 'add_tag' pattern.id %}">
+                                    <input type="text" class="tag-add-input">
+                                    <button class="tag-add-button">add</button>
+                                </div>
+                            </td>
                         </tr>
                         <tr class="status">
                             <td>Status</td>
                             <td><span class="count">{{ pattern.vector_count|stringformat:"02d" }}</span> Vectorized</td>
                         </tr>
                     </table>
-                    <div class="tag-add-form" data-action="{% url 'add_tag' pattern.id %}">
-                        <input type="text" class="tag-add-input">
-                        <button class="tag-add-button">add</button>
-                    </div>
+                    {% fav_button pattern.id %}
                 </div>
-                {% fav_button pattern.id %}
             </div>
 
             <div id="current-vector">
                 <h3>VECTORIZED VIEW</h3>
-                <img src="{{ vector.file.url }}" width="350">
+                <a href="#" class="download-link">
+                    <img src="{% static 'musterapp/img/download.png' %}" class="vector-download">
+                    <img src="{{ vector.file.url }}" width="350" class="darken">
+                </a>
                 <p>Preference Score</p>
                 <div class="vector-rating" data-action="{% url 'rate_vector' vector.id %}" data-score="{{ vector.rating }}"></div>
             </div>
