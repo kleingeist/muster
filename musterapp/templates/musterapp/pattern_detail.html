@@ -97,8 +97,8 @@
     <div class="modal fade page-pattern modal-centered"
      id="upload-form" data-keyboard="true" tabindex="-1">
     <div class="modal-dialog">
-        <div class="modal-body modal-login">
-            <p class="top-border">Upload</p>
+        <div class="modal-body modal-upload">
+            <h3 class="top-border">Upload</h3>
             <form action="{% url 'pattern_detail' pattern.id vector.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>{{ form.non_field_errors }}</p>
