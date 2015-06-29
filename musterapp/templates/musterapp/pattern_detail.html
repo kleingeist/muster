@@ -38,7 +38,7 @@
             </div>
 
             <div id="current-vector">
-                <p>VECtORIZED VIEW</p>
+                <p>VECTORIZED VIEW</p>
                 <img src="{{ vector.file.url }}" width="350">
                 <p>Preference Score</p>
                 <div class="vector-rating" data-action="{% url 'rate_vector' vector.id %}" data-score="{{ vector.rating }}"></div>
@@ -48,31 +48,34 @@
         <div class="middle-col">
             {% if not user.is_anonymous %}
                 <div class="upload-field">
-                    <h1>UPLOAD</h1>
-                    <a>upload</a>
-                    <p>Upload your own PATTERN!</p>
+                    <p>UPLOAD</p>
+                    <span class="x-centered">
+                        <a class="upload" style="cursor: pointer">UPLOAD</a>
+                        <p>Upload your own PATTERN!</p>
+                    </span>
                 </div>
             {% endif %}
-        {% if author in vector %}
+
             <div class="uploader">
-                <p>MANUFACtOR INFO</p>
-                <img id="gravatar" src={% avatar_url vector.author.get_username %}>
-            <p>{{ vector.author.name }}</p>
-            <p>{{ vector.author.profession }}</p>
+                <p>MANUFACTOR INFO</p>
+                <img class="avatar" id="gravatar" src={% avatar_url author %}>
+            <p style="font-family: kirvy-bold-webfont; font-size: 12px"> {{ author.first_name }} {{ author.last_name|slice:"1" }}.</p>
+            <p style="color: lightgray">{{ author.professional.profession }}</p>
             </div>
-        {% endif %}
         </div>
 
         <div class="right-col">
             <div id="vector-list">
                 <p>Vectorized Pattern</p>
+                <div class="listing">
                 {% for vec in vectors %}
-                    <div>
+                    <div class="vector-list-element">
                         <a href="{% url 'pattern_detail' pattern.id vec.id %}">
-                            <img src="{{ vec.file.url }}" width="350">
+                            <img src="{{ vec.file.url }}" width="250">
                         </a>
                     </div>
                 {% endfor %}
+                </div>
             </div>
         </div>
     </div>
