@@ -361,6 +361,17 @@ input, button, select, textarea {
   background: #ffffff;
 }
 
+#nav-left .bottom .avatar {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#nav-left .bottom .avatar .username {
+  margin-left: -100%;
+  margin-right: -100%;
+  text-align: center;
+}
+
 #nav-left .bottom {
   position: relative;
   bottom: 0;
