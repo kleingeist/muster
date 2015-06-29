@@ -49,7 +49,7 @@ def search(request):
     faved = bool(request.GET.get("faved", False))
     tags = parse_tags(q)
 
-    patterns = Pattern.objects.all().order_by("?")
+    patterns = Pattern.objects.all().order_by("id")
     for tag in tags:
         patterns = patterns.filter(tags__name=tag.lower())
 
@@ -73,7 +73,7 @@ def search(request):
         patterns = paginator.page(paginator.num_pages)
 
     context = {
-        "q_current": q,
+        "q_current": ",".join([tag.lower() for tag in tags]),
         "faved": faved,
         "favorites": favorites,
         "patterns": patterns

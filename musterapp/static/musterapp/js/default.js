@@ -147,6 +147,25 @@ $(document).ready(function(){
        $("#search-form").submit();
     });
 
+    var tag_token_list = $.map(tag_list_all, function(tag, i) {
+       return {id: i, name: tag};
+    });
+
+    /*
+    $("#search-form .query").tokenInput(tag_token_list, {
+        allowFreeTagging: true,
+    });
+    */
+    $("#search-form .query").tagit({
+        singleField: true,
+        autocomplete: {
+            source: function( request, response ) {
+                response( $.ui.autocomplete.filter( tag_list_all, request.term ) );
+            }
+        },
+
+    });
+    //$("#search-form .tagit").append('<li class="search-button"><button></li>');
 
 
     /**
