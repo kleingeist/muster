@@ -1,0 +1,28 @@
+{% load thumbnail %}
+{% load favorit %}
+
+  <div class="search-list {% if request.is_ajax %}ajax{% endif %}">
+    <div class="search-result clearfix">
+      {% for pattern in patterns %}
+        <div class="pattern">
+          <a href="{% url 'pattern_detail' pattern.id %}">
+            <img src="{% thumbnail pattern.image "300x350" format="PNG" %}">
+          </a>
+          {% fav_button pattern.id %}
+        </div>
+      {% endfor %}
+    </div>
+
+
+
+    <div class="pagination">
+      <ul class="dot-paginator">
+        {% for page in patterns.paginator.page_range %}
+          <li {% if page == patterns.number %} class="active" {% endif %}>
+            <a href="{% url 'search' %}?q={{ q }}{% if faved %}&faved=only{% endif %}{% if vectorized %}&vectorized=only{% endif %}&page={{ page }}">
+              {{ page }}</a>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
