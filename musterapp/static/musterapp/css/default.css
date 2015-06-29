@@ -639,12 +639,9 @@ input, button, select, textarea {
 
 /* Patterndetail */
 #pattern-detail {
-  position: absolute;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  top: 100px;
-  left: 100px;
   z-index: -1;
 }
 
@@ -654,6 +651,7 @@ input, button, select, textarea {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  padding-top: 70px;
 }
 
 #pattern-detail .top-bar {
@@ -1074,4 +1072,21 @@ ul.dot-paginator li.active a {
   color: #fff;
   display: block;
   border-bottom: 1px solid #333;
+}
+
+/* Scrollbar ONLY for demo NOT portable */
+::-webkit-scrollbar
+{
+  width: 8px;  /* for vertical scrollbars */
+  height: 8px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track
+{
+  background: rgba(196, 195, 195, 0.1);
+}
+
+::-webkit-scrollbar-thumb
+{
+  background: rgba(138, 136, 137, 0.7);
 }
