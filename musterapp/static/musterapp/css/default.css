@@ -968,6 +968,7 @@ span.count,
   background-size: 22px 22px;
 }
 
+#search .query,
 #search ul.tagit {
   float: left;
   width: 500px;
@@ -1005,6 +1006,10 @@ input[type="checkbox"] + label span {
 
 input[type="checkbox"]:checked + label span {
     background: url(../img/svg/checked.svg) center center no-repeat;
+}
+
+#search .search-list.ajax {
+  display: none;
 }
 
 #search .search-result .pattern {
