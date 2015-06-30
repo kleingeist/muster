@@ -143,7 +143,6 @@ $(document).ready(function(){
     /**
      * Search
      */
-
     function load_results(url) {
         url = url + "&is_ajax=true"
         $.ajax(url, {
@@ -233,10 +232,8 @@ $(document).ready(function(){
                         tag: value,
                     },
                     success: function (response) {
-                        console.log(response);
-
                         if (response.created) {
-                            $container.find(".taglist").append(response.html);
+                            $container.find(".taglist").append(" " + response.html);
                         }
                         pending = false;
                         hide();
@@ -273,11 +270,9 @@ $(document).ready(function(){
                 comfortZone: 20
             })
             .autocomplete({
-                lookup: tag_list_all,
-                triggerSelectOnValidInput: false,
-                tabDisabled: true,
-                onSelect: function (value) {
-                    submit($input.val());
+                source: tag_list_all,
+                select: function(event, ui) {
+                    submit(ui.item.value)
                 }
             })
         ;
