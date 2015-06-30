@@ -690,14 +690,52 @@ input, button, select, textarea {
   background-image: url(../img/svg/add-tag.svg);
 }
 
+#pattern-detail .cross {
+  background-image: url(../img/cross.png);
+  width: 30px;
+  height: 30px;
+  display: block;
+  background-size: 30px 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: -15px;
+  padding: 0;
+
+  /* .text-hide(); */
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+
+#pattern-detail .top {
+  position: absolute;
+  top: 0;
+}
+
+#pattern-detail .bottom {
+  position: absolute;
+  bottom: 0;
+}
+
+#pattern-detail .left {
+  left: 0;
+}
+
+#pattern-detail .right {
+  right: 0;
+}
+
 #pattern-detail #current-pattern,
 #pattern-detail #current-vector,
 #pattern-detail #vector-list {
+  position: relative;
   border: solid 0px white;
   width: 400px;
   height: 230px;
   text-align: center;
-  margin: 0px 30px 30px 0px;
+  margin: 0px 40px 40px 0px;
 }
 
 #pattern-detail #current-pattern h3,
@@ -736,7 +774,7 @@ input, button, select, textarea {
 
 #pattern-detail #vector-list {
   width: 300px;
-  height: 490px;
+  height: 500px;
 }
 
 #pattern-detail #vector-list .listing {
@@ -750,8 +788,8 @@ input, button, select, textarea {
   border: solid 0px white;
   width: 250px;
   height: 230px;
-  margin-right: 30px;
-  margin-bottom: 30px;
+  margin-right: 40px;
+  margin-bottom: 40px;
   text-align: center;
 }
 
@@ -830,13 +868,27 @@ input, button, select, textarea {
   text-decoration: none;
 }
 
-#pattern-detail .modal-dialog .modal-upload h3.top-border {
-  background-color: #ff6f00;
-  font-size: 11px !important;
+#upload-form .modal-upload {
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 200px;
+  background-color: rgba(81,81,81,0.8);
+  text-align: center;
 }
 
-#pattern-detail .modal-upload {
+#upload-form .modal-upload p.top-border {
+  font-family: kirvy-bold-webfont;
+  font-size: large;
   text-align: center;
+  margin-bottom: 0px;
+  background-color: rgba(0,0,0,0.6);
+}
+
+#upload-form .modal-upload form {
+  top: 50%;
 }
 
 /* Sidebar  */

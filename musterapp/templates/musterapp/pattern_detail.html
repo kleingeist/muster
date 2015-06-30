@@ -20,6 +20,11 @@
 
         <div class="left-col">
             <div id="current-pattern">
+                <div class="cross top left">a</div>
+                <div class="cross top right">a</div>
+                <div class="cross bottom left">a</div>
+                <div class="cross bottom right">a</div>
+
                 <h3>ORIGINAL VIEW</h3>
                 <a href="{{ pattern.image.url }}" download class="download-link">
                     <img src="{% static 'musterapp/img/download.png' %}" class="pattern-download">
@@ -51,6 +56,11 @@
             </div>
 
             <div id="current-vector">
+                <div class="cross top left">a</div>
+                <div class="cross top right">a</div>
+                <div class="cross bottom left">a</div>
+                <div class="cross bottom right">a</div>
+
                 <h3>VECTORIZED VIEW</h3>
                 <a href="{{ vector.file.url }}" download class="download-link">
                     <img src="{% static 'musterapp/img/download.png' %}" class="vector-download">
@@ -63,6 +73,11 @@
 
         <div class="middle-col">
                 <div class="upload-field">
+                    <div class="cross top left">a</div>
+                    <div class="cross top right">a</div>
+                    <div class="cross bottom left">a</div>
+                    <div class="cross bottom right">a</div>
+
                     <h3>UPLOAD</h3>
                     <span class="x-centered">
                         <a class="upload" style="cursor: pointer">UPLOAD</a>
@@ -71,6 +86,11 @@
                 </div>
 
             <div class="uploader">
+                <div class="cross top left">a</div>
+                <div class="cross top right">a</div>
+                <div class="cross bottom left">a</div>
+                <div class="cross bottom right">a</div>
+
                 <h3>MANUFACTOR INFO</h3>
                 <img class="avatar" id="gravatar" src={% avatar_url author %}>
             <p style="font-family: kirvy-bold-webfont; font-size: 12px"> {{ author.first_name }} {{ author.last_name|slice:"1" }}.</p>
@@ -80,6 +100,11 @@
 
         <div class="right-col">
             <div id="vector-list">
+                <div class="cross top left">a</div>
+                <div class="cross top right">a</div>
+                <div class="cross bottom left">a</div>
+                <div class="cross bottom right">a</div>
+
                 <h3>Vectorized Pattern</h3>
                 <div class="listing">
                 {% for vec in vectors %}
@@ -94,11 +119,11 @@
         </div>
     </div>
 
-    <div class="modal fade page-pattern modal-centered"
+    <div class="modal fade modal-centered"
      id="upload-form" data-keyboard="true" tabindex="-1">
     <div class="modal-dialog">
         <div class="modal-body modal-upload">
-            <h3 class="top-border">Upload</h3>
+            <p class="top-border">Upload</p>
             <form action="{% url 'pattern_detail' pattern.id vector.id %}" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <p>{{ form.non_field_errors }}</p>
@@ -106,8 +131,8 @@
                 <p>
                     {{ form.vectorfile.errors }}
                     {{ form.vectorfile }}
+                    <input type="submit" value="Upload" {% if not user.is_authenticated %}disabled{% endif %}/>
                 </p>
-                <p><input type="submit" value="Upload" {% if not user.is_authenticated %}disabled{% endif %}/></p>
             </form>
         </div>
     </div>
