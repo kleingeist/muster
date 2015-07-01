@@ -128,8 +128,8 @@
                 {% csrf_token %}
                 <p>{{ form.non_field_errors }}</p>
                 <p>{{ form.vectorfile.label_tag }} {{ form.vectorfile.help_text }}</p>
+                <p>{{ form.vectorfile.errors }}</p>
                 <p>
-                    {{ form.vectorfile.errors }}
                     {{ form.vectorfile }}
                     <input type="submit" value="Upload" {% if not user.is_authenticated %}disabled{% endif %}/>
                 </p>

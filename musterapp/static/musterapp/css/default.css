@@ -874,9 +874,10 @@ input, button, select, textarea {
   display: flex;
   flex-direction: column;
   width: 500px;
-  height: 200px;
+  height: 100px;
   background-color: rgba(81,81,81,0.8);
   text-align: center;
+  align-content: center;
 }
 
 #upload-form .modal-upload p.top-border {
